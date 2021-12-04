@@ -1,4 +1,8 @@
+import api.EdgeData;
 import api.GeoLocation;
+
+import java.util.ArrayList;
+import java.util.HashSet;
 
 //import api.NodeData;
 public class Node implements api.NodeData {
@@ -7,6 +11,14 @@ public class Node implements api.NodeData {
     private double weight;
     private String info;
     private int tag;
+    public HashSet<Integer> parents_ids;
+    public HashSet<Integer>  children_ids;
+    public HashSet<EdgeData>  edges_to_children;
+
+    public Node(int key, GeoLocation location) {
+        this.key = key;
+        this.location = location;
+    }
 
     @Override
     public int getKey() {
