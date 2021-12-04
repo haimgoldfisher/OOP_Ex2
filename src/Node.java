@@ -67,4 +67,32 @@ public class Node implements api.NodeData {
     public void setTag(int t) {
         this.tag = t;
     }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public HashSet<Integer> getParents_ids() {
+        return parents_ids;
+    }
+
+    public void setParents_ids(HashSet<Integer> parents_ids) {
+        this.parents_ids = parents_ids;
+    }
+
+    public HashSet<Integer> getChildren_ids() {
+        return children_ids;
+    }
+
+    public void setChildren_ids(HashSet<Integer> children_ids) {
+        this.children_ids = children_ids;
+    }
+
+    public HashSet<EdgeData> getEdges_to_children() {
+        return edges_to_children;
+    }
+
+    public void setEdges_to_children(HashSet<EdgeData> edges_to_children) {
+        this.edges_to_children = edges_to_children;
+    }
 }

@@ -2,28 +2,57 @@ import api.DirectedWeightedGraph;
 import api.EdgeData;
 import api.NodeData;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
-    public HashMap<Integer, NodeData> key_node;
-    public HashMap<int[], EdgeData> keys_edge;
+    private HashMap<Integer, NodeData> key_node;
+    private HashMap<int[], EdgeData> keys_edge;
     private int mc;
 
     public MyDirectedWeightedGraph() {
-        this.key_node = new HashMap<>();
-        this.keys_edge = new HashMap<>();
+        this.key_node = new HashMap<Integer, NodeData>();
+        this.keys_edge = new HashMap<int[], EdgeData>();
+    }
+
+    public void setKey_node(HashMap<Integer, NodeData> key_node) {
+        this.key_node = key_node;
+    }
+
+    public void setKeys_edge(HashMap<int[], EdgeData> keys_edge) {
+        this.keys_edge = keys_edge;
+    }
+
+    public HashMap<Integer, NodeData> getKey_node() {
+        return key_node;
+    }
+
+    public HashMap<int[], EdgeData> getKeys_edge() {
+        return keys_edge;
+    }
+
+    public int getMc() {
+        return mc;
+    }
+
+    public void setMc(int mc) {
+        this.mc = mc;
     }
 
     public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
     {
         this.key_node = new HashMap<Integer, NodeData>();
         this.keys_edge = new HashMap<int[], EdgeData>();
-        graph.edgeIter()
-        graph.nodeIter()
-        this.mc = graph.getMC();
+        // nodes iterator:
+        for (Iterator<NodeData> iter = graph.nodeIter(); iter.hasNext(); ) {
+            NodeData currNode = iter.next();
+            this.key_node.put(currNode.getKey(), currNode);
+        }
+        // edges iterator:
+        for (Iterator<EdgeData> iter = graph.edgeIter(); iter.hasNext(); ) {
+            EdgeData currEdge = iter.next();
+            int[] currEdgeKeys = {currEdge.getSrc(), currEdge.getDest()};
+            this.keys_edge.put(currEdgeKeys, currEdge);
+        }
     }
 
     @Override
@@ -112,16 +141,16 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public int nodeSize() {
-        return key_node.size();
+        return this.key_node.size();
     }
 
     @Override
     public int edgeSize() {
-        return keys_edge.size();
+        return this.keys_edge.size();
     }
 
     @Override
     public int getMC() {
-        return mc;
+        return this.mc;
     }
 }

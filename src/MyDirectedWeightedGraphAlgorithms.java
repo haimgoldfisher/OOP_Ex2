@@ -19,8 +19,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public DirectedWeightedGraph copy() {
-        DirectedWeightedGraph new_g = new MyDirectedWeightedGraph(this.graph);
-        return new_g;
+        return new MyDirectedWeightedGraph(this.graph);
     }
 
     @Override
