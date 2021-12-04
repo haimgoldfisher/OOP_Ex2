@@ -8,9 +8,14 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
-    HashMap<Integer, NodeData> key_node;
-    HashMap<int[], EdgeData> keys_edge;
-    int mc;
+    public HashMap<Integer, NodeData> key_node;
+    public HashMap<int[], EdgeData> keys_edge;
+    private int mc;
+
+    public MyDirectedWeightedGraph() {
+        this.key_node = new HashMap<>();
+        this.keys_edge = new HashMap<>();
+    }
 
     @Override
     public NodeData getNode(int key) {
@@ -63,7 +68,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public NodeData removeNode(int key) {
-        Node curr_node = (Node)key_node.get(key);
+        Node curr_node = (Node) key_node.get(key);
         for (int parent_id : curr_node.parents_ids) {
             int[] edge_keys = {parent_id, key};
             keys_edge.remove(edge_keys);

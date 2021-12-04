@@ -12,12 +12,15 @@ public class Node implements api.NodeData {
     private String info;
     private int tag;
     public HashSet<Integer> parents_ids;
-    public HashSet<Integer>  children_ids;
-    public HashSet<EdgeData>  edges_to_children;
+    public HashSet<Integer> children_ids;
+    public HashSet<EdgeData> edges_to_children;
 
     public Node(int key, GeoLocation location) {
         this.key = key;
         this.location = location;
+        this.parents_ids = new HashSet<>();
+        this.children_ids = new HashSet<>();
+        this.edges_to_children = new HashSet<>();
     }
 
     @Override
