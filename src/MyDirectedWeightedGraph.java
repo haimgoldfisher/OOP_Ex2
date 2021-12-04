@@ -17,6 +17,15 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         this.keys_edge = new HashMap<>();
     }
 
+    public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
+    {
+        this.key_node = new HashMap<Integer, NodeData>();
+        this.keys_edge = new HashMap<int[], EdgeData>();
+        graph.edgeIter()
+        graph.nodeIter()
+        this.mc = graph.getMC();
+    }
+
     @Override
     public NodeData getNode(int key) {
         return key_node.get(key);
