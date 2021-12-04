@@ -23,8 +23,12 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     }
 
     @Override
-    public boolean isConnected() {
-        return false;
+    public boolean isConnected()
+    {
+        if (this.graph.nodeSize() > this.graph.edgeSize()+1)
+            return false; // in connected graph we have at least n-1 edges for n vertices
+        Node n = (Node) this.graph.getNode(1);
+        return (Node) n.BFS_search(this.graph) == this.graph.nodeSize();
     }
 
     @Override
