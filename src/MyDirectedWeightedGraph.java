@@ -139,6 +139,32 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         return edge;
     }
 
+    public int BFS_search(Node start) // a BFS algo, it returns the num of discovered nodes
+    {
+        int discoveredNodes = 0;
+        Queue<Node> Q = new LinkedList<Node>(); // bfs algo works on a queue
+        Node v = null;
+        Q.add(start); // add the source node to the queue
+        while (!Q.isEmpty()) {
+            v = Q.remove(); // remove & return the first node in the queue
+            v.discovered = true; // mark this node as discovered
+            discoveredNodes++; // every time a node is being discovered - raise the counter
+            if (v.parents_ids.size() > 0)
+                for (int par : v.parents_ids){
+                    Node parent = (Node) this.getNode(par);
+                    if (!parent.discovered)
+                        Q.add(parent);
+                }
+            if (v.children_ids.size() > 0)
+                for (int chil : v.children_ids){
+                    Node child = (Node) this.getNode(chil);
+                    if (!child.discovered)
+                        Q.add(child);
+                }
+        }
+        return discoveredNodes; // the num of nodes which the algo has found
+    }
+
     @Override
     public int nodeSize() {
         return this.key_node.size();
