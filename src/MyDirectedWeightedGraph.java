@@ -30,9 +30,9 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         return keys_edge;
     }
 
-    public int getMc() {
-        return mc;
-    }
+//    public int getMc() {
+//        return mc;
+//    }
 
     public void setMc(int mc) {
         this.mc = mc;
@@ -40,19 +40,20 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
     {
-        this.key_node = new HashMap<Integer, NodeData>();
-        this.keys_edge = new HashMap<int[], EdgeData>();
+        MyDirectedWeightedGraph g = (MyDirectedWeightedGraph) graph;
+        this.key_node = new HashMap<Integer, NodeData>(g.key_node);
+        this.keys_edge = new HashMap<int[], EdgeData>(g.keys_edge);
         // nodes iterator:
-        for (Iterator<NodeData> iter = graph.nodeIter(); iter.hasNext(); ) {
-            NodeData currNode = iter.next();
-            this.key_node.put(currNode.getKey(), currNode);
-        }
-        // edges iterator:
-        for (Iterator<EdgeData> iter = graph.edgeIter(); iter.hasNext(); ) {
-            EdgeData currEdge = iter.next();
-            int[] currEdgeKeys = {currEdge.getSrc(), currEdge.getDest()};
-            this.keys_edge.put(currEdgeKeys, currEdge);
-        }
+//        for (Iterator<NodeData> iter = graph.nodeIter(); iter.hasNext(); ) {
+//            NodeData currNode = iter.next();
+//            this.key_node.put(currNode.getKey(), currNode);
+//        }
+//        // edges iterator:
+//        for (Iterator<EdgeData> iter = graph.edgeIter(); iter.hasNext(); ) {
+//            EdgeData currEdge = iter.next();
+//            int[] currEdgeKeys = {currEdge.getSrc(), currEdge.getDest()};
+//            this.keys_edge.put(currEdgeKeys, currEdge);
+//        }
     }
 
     @Override
