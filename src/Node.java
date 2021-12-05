@@ -105,25 +105,4 @@ public class Node implements api.NodeData {
         this.discovered = discovered;
     }
 
-    public int BFS_search(MyDirectedWeightedGraph graph) // a BFS algo implementation, it returns the num of discovered nodes
-    {
-        int discoveredNodes = 0;
-        Queue<Node> Q = new LinkedList<Node>(); // bfs algo works on a queue
-        Node v = null;
-        Q.add(this); // add the source node to the queue
-        while (!Q.isEmpty()) {
-            v = Q.remove(); // remove & return the first node in the queue
-            v.discovered = true; // mark this node as discovered
-            discoveredNodes++;
-            if (this.edges_to_children.size() > 1) // WHAT ABOUT THE EDGES TO PARENTS???
-                for (EdgeData edges_to_child : this.edges_to_children) {
-                    int dest = edges_to_child.getDest();
-                    Node dst = (Node)graph.getNode(dest);
-                    if (!dst.discovered)
-                        Q.add((Node) graph.getNode(dest));
-                }
-        }
-        return discoveredNodes;
-    }
-
 }

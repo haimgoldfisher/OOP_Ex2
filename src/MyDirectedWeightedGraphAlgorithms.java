@@ -5,6 +5,10 @@ import api.NodeData;
 
 import java.util.*;
 
+
+import java.util.List;
+import java.util.List;
+
 public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms {
     private MyDirectedWeightedGraph graph;
 
@@ -27,8 +31,8 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     public boolean isConnected() {
         if (this.graph.nodeSize() > this.graph.edgeSize() + 1)
             return false; // in connected graph we have at least n-1 edges for n vertices
-        Node n = (Node) this.graph.getNode(1);
-        return (Node) n.BFS_search(this.graph) == this.graph.nodeSize();
+        Node n = (Node) this.graph.getNode(1); // ???
+        return this.graph.BFS_search(n) == this.graph.nodeSize();
     }
 
     @Override
@@ -119,13 +123,15 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     }
 
     @Override
-    public boolean save(String file) {
-        return false;
+    public boolean save(String file)
+    {
+        return false; // the file could not be saved
     }
 
     @Override
-    public boolean load(String file) {
-        return false;
+    public boolean load(String file)
+    {
+        return false; // the file could not be loaded
     }
 
 //    private double DijkstraAlgorithm(int src, int dest) {
