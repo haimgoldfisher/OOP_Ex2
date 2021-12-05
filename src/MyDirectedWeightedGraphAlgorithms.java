@@ -2,7 +2,7 @@ import api.DirectedWeightedGraph;
 import api.DirectedWeightedGraphAlgorithms;
 import api.EdgeData;
 import api.NodeData;
-
+import com.google.gson.Gson;
 import java.util.*;
 
 
@@ -125,6 +125,8 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public boolean save(String file)
     {
+        Gson myGson = new Gson();
+        
         return false; // the file could not be saved
     }
 
