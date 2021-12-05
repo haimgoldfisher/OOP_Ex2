@@ -11,11 +11,19 @@ import java.util.List;
 
 public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphAlgorithms {
     private MyDirectedWeightedGraph graph;
+    HashMap<Integer,HashMap<Integer,Double>> id_distances;
 
     @Override
     public void init(DirectedWeightedGraph g) {
         this.graph = (MyDirectedWeightedGraph) g;
+        this.id_distances = new HashMap<>();
+        HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+        for (int key : keys) {
+            HashMap<Integer,Double> distances = DijkstraAlgorithm(key);
+            id_distances.put(key,distances);
+        }
     }
+
 
     @Override
     public DirectedWeightedGraph getGraph() {
@@ -141,39 +149,34 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         return false; // the file could not be loaded
     }
 
-//    private double DijkstraAlgorithm(int src, int dest) {
-//        HashMap<Integer, Double> distances = new HashMap();
-//        ArrayList<Integer> not_visited = new ArrayList<>();
-//        HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
-//        for (int key : keys) {
-//            distances.put(key, Double.MAX_VALUE);
-//            not_visited.add(key);
-//        }
-//        distances.put(src, (double) 0);
-//        while (!not_visited.isEmpty()) {
-//            int min_id = minDistance(not_visited, distances);
-//            Node curr_node = (Node) this.graph.getNode(min_id);
-//            not_visited.remove((Object) min_id);
-//            for (EdgeData edge : curr_node.edges_to_children) {
-//                Edge curr_edge = (Edge) edge;
-//                int curr_dest = curr_edge.getDest();
-//                if (!not_visited.contains(curr_dest)) {//necessary?
-//                    continue;
-//                }
-//                double curr_weight = distances.get(curr_dest);
-//                double new_weight = distances.get(min_id) + curr_edge.getWeight();
-//                if (new_weight < curr_weight) {
-//                    distances.put(curr_dest, new_weight);
-//                }
-//            }
-//        }
-//        double shortest = distances.get(dest);
-//        if (shortest == Double.MAX_VALUE) {
-//            return -1;
-//        } else {
-//            return shortest;
-//        }
-//    }
+    private HashMap<Integer, Double> DijkstraAlgorithm(int src) {
+        HashMap<Integer, Double> distances = new HashMap();
+        ArrayList<Integer> not_visited = new ArrayList<>();
+        HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+        for (int key : keys) {
+            distances.put(key, Double.MAX_VALUE);
+            not_visited.add(key);
+        }
+        distances.put(src, (double) 0);
+        while (!not_visited.isEmpty()) {
+            int min_id = minDistance(not_visited, distances);
+            Node curr_node = (Node) this.graph.getNode(min_id);
+            not_visited.remove((Object) min_id);
+            for (EdgeData edge : curr_node.edges_to_children) {
+                Edge curr_edge = (Edge) edge;
+                int curr_dest = curr_edge.getDest();
+                if (!not_visited.contains(curr_dest)) {//necessary?
+                    continue;
+                }
+                double curr_weight = distances.get(curr_dest);
+                double new_weight = distances.get(min_id) + curr_edge.getWeight();
+                if (new_weight < curr_weight) {
+                    distances.put(curr_dest, new_weight);
+                }
+            }
+        }
+        return distances;
+    }
 
     private int minDistance(ArrayList<Integer> not_visited, HashMap<Integer, Double> distances) {
         int ans_id = -1;
