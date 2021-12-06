@@ -151,7 +151,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     {
         Gson myGson = new Gson();
         try {
-            MyDirectedWeightedGraph graph = myGson.fromJson(new FileReader(file), MyDirectedWeightedGraph.class);
+            this.graph = myGson.fromJson(new FileReader(file), MyDirectedWeightedGraph.class);
         }
         catch (FileNotFoundException e){
             e.printStackTrace();
