@@ -136,14 +136,13 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     public boolean save(String file) throws JsonParseException // file = the name of the new JSON
     {
         Gson myGson = new Gson();
-        MyDirectedWeightedGraph graph = new MyDirectedWeightedGraph();
         try {
-            myGson.toJson(graph, new FileWriter(file));
+            myGson.toJson(this.graph, new FileWriter(file)); // convert the graph into new json
         } catch (IOException e) {
             e.printStackTrace();
             return false;
         }
-        String jsonStringForm = myGson.toJson(graph);
+        //String jsonStringForm = myGson.toJson(graph);
         return true;
     }
 
@@ -158,16 +157,16 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             e.printStackTrace();
             return false;
         }
-        String jsonFields = "{'Nodes': '???', 'Edges': '???'}";
-        MyDirectedWeightedGraph graph = myGson.fromJson(jsonFields, MyDirectedWeightedGraph.class);
-        try {
-            JsonElement json = myGson.fromJson(new FileReader(file), JsonElement.class);
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-        String res = myGson.toJson(jsonFields);
+//        String jsonFields = "{'Nodes': '???', 'Edges': '???'}";
+//        MyDirectedWeightedGraph graph = myGson.fromJson(jsonFields, MyDirectedWeightedGraph.class);
+//        try {
+//            JsonElement json = myGson.fromJson(new FileReader(file), JsonElement.class);
+//        }
+//        catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//            return false;
+//        }
+//        String res = myGson.toJson(jsonFields);
         return true; // the file could not be loaded
     }
 
