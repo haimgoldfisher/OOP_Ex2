@@ -4,7 +4,7 @@ import api.EdgeData;
 import api.NodeData;
 import com.google.gson.*;
 
-import java.io.File;
+import java.io.*;
 import java.util.*;
 
 
@@ -133,34 +133,42 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     }
 
     @Override
-    public boolean save(String file) throws JsonParseException
+    public boolean save(String file) throws JsonParseException // file = the name of the new JSON
     {
-        JsonObject jsonObject = new JsonObject();
-        for (Iterator<EdgeData> it = this.graph.edgeIter(); it.hasNext(); ) {
-            Edge edge = (Edge)it.next();
-            String toFillEdges = String.format("\"src\": {%d} ,\n \"w\": {%f} ,\n \"dest\": {%d} \n", edge.getSrc(), edge.getWeight(), edge.getDest());
-            jsonObject.add("Edges", toFillEdges);
-        }
-        for (Iterator<NodeData> it = this.graph.nodeIter(); it.hasNext(); ) {
-            Node node = (Node) it.next();
-            String toFillNodes = String.format("\"pos\":{%f,%f,%f} ,\n \"id\": {%d}", node.getLocation(), node.getKey());
-            jsonObject.add("Nodes", toFillNodes);
-        }
-
         Gson myGson = new Gson();
         MyDirectedWeightedGraph graph = new MyDirectedWeightedGraph();
-        graph = myGson.fromJson(file, graph.getClass());
-        return false; // the file could not be saved
+        try {
+            myGson.toJson(graph, new FileWriter(file));
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        String jsonStringForm = myGson.toJson(graph);
+        return true;
     }
 
     @Override
-    public boolean load(String file) throws JsonParseException
+    public boolean load(String file) throws JsonParseException  // file = the path of the JSON file
     {
-        File newGraph = new File(file);
         Gson myGson = new Gson();
-
-
-        return false; // the file could not be loaded
+        try {
+            MyDirectedWeightedGraph graph = myGson.fromJson(new FileReader(file), MyDirectedWeightedGraph.class);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+            return false;
+        }
+        String jsonFields = "{'Nodes': '???', 'Edges': '???'}";
+        MyDirectedWeightedGraph graph = myGson.fromJson(jsonFields, MyDirectedWeightedGraph.class);
+        try {
+            JsonElement json = myGson.fromJson(new FileReader(file), JsonElement.class);
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+        String res = myGson.toJson(jsonFields);
+        return true; // the file could not be loaded
     }
 
     private HashMap<Integer, Double> DijkstraAlgorithm(int src) {
