@@ -3,6 +3,8 @@ import api.DirectedWeightedGraphAlgorithms;
 import api.EdgeData;
 import api.NodeData;
 import com.google.gson.*;
+
+import java.io.File;
 import java.util.*;
 
 
@@ -134,7 +136,17 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     public boolean save(String file) throws JsonParseException
     {
         JsonObject jsonObject = new JsonObject();
-        jsonObject.get(file);
+        for (Iterator<EdgeData> it = this.graph.edgeIter(); it.hasNext(); ) {
+            Edge edge = (Edge)it.next();
+            String toFillEdges = String.format("\"src\": {%d} ,\n \"w\": {%f} ,\n \"dest\": {%d} \n", edge.getSrc(), edge.getWeight(), edge.getDest());
+            jsonObject.add("Edges", toFillEdges);
+        }
+        for (Iterator<NodeData> it = this.graph.nodeIter(); it.hasNext(); ) {
+            Node node = (Node) it.next();
+            String toFillNodes = String.format("\"pos\":{%f,%f,%f} ,\n \"id\": {%d}", node.getLocation(), node.getKey());
+            jsonObject.add("Nodes", toFillNodes);
+        }
+
         Gson myGson = new Gson();
         MyDirectedWeightedGraph graph = new MyDirectedWeightedGraph();
         graph = myGson.fromJson(file, graph.getClass());
@@ -144,8 +156,10 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public boolean load(String file) throws JsonParseException
     {
-        JsonObject jsonObject = new JsonObject();
-        jsonObject.get(file);
+        File newGraph = new File(file);
+        Gson myGson = new Gson();
+
+
         return false; // the file could not be loaded
     }
 
