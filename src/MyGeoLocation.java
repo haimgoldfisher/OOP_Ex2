@@ -19,17 +19,17 @@ public class MyGeoLocation implements GeoLocation {
 
     @Override
     public double x() {
-        return x;
+        return this.x;
     }
 
     @Override
     public double y() {
-        return y;
+        return this.y;
     }
 
     @Override
     public double z() {
-        return z;
+        return this.z;
     }
 
     @Override

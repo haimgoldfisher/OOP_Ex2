@@ -185,7 +185,8 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         }
     }
 
-    private static void swap(List<NodeData> x,int i,int j){
+    private static void swap(List<NodeData> x,int i,int j)
+    {
         NodeData tempi = x.get(i);
         NodeData tempj = x.get(j);
         x.set(i,tempj);
@@ -195,7 +196,56 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public boolean save(String file)
     {
-        return false;
+        if (this.graph == null)
+            return false;
+        try {
+            String outputPath = file;
+            if (!outputPath.endsWith(".json"))
+                outputPath += ".json";
+            FileWriter fileWriter = new FileWriter(outputPath);
+            Gson builder = new GsonBuilder().setPrettyPrinting().create();
+            JsonSerializer<MyDirectedWeightedGraph> serializer = new JsonSerializer<MyDirectedWeightedGraph>() {
+                @Override
+                public JsonElement serialize(MyDirectedWeightedGraph graph, Type type, JsonSerializationContext jsonSerializationContext) {
+                    JsonElement json = new JsonObject();
+                    JsonArray Edges = new JsonArray();
+                    JsonArray Nodes = new JsonArray();
+                    Iterator<NodeData> nodeDataIterator = graph.nodeIter();
+                    int key, src, dest;
+                    double weight;
+                    while (nodeDataIterator.hasNext()) {
+                        JsonObject node = new JsonObject();
+                        Node currNode = (Node) nodeDataIterator.next();
+                        String strPos = currNode.getLocation().x()+","+currNode.getLocation().y()+","+currNode.getLocation().z();
+                        key = currNode.getKey();
+                        node.getAsJsonObject().addProperty("pos", strPos);
+                        node.getAsJsonObject().addProperty("id", key);
+                        Nodes.add(node);
+                    }
+                    Iterator<NodeData> edgeDataIterator = graph.nodeIter();
+                    while (edgeDataIterator.hasNext()) {
+                        JsonObject edge = new JsonObject();
+                        Edge currEdge = (Edge) edgeDataIterator.next();
+                        src = currEdge.getSrc();
+                        weight = currEdge.getWeight();
+                        dest = currEdge.getDest();
+                        edge.getAsJsonObject().addProperty("src", src);
+                        edge.getAsJsonObject().addProperty("w", weight);
+                        edge.getAsJsonObject().addProperty("dest", dest);
+                        Edges.add(edge);
+                    }
+                    json.getAsJsonObject().add("Edges", Edges);
+                    json.getAsJsonObject().add("Nodes", Nodes);
+                    return json;
+                }
+            };
+            fileWriter.write(builder.toJson(serializer));
+            fileWriter.close();
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
@@ -208,32 +258,28 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 @Override
                 public MyDirectedWeightedGraph deserialize(JsonElement json, Type typeOf, JsonDeserializationContext context) throws JsonParseException {
                     JsonObject jsonObj = json.getAsJsonObject();
-                    MyDirectedWeightedGraph graph = new MyDirectedWeightedGraph();
+                    MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph();
                     JsonArray jsonArrayNodes = jsonObj.get("Nodes").getAsJsonArray();
-                    double w, x, y, z;
-                    for (int i = 0; i < jsonArrayNodes.size(); i++)
-                    {
-                        JsonObject jsonObjectNode = jsonArrayNodes.get(i).getAsJsonObject();
-                        int key = jsonObjectNode.get("id").getAsInt();
-                        String posStr = jsonObjectNode.get("pos").getAsString();
-                        String [] posParams = posStr.split(",");
+                    double weight, x, y, z;
+                    for (JsonElement currNode : jsonArrayNodes.getAsJsonArray()) {
+                        int key = currNode.getAsJsonObject().get("id").getAsInt();
+                        String posStr = currNode.getAsJsonObject().get("pos").getAsString();
+                        String[] posParams = posStr.split(",");
                         x = Double.parseDouble(posParams[0]);
                         y = Double.parseDouble(posParams[1]);
                         z = Double.parseDouble(posParams[2]);
                         MyGeoLocation pos = new MyGeoLocation(x, y, z);
-                        graph.addNode(new Node(key, pos));
+                        newGraph.addNode(new Node(key, pos));
                     }
                     JsonArray jsonArrayEdges = jsonObj.get("Edges").getAsJsonArray();
                     int src, dest;
-                    for (int i = 0; i < jsonArrayEdges.size(); i++)
-                    {
-                        JsonObject jsonObjectEdge = jsonArrayEdges.get(i).getAsJsonObject();
-                        src = jsonObjectEdge.get("src").getAsInt();
-                        w = jsonObjectEdge.get("w").getAsDouble();
-                        dest = jsonObjectEdge.get("dest").getAsInt();
-                        graph.connect(src, dest, w);
+                    for (JsonElement currEdge : jsonArrayEdges.getAsJsonArray()) {
+                        src = currEdge.getAsJsonObject().get("src").getAsInt();
+                        weight = currEdge.getAsJsonObject().get("w").getAsDouble();
+                        dest = currEdge.getAsJsonObject().get("dest").getAsInt();
+                        newGraph.connect(src, dest, weight);
                     }
-                    return graph;
+                    return newGraph;
                 }
             };
             builder.registerTypeAdapter(MyDirectedWeightedGraph.class, deserializer);
@@ -241,9 +287,9 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             MyDirectedWeightedGraph graph = customGson.fromJson(fileReader, MyDirectedWeightedGraph.class);
             System.out.println(graph);
             this.graph = graph;
+            fileReader.close();
             return true;
-        }
-        catch (FileNotFoundException e){
+        } catch (IOException e){
             e.printStackTrace();
             return false;
         }
