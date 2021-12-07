@@ -58,8 +58,8 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         return true;
     }
 
-    private MyDirectedWeightedGraph reverse(MyDirectedWeightedGraph graph) {
-        MyDirectedWeightedGraph ans = new MyDirectedWeightedGraph(getGraph());
+    public static MyDirectedWeightedGraph reverse(MyDirectedWeightedGraph graph) {
+        MyDirectedWeightedGraph ans = new MyDirectedWeightedGraph(graph);
         for (int[] key: ans.getKeys_edge().keySet()) {
             EdgeData removed_edge = ans.removeEdge(key[0],key[1]);
             ans.connect(key[1],key[0],removed_edge.getWeight());
@@ -155,7 +155,27 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public NodeData center() {
-
+        if(!isConnected()){
+            return null;
+        }
+        HashMap<Integer,Double> e = new HashMap<>();
+        double rad = Double.POSITIVE_INFINITY;
+//        double diam = Double.MIN_VALUE;
+        for (int src: id_distances.keySet()) {
+            for (int dest: id_distances.keySet()) {
+                double curr_dist = id_distances.get(src).get(dest);
+                e.put(src,Math.max(e.get(src),curr_dist));
+            }
+        }
+        for (int key: e.keySet()) {
+            rad = Math.min(rad,e.get(key));
+//            diam = Math.max(diam,e.get(key));
+        }
+        for (int key: e.keySet()) {
+            if(e.get(key) == rad){
+                return this.graph.getNode(key);
+            }
+        }
         return null;
     }
 
