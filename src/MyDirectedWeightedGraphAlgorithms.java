@@ -204,42 +204,36 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 outputPath += ".json";
             FileWriter fileWriter = new FileWriter(outputPath);
             Gson builder = new GsonBuilder().setPrettyPrinting().create();
-            JsonSerializer<MyDirectedWeightedGraph> serializer = new JsonSerializer<MyDirectedWeightedGraph>() {
-                @Override
-                public JsonElement serialize(MyDirectedWeightedGraph graph, Type type, JsonSerializationContext jsonSerializationContext) {
-                    JsonElement json = new JsonObject();
-                    JsonArray Edges = new JsonArray();
-                    JsonArray Nodes = new JsonArray();
-                    Iterator<NodeData> nodeDataIterator = graph.nodeIter();
-                    int key, src, dest;
-                    double weight;
-                    while (nodeDataIterator.hasNext()) {
-                        JsonObject node = new JsonObject();
-                        Node currNode = (Node) nodeDataIterator.next();
-                        String strPos = currNode.getLocation().x()+","+currNode.getLocation().y()+","+currNode.getLocation().z();
-                        key = currNode.getKey();
-                        node.getAsJsonObject().addProperty("pos", strPos);
-                        node.getAsJsonObject().addProperty("id", key);
-                        Nodes.add(node);
-                    }
-                    Iterator<NodeData> edgeDataIterator = graph.nodeIter();
-                    while (edgeDataIterator.hasNext()) {
-                        JsonObject edge = new JsonObject();
-                        Edge currEdge = (Edge) edgeDataIterator.next();
-                        src = currEdge.getSrc();
-                        weight = currEdge.getWeight();
-                        dest = currEdge.getDest();
-                        edge.getAsJsonObject().addProperty("src", src);
-                        edge.getAsJsonObject().addProperty("w", weight);
-                        edge.getAsJsonObject().addProperty("dest", dest);
-                        Edges.add(edge);
-                    }
-                    json.getAsJsonObject().add("Edges", Edges);
-                    json.getAsJsonObject().add("Nodes", Nodes);
-                    return json;
-                }
-            };
-            fileWriter.write(builder.toJson(serializer));
+            JsonElement json = new JsonObject();
+            JsonArray Edges = new JsonArray();
+            JsonArray Nodes = new JsonArray();
+            Iterator<NodeData> nodeDataIterator = graph.nodeIter();
+            int key, src, dest;
+            double weight;
+            while (nodeDataIterator.hasNext()) {
+                JsonObject node = new JsonObject();
+                NodeData currNode = nodeDataIterator.next();
+                String strPos = currNode.getLocation().x()+","+currNode.getLocation().y()+","+currNode.getLocation().z();
+                key = currNode.getKey();
+                node.getAsJsonObject().addProperty("pos", strPos);
+                node.getAsJsonObject().addProperty("id", key);
+                Nodes.add(node);
+            }
+            Iterator<EdgeData> edgeDataIterator = graph.edgeIter();
+            while (edgeDataIterator.hasNext()) {
+                JsonObject edge = new JsonObject();
+                EdgeData currEdge = edgeDataIterator.next();
+                src = currEdge.getSrc();
+                weight = currEdge.getWeight();
+                dest = currEdge.getDest();
+                edge.getAsJsonObject().addProperty("src", src);
+                edge.getAsJsonObject().addProperty("w", weight);
+                edge.getAsJsonObject().addProperty("dest", dest);
+                Edges.add(edge);
+            }
+            json.getAsJsonObject().add("Edges", Edges);
+            json.getAsJsonObject().add("Nodes", Nodes);
+            fileWriter.write(builder.toJson(json));
             fileWriter.close();
             return true;
         } catch (IOException e) {

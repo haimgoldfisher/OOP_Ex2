@@ -31,7 +31,7 @@ public class Node implements api.NodeData {
 
     @Override
     public GeoLocation getLocation() {
-        return this.getLocation();
+        return this.location;
     }
 
     @Override
