@@ -7,19 +7,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
     private HashMap<Integer, NodeData> key_node;
-    private HashMap<int[], EdgeData> keys_edge;
+    private HashMap<ArrayList<Integer>, EdgeData> keys_edge;
     private int mc;
 
     public MyDirectedWeightedGraph() {
         this.key_node = new HashMap<Integer, NodeData>();
-        this.keys_edge = new HashMap<int[], EdgeData>();
+        this.keys_edge = new HashMap<ArrayList<Integer>, EdgeData>();
     }
 
     public void setKey_node(HashMap<Integer, NodeData> key_node) {
         this.key_node = key_node;
     }
 
-    public void setKeys_edge(HashMap<int[], EdgeData> keys_edge) {
+    public void setKeys_edge(HashMap<ArrayList<Integer>, EdgeData> keys_edge) {
         this.keys_edge = keys_edge;
     }
 
@@ -27,7 +27,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         return key_node;
     }
 
-    public HashMap<int[], EdgeData> getKeys_edge() {
+    public HashMap<ArrayList<Integer>, EdgeData> getKeys_edge() {
         return keys_edge;
     }
 
@@ -43,7 +43,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
     {
         MyDirectedWeightedGraph g = (MyDirectedWeightedGraph) graph;
         this.key_node = new HashMap<Integer, NodeData>(g.key_node);
-        this.keys_edge = new HashMap<int[], EdgeData>(g.keys_edge);
+        this.keys_edge = new HashMap<ArrayList<Integer>, EdgeData>(g.keys_edge);
         // nodes iterator:
 //        for (Iterator<NodeData> iter = graph.nodeIter(); iter.hasNext(); ) {
 //            NodeData currNode = iter.next();
@@ -64,7 +64,9 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public EdgeData getEdge(int src, int dest) {
-        int[] edge_keys = {src, dest};
+        ArrayList<Integer> edge_keys = new ArrayList<>();
+        edge_keys.add(src);
+        edge_keys.add(dest);
         return keys_edge.get(edge_keys);
     }
 
@@ -77,7 +79,10 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public void connect(int src, int dest, double w) {
-        int[] new_edge_keys = {src, dest};
+//        int[] new_edge_keys = {src, dest};
+        ArrayList<Integer> new_edge_keys = new ArrayList<>(2);
+        new_edge_keys.add(src);
+        new_edge_keys.add(dest);
         Edge new_edge = new Edge(src, dest, w);
         keys_edge.put(new_edge_keys, new_edge);//add the new edge to the edges HashMap.
         Node dest_node = (Node) key_node.get(dest);
@@ -130,7 +135,10 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public EdgeData removeEdge(int src, int dest) {
-        int[] edge_keys = {src, dest};
+//        int[] edge_keys = {src, dest};
+        ArrayList<Integer> edge_keys = new ArrayList<>(2);
+        edge_keys.add(src);
+        edge_keys.add(dest);
         Edge edge = (Edge) keys_edge.get(edge_keys);
         Node src_node = (Node) key_node.get(src);
         src_node.children_ids.remove(dest);
@@ -227,6 +235,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         Stack<Integer> s = new Stack<>();
         s.push(start);
         key_visited.put(start, true);
+        counter++;
         while (!s.isEmpty()) {
             int curr_id = s.pop();
             Node curr_node = (Node) this.key_node.get(curr_id);

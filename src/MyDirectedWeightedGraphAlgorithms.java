@@ -60,9 +60,17 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     public static MyDirectedWeightedGraph reverse(MyDirectedWeightedGraph graph) {
         MyDirectedWeightedGraph ans = new MyDirectedWeightedGraph(graph);
-        for (int[] key: ans.getKeys_edge().keySet()) {
-            EdgeData removed_edge = ans.removeEdge(key[0],key[1]);
-            ans.connect(key[1],key[0],removed_edge.getWeight());
+        ArrayList<ArrayList<Integer>> keys_list= new ArrayList<>();
+        for (ArrayList<Integer> key: ans.getKeys_edge().keySet()) {
+            keys_list.add(key);
+        }
+        for (int i = 0; i < keys_list.size(); i++) {
+            ArrayList<Integer> key = keys_list.get(i);
+            EdgeData removed_edge = ans.removeEdge(key.get(0),key.get(1));
+        }
+        for (ArrayList<Integer> key: graph.getKeys_edge().keySet()) {
+            EdgeData edge = graph.getEdge(key.get(0),key.get(1));
+            ans.connect(key.get(1),key.get(0),edge.getWeight());
         }
         return ans;
     }
@@ -161,6 +169,9 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         HashMap<Integer,Double> e = new HashMap<>();
         double rad = Double.POSITIVE_INFINITY;
 //        double diam = Double.MIN_VALUE;
+        for (int src: id_distances.keySet()) {
+            e.put(src, (double) 0);
+        }
         for (int src: id_distances.keySet()) {
             for (int dest: id_distances.keySet()) {
                 double curr_dist = id_distances.get(src).get(dest);
