@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/GUI_Graph.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +42,16 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.GUI">
+  <component name="RunManager" selected="Application.GUI_Graph">
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
+      <module name="OOP_Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI_Graph" />
       <module name="OOP_Ex2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -62,6 +69,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GUI_Graph" />
         <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.testing.load_Test" />
       </list>
@@ -85,6 +93,7 @@
       <workItem from="1638828622221" duration="87000" />
       <workItem from="1638879539144" duration="269000" />
       <workItem from="1638887694314" duration="1780000" />
+      <workItem from="1638889554754" duration="285000" />
     </task>
     <servers />
   </component>
@@ -101,5 +110,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
