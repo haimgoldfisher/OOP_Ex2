@@ -19,6 +19,8 @@ public class testing {
     {
         MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
         graphAlgorithms.load("data/G1.json");
+        System.out.println(graphAlgorithms.getGraph().getNode(0));
+        //graphAlgorithms.save("output");
     }
 
 

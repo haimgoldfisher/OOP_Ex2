@@ -3,14 +3,19 @@
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/OOP_Ex2/testing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/OOP_Ex2/testing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/testing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI_Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Graph.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -32,12 +37,26 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.GUI_Graph">
+    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI" />
+      <module name="OOP_Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GUI_Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI_Graph" />
+      <module name="OOP_Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="testing.load_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OOP_Ex2" />
       <option name="PACKAGE_NAME" value="" />
@@ -50,6 +69,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GUI_Graph" />
+        <item itemvalue="Application.GUI" />
         <item itemvalue="JUnit.testing.load_Test" />
       </list>
     </recent_temporary>
@@ -68,6 +89,12 @@
       <workItem from="1638713468466" duration="6086000" />
       <workItem from="1638794982889" duration="2133000" />
       <workItem from="1638803476449" duration="8961000" />
+      <workItem from="1638823085983" duration="5200000" />
+      <workItem from="1638828622221" duration="87000" />
+      <workItem from="1638879539144" duration="269000" />
+      <workItem from="1638887694314" duration="1780000" />
+      <workItem from="1638889554754" duration="285000" />
+      <workItem from="1638891093733" duration="951000" />
     </task>
     <servers />
   </component>
