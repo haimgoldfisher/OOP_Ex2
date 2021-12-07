@@ -52,7 +52,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         ArrayList<Integer> not_visited = new ArrayList<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
         for (int key : keys) {
-            distances.put(key, Double.MAX_VALUE);
+            distances.put(key, Double.POSITIVE_INFINITY);
             not_visited.add(key);
         }
         distances.put(src, (double) 0);
@@ -77,7 +77,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             }
         }
         double shortest = distances.get(dest);
-        if (shortest == Double.MAX_VALUE) {
+        if (shortest == Double.POSITIVE_INFINITY) {
             return -1;
         } else {
             return shortest;
@@ -92,7 +92,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         ArrayList<Integer> not_visited = new ArrayList<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
         for (int key : keys) {
-            distances.put(key, Double.MAX_VALUE);
+            distances.put(key, Double.POSITIVE_INFINITY);
             not_visited.add(key);
         }
         distances.put(src, (double) 0);
@@ -117,7 +117,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 }
             }
         }
-        if(distances.get(dest)==Double.MAX_VALUE){
+        if(distances.get(dest)== Double.POSITIVE_INFINITY){
             return null;
         }
         int curr = dest;
@@ -141,7 +141,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     public List<NodeData> tsp(List<NodeData> cities) {
         ArrayList<List<NodeData>> all_paths = getAllPermutation(cities);
         int min_index = -1;
-        double min_cost = Double.MAX_VALUE;
+        double min_cost = Double.POSITIVE_INFINITY;
         for (int i = 0; i < all_paths.size(); i++) {
             List<NodeData> curr_path = all_paths.get(i);
             double curr_cost = calcCost(curr_path);
@@ -149,6 +149,9 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 min_cost = curr_cost;
                 min_index = i;
             }
+        }
+        if (min_cost == Double.POSITIVE_INFINITY){
+            return null;
         }
         List<NodeData> shortest_path = all_paths.get(min_index);
         return shortest_path;
@@ -254,7 +257,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         ArrayList<Integer> not_visited = new ArrayList<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
         for (int key : keys) {
-            distances.put(key, Double.MAX_VALUE);
+            distances.put(key, Double.POSITIVE_INFINITY);
             not_visited.add(key);
         }
         distances.put(src, (double) 0);
@@ -283,7 +286,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     private int minDistance(ArrayList<Integer> not_visited, HashMap<Integer, Double> distances) {
         int ans_id = -1;
-        double min = Double.MAX_VALUE;
+        double min = Double.POSITIVE_INFINITY;
         for (int i = 0; i < not_visited.size(); i++) {
             int curr_id = not_visited.get(i);
             double curr_distance = distances.get(curr_id);
