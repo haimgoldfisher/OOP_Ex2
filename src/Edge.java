@@ -15,6 +15,14 @@ public class Edge implements EdgeData {
         this.weight = weight;
     }
 
+    public void setSrc_key(int src_key) {
+        this.src_key = src_key;
+    }
+
+    public void setDest_key(int dest_key) {
+        this.dest_key = dest_key;
+    }
+
     @Override
     public int getSrc() {
         return this.src_key;

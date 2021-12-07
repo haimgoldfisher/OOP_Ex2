@@ -40,11 +40,33 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
 
     @Override
     public boolean isConnected() {
-        if (this.graph.nodeSize() > this.graph.edgeSize() + 1)
-            return false; // in connected graph we have at least n-1 edges for n vertices
-        Node n = (Node) this.graph.getNode(1); // ???
-        return this.graph.BFS_search(n) == this.graph.nodeSize();
+//        if (this.graph.nodeSize() > this.graph.edgeSize() + 1)
+//            return false; // in connected graph we have at least n-1 edges for n vertices
+//        Node n = (Node) this.graph.getNode(1); // ???
+//        return this.graph.BFS_search(n) == this.graph.nodeSize();
+        TreeSet <Integer>keys = new TreeSet<>(this.graph.getKey_node().keySet());
+        int key = keys.first();
+        int visited = this.graph.myDFS(key);
+        if(visited!=this.graph.nodeSize()){
+            return false;
+        }
+        MyDirectedWeightedGraph reversed_g = reverse(graph);
+        visited = reversed_g.myDFS(key);
+        if(visited!=this.graph.nodeSize()){
+            return false;
+        }
+        return true;
     }
+
+    private MyDirectedWeightedGraph reverse(MyDirectedWeightedGraph graph) {
+        MyDirectedWeightedGraph ans = new MyDirectedWeightedGraph(getGraph());
+        for (int[] key: ans.getKeys_edge().keySet()) {
+            EdgeData removed_edge = ans.removeEdge(key[0],key[1]);
+            ans.connect(key[1],key[0],removed_edge.getWeight());
+        }
+        return ans;
+    }
+
 
     @Override
     public double shortestPathDist(int src, int dest) {
