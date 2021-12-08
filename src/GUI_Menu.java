@@ -4,6 +4,9 @@ import java.awt.event.*;
 public class GUI_Menu extends JFrame implements ActionListener {
     MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
 
+    static JLabel label;
+    static JLabel answer;
+
     public static void menu()
     {
         GUI_Menu gui_menu = new GUI_Menu();
@@ -12,7 +15,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
         JMenuItem save, gson_g1, gson_g2, gson_g3, show_graph, edit;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
         JFrame frame = new JFrame("Ex2 - Data Structures and Algorithms On Graphs");
-        //JLabel label = new JLabel("Current Function: ");
+        label = new JLabel("Current Function: ");
+        answer = new JLabel("");
         main_menu = new JMenu("Menu");
         load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
@@ -47,8 +51,9 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
         menuBar.add(main_menu);
         frame.setJMenuBar(menuBar);
-        //frame.add(label);
-
+        frame.add(label);
+        //answer.setLocation(label.getX(), label.getY()-10);
+        //frame.add(answer);
         save.addActionListener(gui_menu);
         gson_g1.addActionListener(gui_menu);
         gson_g2.addActionListener(gui_menu);
@@ -67,7 +72,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println(e.getActionCommand() + " selected");
+        label.setText("Current Function: "+e.getActionCommand());
         switch (e.getActionCommand()) {
             case "G1" -> this.graph.load("data/G1.json");
             case "G2" -> this.graph.load("data/G2.json");
@@ -75,11 +80,12 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "Save" -> this.graph.save("output.json");
             case "Edit" -> System.out.println("Edit");
             case "Show Graph" -> System.out.println("Show Graph");
-            case "Is Connected" -> System.out.println("Is Connected");
+            case "Is Connected" -> answer.setText("Is Connected: "+this.graph.isConnected());
             case "Shortest Path" -> System.out.println("Shortest Path");
             case "Shortest Path Distance" -> System.out.println("Shortest Path Distance");
             case "Center" -> System.out.println("Center");
             case "TSP" -> System.out.println("TSP");
+            default -> throw new IllegalStateException("Unexpected value: " + e.getActionCommand());
         }
     }
 
