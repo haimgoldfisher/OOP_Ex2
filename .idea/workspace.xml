@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/JavaComboBox.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Menu.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +112,7 @@
       <workItem from="1638892175234" duration="122000" />
       <workItem from="1638895548370" duration="1364000" />
       <workItem from="1638896965452" duration="1458000" />
-      <workItem from="1638913020510" duration="11727000" />
+      <workItem from="1638913020510" duration="12459000" />
     </task>
     <servers />
   </component>

@@ -2,6 +2,8 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 public class GUI_Menu extends JFrame implements ActionListener {
+    MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
+
     public static void menu()
     {
         GUI_Menu gui_menu = new GUI_Menu();
@@ -66,6 +68,19 @@ public class GUI_Menu extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e)
     {
         System.out.println(e.getActionCommand() + " selected");
+        switch (e.getActionCommand()) {
+            case "G1" -> this.graph.load("data/G1.json");
+            case "G2" -> this.graph.load("data/G2.json");
+            case "G3" -> this.graph.load("data/G3.json");
+            case "Save" -> this.graph.save("output.json");
+            case "Edit" -> System.out.println("Edit");
+            case "Show Graph" -> System.out.println("Show Graph");
+            case "Is Connected" -> System.out.println("Is Connected");
+            case "Shortest Path" -> System.out.println("Shortest Path");
+            case "Shortest Path Distance" -> System.out.println("Shortest Path Distance");
+            case "Center" -> System.out.println("Center");
+            case "TSP" -> System.out.println("TSP");
+        }
     }
 
     public static void main(String[] args) {
