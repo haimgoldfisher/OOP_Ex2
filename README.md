@@ -11,29 +11,37 @@
 
 In this exercise, we are required to design and implement a variety of different algorithms on graphs (Directed and Weighted), which are represented using data structures.
 
-The Node:
+Each graph (MyDirectedWeightedGraph) has Mode Count int param and two hash sets:
 
-*
-*
-*
+* Mode Count (MC) - Count the number of actions performed so far in the graph (initialized to 0).
 
-The Graph:
+* Nodes - Each node contains the following important parameters (not all are specified):
+  * key (int): (Called also ID) The name of the vertex (using an int number). Helps us access the desired vertex using its name. Inevitably the name of each vertex is unique and exclusive.
+  * location (x,y,z double): The location of the vertex in the three-dimensional space. Note that this task we are required for two-dimensional representation. Therefore the value of z will always be 0.
+  * parents_ids (Hashset): An Hashmap that represents all the parent keys of this vertex. Required for access to the parents.
+  * children_ids (Hashset): An Hashmap that represents all the child keys of this vertex. Required for access to the children.
+  * edges_to_children (Hashset): An Hashmap that represents the keys (src+dest) of all the edges that go from this vertex to child vertices.
 
-*
-*
-*
+* Edges - Each edge contains the following important parameters (not all are specified):
+  * src_key (int): The key of the vertex from which the edge emerges
+  * dest_key (int): The key of the vertex to which the edge reaches
+  * weight (double): Edge's weight. Also called Edge's length.
 
 The algorithms we would like to implement at maximum efficiency:
 
 * <ins>**Is Connected**</ins> - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
 whether a given graph is a connected or not.
 * <ins>**Shortest Path Disttance**</ins> - 
-* <ins>**Shortest Path**</ins> - 
-* <ins>**Center**</ins> - 
-* <ins>**Travelling Salesman Problem (TSP)**</ins> - 
+* <ins>**Shortest Path**</ins> - Algorithm for finding the shortest path between any 2 vertices in a graph.
+* <ins>**Center**</ins> - Algorithm for finding the most central vertex in a graph (can be more than one)
+* <ins>**Travelling Salesman Problem (TSP)**</ins> - An algorithm for finding the shortest path that passes through all the given vertices.
 
 ---------
 ## 2. The Thoughts Behind The Classes:
+
+It is important to note that since most of the designings of the task are given to us, most of the planning is in the auxiliary functions for the implementation of the algorithms and less about the classes (except for the implementation of the GUI). Since we were initially given five interfaces that we implemented, we will build a class that matches each interface. Each class will implement all the necessary methods and functions. Next, additional methods and additional functions will be built within each class in order to help us solve the task. The work on the GUI interface is divided into several different classes. A class that represents the main menu, one that represents the drawing of the graph,
+We will also complete the MAIN function EX2 so that we can run the program as one complete unit.
+
 ---------
 ## 3. UML Diagram:
 ---------
