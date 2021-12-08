@@ -1,5 +1,7 @@
 import api.EdgeData;
 
+import java.awt.*;
+
 public class Edge implements EdgeData {
 //    private Node src;
 //    private Node dest;
@@ -57,4 +59,5 @@ public class Edge implements EdgeData {
     public void setTag(int t) {
         this.tag = t;
     }
+
 }

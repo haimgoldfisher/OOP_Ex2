@@ -29,7 +29,6 @@ public class testing {
     {
         MyGeoLocation g = new MyGeoLocation(1,2,3);
         Node n = new Node(1, g);
-
     }
 
     @Test

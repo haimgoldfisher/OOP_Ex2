@@ -19,6 +19,14 @@ public class GUI extends JFrame implements ActionListener { // , JButton
         loadButton.setVisible(true);
         loadButton.addActionListener(this);
 
+//        String[] graphStrings = {"G1", "G2", "G3"};
+//        JComboBox graphsList = new JComboBox(graphStrings);
+//        graphsList.setLocation(100,100);
+//        graphsList.setSize(100, 100);
+//        graphsList.setSelectedIndex(2);
+//        graphsList.setVisible(true);
+//        graphsList.addActionListener(this);
+
         Button saveButton = new Button("Save");
         this.add(saveButton);
         saveButton.setLocation(400, 400);
