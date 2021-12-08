@@ -1,18 +1,32 @@
+import api.EdgeData;
+import api.NodeData;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class GUI_Menu extends JFrame implements ActionListener {
-    MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
+import java.util.LinkedList;
 
-    public static void menu()
-    {
-        GUI_Menu gui_menu = new GUI_Menu();
+public class GUI_Menu extends JFrame implements ActionListener {
+    public MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
+    int scrW;
+    int scrH;
+    int innerW;
+    int innerH;
+
+    public GUI_Menu(){
+        init();
+    }
+
+    private void init() {
+//        GUI_Menu gui_menu = new GUI_Menu();
         JMenuBar menuBar = new JMenuBar();
         JMenu main_menu, load ,run_alogs;
         JMenuItem save, gson_g1, gson_g2, gson_g3, show_graph, edit;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
-        JFrame frame = new JFrame("Ex2 - Data Structures and Algorithms On Graphs");
+//        JFrame frame = new JFrame("Ex2 - Data Structures and Algorithms On Graphs");
         //JLabel label = new JLabel("Current Function: ");
+//        this.setName("Ex2 - Data Structures and Algorithms On Graphs");
+        this.setTitle("Ex2 - Data Structures and Algorithms On Graphs");
         main_menu = new JMenu("Menu");
         load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
@@ -46,24 +60,34 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
 
         menuBar.add(main_menu);
-        frame.setJMenuBar(menuBar);
+        this.setJMenuBar(menuBar);
         //frame.add(label);
 
-        save.addActionListener(gui_menu);
-        gson_g1.addActionListener(gui_menu);
-        gson_g2.addActionListener(gui_menu);
-        gson_g3.addActionListener(gui_menu);
-        edit.addActionListener(gui_menu);
-        show_graph.addActionListener(gui_menu);
-        isConnected.addActionListener(gui_menu);
-        shortestPath.addActionListener(gui_menu);
-        shortestPathDist.addActionListener(gui_menu);
-        center.addActionListener(gui_menu);
-        tsp.addActionListener(gui_menu);
+        save.addActionListener(this);
+        gson_g1.addActionListener(this);
+        gson_g2.addActionListener(this);
+        gson_g3.addActionListener(this);
+        edit.addActionListener(this);
+        show_graph.addActionListener(this);
+        isConnected.addActionListener(this);
+        shortestPath.addActionListener(this);
+        shortestPathDist.addActionListener(this);
+        center.addActionListener(this);
+        tsp.addActionListener(this);
 
-        frame.setSize(500, 500);
-        frame.setVisible(true);
+
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        pack(); // Need this, otherwise insets() show as 0.
+        scrW = (int)screenSize.getWidth();
+        scrH = (int)screenSize.getHeight();
+        innerW = scrW - getInsets().left - getInsets().right;
+        innerH = scrH - getInsets().top - getInsets().bottom;
+        setSize(scrW, scrH);
+        setVisible(true);
+
     }
+
 
     public void actionPerformed(ActionEvent e)
     {
@@ -74,7 +98,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "G3" -> this.graph.load("data/G3.json");
             case "Save" -> this.graph.save("output.json");
             case "Edit" -> System.out.println("Edit");
-            case "Show Graph" -> System.out.println("Show Graph");
+            case "Show Graph" -> this.setContentPane(new GUI_Graph((MyDirectedWeightedGraph) this.graph.getGraph(),innerH,innerW));
             case "Is Connected" -> System.out.println("Is Connected");
             case "Shortest Path" -> System.out.println("Shortest Path");
             case "Shortest Path Distance" -> System.out.println("Shortest Path Distance");
@@ -84,6 +108,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-       menu();
+       new GUI_Menu();
     }
 }

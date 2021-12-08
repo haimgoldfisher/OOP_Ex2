@@ -5,48 +5,70 @@ import api.NodeData;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Iterator;
+import java.util.LinkedList;
 
-public class GUI_Graph extends JFrame {
-    DirectedWeightedGraph graph;
+public class GUI_Graph extends JPanel {
 
+    MyDirectedWeightedGraph graph_data;
+    private int kRADIUS = 5;
+    private int screen_W;
+    private int screen_H;
+    double min_x = Double.MAX_VALUE;
+    double max_x = Double.MIN_VALUE;
+    double min_y = Double.MAX_VALUE;
+    double max_y = Double.MIN_VALUE;
 
-    public GUI_Graph(MyDirectedWeightedGraphAlgorithms graphAlgorithms){
-        this.graph = graphAlgorithms.getGraph();
-        setTitle("Graph");
-        setSize(1000, 1000);
-        setVisible(true);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    public GUI_Graph(MyDirectedWeightedGraph graph,int h,int w){
+        screen_H=h;
+        screen_W=w;
+        graph_data=graph;
+        Init();
     }
 
-    @Override
-    public void paint(Graphics g)
-    {
-        g.setColor(Color.BLACK);
-        Iterator<EdgeData> edgeIT = this.graph.edgeIter();
-        int x1,x2,y1,y2;
-        while (edgeIT.hasNext()){
-            Edge e = (Edge) edgeIT.next();
-            x1 = (int) this.graph.getNode(e.getSrc()).getLocation().x();
-            y1 = (int) this.graph.getNode(e.getSrc()).getLocation().y();
-            x2 = (int) this.graph.getNode(e.getDest()).getLocation().x();
-            y2 = (int) this.graph.getNode(e.getDest()).getLocation().y();
-            g.drawLine(x1*10, y1*10, x2*10, y2*10);
+    private void Init() {
+        screen_W = screen_W-200;
+        screen_H = screen_H-200;
+        for (NodeData nd: graph_data.getKey_node().values()) {
+            MyGeoLocation loc = (MyGeoLocation) nd.getLocation();
+            if(loc.x()<min_x){
+                min_x = loc.x();
+            }
+            if(loc.x()>max_x){
+                max_x = loc.x();
+            }
+            if(loc.y()<min_y){
+                min_y = loc.y();
+            }
+            if(loc.y()>max_y){
+                max_y = loc.y();
+            }
         }
-        Iterator<NodeData> nodeIT = this.graph.nodeIter();
-        while (nodeIT.hasNext()){
-            Node n = (Node) nodeIT.next();
+
+
+    }
+
+    public void paintComponent(Graphics g) {
+        for (NodeData nd: graph_data.getKey_node().values()) {
+            MyGeoLocation loc = (MyGeoLocation) nd.getLocation();
+            g.setColor(Color.BLUE);
+            g.fillOval((int) ((loc.x()-min_x)/(max_x-min_x)*screen_W) , (int) ((loc.y()-min_y)/(max_y-min_y)*screen_H) ,
+                    2 * kRADIUS, 2 * kRADIUS);
+        }
+        for (EdgeData edge: graph_data.getKeys_edge().values()) {
+            int src = edge.getSrc();
+            int dest = edge.getDest();
+            NodeData src_nd = graph_data.getKey_node().get(src);
+            NodeData dest_nd = graph_data.getKey_node().get(dest);
+            MyGeoLocation src_loc = (MyGeoLocation) src_nd.getLocation();
+            MyGeoLocation dest_loc = (MyGeoLocation) dest_nd.getLocation();
             g.setColor(Color.RED);
-            g.fillOval((int)n.getLocation().x()*10, (int)n.getLocation().y()*10, 50, 50);
-            g.setColor(Color.BLACK);
-            g.drawOval((int)n.getLocation().x()*10, (int)n.getLocation().y()*10, 50, 50);
+            g.drawLine((int) ((dest_loc.x()-min_x)/(max_x-min_x)*screen_W)+kRADIUS, (int) ((dest_loc.y()-min_y)/(max_y-min_y)*screen_H)+kRADIUS,
+                    (int) ((src_loc.x()-min_x)/(max_x-min_x)*screen_W)+kRADIUS, (int) ((src_loc.y()-min_y)/(max_y-min_y)*screen_H)+kRADIUS);
+            double dist = src_loc.distance(dest_loc);
+            g.drawString(String.format("%.2f", dist),
+                    (int) ((dest_loc.x() + src_loc.x()) / 2),
+                    (int) ((dest_loc.y() + src_loc.y()) / 2));
         }
-    }
-
-
-
-    public static void main(String[] args) {
-        MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
-        graphAlgorithms.load("data/G1.json");
-        new GUI_Graph(graphAlgorithms);
     }
 }
+
