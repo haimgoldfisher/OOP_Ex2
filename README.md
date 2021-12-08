@@ -38,6 +38,10 @@ whether a given graph is a connected or not.
 
 ---------
 ## 2. The Thoughts Behind The Classes:
+
+It is important to note that since most of the designings of the task are given to us, most of the planning is in the auxiliary functions for the implementation of the algorithms and less about the classes (except for the implementation of the GUI). Since we were initially given five interfaces that we implemented, we will build a class that matches each interface. Each class will implement all the necessary methods and functions. Next, additional methods and additional functions will be built within each class in order to help us solve the task. The work on the GUI interface is divided into several different classes. A class that represents the main menu, one that represents the drawing of the graph,
+We will also complete the MAIN function EX2 so that we can run the program as one complete unit.
+
 ---------
 ## 3. UML Diagram:
 ---------
