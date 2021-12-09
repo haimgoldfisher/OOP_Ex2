@@ -1,0 +1,160 @@
+@startuml
+
+'https://plantuml.com/sequence-diagram
+
+interface GeoLocation
+{
+    + public int x()
+    + public int y()
+    + public int z()
+    + public double distance()
+}
+
+class MyGeoLocation
+{
+    - private double  x;
+    - private double  y;
+    - private double  z;
+}
+
+interface NodeData
+{
+	+ public GeoLocation getLocation()
+	+ public void setLocation(GeoLocation p)
+	+ public double getWeight()
+	+ public void setWeight(double w)
+	+ public String getInfo()
+	+ public void setInfo(String s)
+	+ public int getTag()
+	+ public void setTag(int t)
+}
+
+class Node
+{
+    - private int key
+    - private GeoLocation location
+    - private double weight
+    - private String info
+    - private int tag
+    - public boolean discovered = false
+    - public HashSet<Integer> parents_ids
+    - public HashSet<Integer> children_ids
+    - public HashSet<EdgeData> edges_to_children
+}
+
+interface EdgeData
+{
+    + public int getSrc()
+    + public int getDest()
+    + public double getWeight()
+    + public String getInfo()
+    + public void setInfo(String s)
+    + public int getTag()
+    + public void setTag(int t)
+}
+
+class Edge
+{
+    - private int src_key
+    - private int dest_key
+    - private double weight
+    - private String info
+    - private int tag
+}
+
+interface DirectedWeightedGraph
+{
+   	+ public NodeData getNode(int key);
+   	+ public EdgeData getEdge(int src, int dest);
+   	+ public void addNode(NodeData n);
+   	+ public void connect(int src, int dest, double w);
+   	+ public Iterator<NodeData> nodeIter();
+   	+ public Iterator<EdgeData> edgeIter();
+   	+ public Iterator<EdgeData> edgeIter(int node_id);
+   	+ public NodeData removeNode(int key);
+   	+ public EdgeData removeEdge(int src, int dest);
+   	+ public int nodeSize();
+    + public int edgeSize();
+    + public int getMC();
+}
+
+}
+
+class MyDirectedWeightedGraph
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+class Pair
+{
+    - private int key;
+    - private double distance
+    + public Pair()
+    + public Pair(int key, double distance)
+    + public int getKey()
+    + public double getDistance()
+    + public void setKey(int key)
+    + public void setDistance(double distance)
+    + public int compare(Pair nd1, Pair nd2)
+
+}
+
+interface DirectedWeightedGraphAlgorithms
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+interface DirectedWeightedGraphAlgorithms
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+class MyDirectedWeightedGraphAlgorithms
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+class GUI_Graph
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+class GUI_Menu
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+}
+
+class Ex2
+{
+    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
+    + elevator_allocation(elev_list: list, call: int) -> int
+
+}
+
+MyGeoLocation --|> Node
+Node --|> NodeData
+Node --|> Edge
+Node --|> MyDirectedWeightedGraph
+Edge --|> EdgeData
+Edge --|> MyDirectedWeightedGraph
+MyDirectedWeightedGraph --|> DirectedWeightedGraph
+MyDirectedWeightedGraph --|> MyDirectedWeightedGraphAlgorithms
+Pair --|> MyDirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraphAlgorithms --|> DirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraphAlgorithms --|> GUI_Menu
+GUI_Graph --|> GUI_Menu
+GUI_Menu --|> Ex2
+
+@enduml
+@enduml
