@@ -9,11 +9,23 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
     private HashMap<Integer, NodeData> key_node;
     private HashMap<ArrayList<Integer>, EdgeData> keys_edge;
-    private int mc;
+    private int mc = 0;
 
     public MyDirectedWeightedGraph() {
         this.key_node = new HashMap<Integer, NodeData>();
         this.keys_edge = new HashMap<ArrayList<Integer>, EdgeData>();
+    }
+
+    public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
+    {
+        MyDirectedWeightedGraph g = (MyDirectedWeightedGraph) graph;
+        this.key_node = new HashMap<Integer, NodeData>();
+        this.keys_edge = new HashMap<ArrayList<Integer>, EdgeData>(g.keys_edge);
+        for (int key : g.key_node.keySet()) {
+            Node curr_node = (Node) g.key_node.get(key);
+            Node new_nd = new Node(curr_node);
+            this.key_node.put(key, new_nd);
+        }
     }
 
     public void setKey_node(HashMap<Integer, NodeData> key_node) {
@@ -32,31 +44,10 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         return keys_edge;
     }
 
-//    public int getMc() {
-//        return mc;
-//    }
-
     public void setMc(int mc) {
         this.mc = mc;
     }
 
-    public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
-    {
-        MyDirectedWeightedGraph g = (MyDirectedWeightedGraph) graph;
-        this.key_node = new HashMap<Integer, NodeData>(g.key_node);
-        this.keys_edge = new HashMap<ArrayList<Integer>, EdgeData>(g.keys_edge);
-        // nodes iterator:
-//        for (Iterator<NodeData> iter = graph.nodeIter(); iter.hasNext(); ) {
-//            NodeData currNode = iter.next();
-//            this.key_node.put(currNode.getKey(), currNode);
-//        }
-//        // edges iterator:
-//        for (Iterator<EdgeData> iter = graph.edgeIter(); iter.hasNext(); ) {
-//            EdgeData currEdge = iter.next();
-//            int[] currEdgeKeys = {currEdge.getSrc(), currEdge.getDest()};
-//            this.keys_edge.put(currEdgeKeys, currEdge);
-//        }
-    }
 
     @Override
     public NodeData getNode(int key) {
@@ -76,6 +67,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         int new_key = n.getKey();
         Node new_node = (Node) n;
         key_node.put(new_key, new_node);
+        mc++;
     }
 
     @Override
@@ -91,6 +83,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         Node src_node = (Node) key_node.get(src);
         src_node.children_ids.add(dest);//add the dest_id to the children_ids HashSet of src_node.
         src_node.edges_to_children.add(new_edge);//add the Edge to the Edge Hash set of src_node.
+        mc++;
     }
 
     @Override
@@ -114,6 +107,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public NodeData removeNode(int key) {
+        mc++;
         Node curr_node = (Node) key_node.get(key);
         for (int parent_id : curr_node.parents_ids) {
             int[] edge_keys = {parent_id, key};
@@ -136,7 +130,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
 
     @Override
     public EdgeData removeEdge(int src, int dest) {
-//        int[] edge_keys = {src, dest};
+        mc++;
         ArrayList<Integer> edge_keys = new ArrayList<>(2);
         edge_keys.add(src);
         edge_keys.add(dest);
@@ -161,13 +155,13 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
             v.discovered = true; // mark this node as discovered
             discoveredNodes++; // every time a node is being discovered - raise the counter
             if (v.parents_ids.size() > 0)
-                for (int par : v.parents_ids){
+                for (int par : v.parents_ids) {
                     Node parent = (Node) this.getNode(par);
                     if (!parent.discovered)
                         Q.add(parent);
                 }
             if (v.children_ids.size() > 0)
-                for (int chil : v.children_ids){
+                for (int chil : v.children_ids) {
                     Node child = (Node) this.getNode(chil);
                     if (!child.discovered)
                         Q.add(child);
@@ -191,40 +185,6 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         return this.mc;
     }
 
-//    private int DFS(int start){
-//        HashMap<Integer,Integer> key_color = new HashMap<>();
-//        HashMap<Integer,Integer> key_previous = new HashMap<>();
-//        HashMap<Integer,Integer> key_start = new HashMap<>();
-//        HashMap<Integer,Integer> key_stop = new HashMap<>();
-//        HashSet<Integer> keys = new HashSet<>(this.key_node.keySet());
-//        for (int key: keys) {
-//            key_color.put(key,0);//0=white,1=gray,2=black.
-//            key_previous.put(key,key);
-//        }
-//        AtomicInteger time = new AtomicInteger(0);
-//        for (int key: keys) {
-//           if(key_color.get(key)==0){
-//               DFSVisit(key,key_color,key_previous,time,key_start,key_stop);
-//           }
-//        }
-//        return 0;
-//    }
-//
-//    private void DFSVisit(int u, HashMap<Integer,Integer> key_color, HashMap<Integer,Integer> key_previous,AtomicInteger time, HashMap<Integer,Integer> key_start,  HashMap<Integer,Integer> key_stop){
-//        key_color.put(u,1);//set to gray
-//        time.addAndGet(1);
-//        key_start.put(u,time.get());
-//        Node curr_node = (Node) this.key_node.get(u);
-//        for (int child:curr_node.children_ids) {
-//            if(key_color.get(child)==0) {
-//                key_previous.put(child, u);
-//                DFSVisit(child, key_color, key_previous, time, key_start, key_stop);
-//            }
-//        }
-//        key_color.put(u,2);
-//        time.addAndGet(1);
-//        key_stop.put(u,time.get());
-//    }
 
     public int myDFS(int start) {
         int counter = 0;

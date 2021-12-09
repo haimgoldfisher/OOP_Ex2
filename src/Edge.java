@@ -3,7 +3,7 @@ import api.EdgeData;
 import java.awt.*;
 
 public class Edge implements EdgeData {
-//    private Node src;
+    //    private Node src;
 //    private Node dest;
     private int src_key;
     private int dest_key;
@@ -15,6 +15,12 @@ public class Edge implements EdgeData {
         this.src_key = src_key;
         this.dest_key = dest_key;
         this.weight = weight;
+    }
+
+    public Edge(Edge e) {
+        this.src_key = e.src_key;
+        this.dest_key = e.dest_key;
+        this.weight = e.weight;
     }
 
     public void setSrc_key(int src_key) {

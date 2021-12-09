@@ -11,7 +11,9 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraph getGrapg(String json_file) {
-        DirectedWeightedGraph ans = null;
+        DirectedWeightedGraphAlgorithms ga = new MyDirectedWeightedGraphAlgorithms();
+        ga.load(json_file);
+        DirectedWeightedGraph ans = ga.getGraph();
         // ****** Add your code here ******
         //
         // ********************************
@@ -23,7 +25,9 @@ public class Ex2 {
      * @return
      */
     public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file) {
-        DirectedWeightedGraphAlgorithms ans = null;
+        DirectedWeightedGraphAlgorithms ans = new MyDirectedWeightedGraphAlgorithms();
+        ans.load(json_file);
+        ans.init(ans.getGraph());
         // ****** Add your code here ******
         //
         // ********************************

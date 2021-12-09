@@ -25,6 +25,26 @@ public class Node implements api.NodeData {
         this.edges_to_children = new HashSet<>();
     }
 
+    public Node(Node nd) {
+        this.key = nd.key;
+        this.location = new MyGeoLocation(nd.location);
+        this.parents_ids = new HashSet<>();
+        this.children_ids = new HashSet<>();
+        this.edges_to_children = new HashSet<>();
+        for (int id : nd.parents_ids) {
+            this.parents_ids.add(id);
+        }
+        for (int id : nd.children_ids) {
+            this.children_ids.add(id);
+        }
+        for (EdgeData e : nd.edges_to_children) {
+            Edge new_e = new Edge((Edge) e);
+            this.edges_to_children.add(new_e);
+        }
+
+    }
+
+
     @Override
     public int getKey() {
         return this.key;

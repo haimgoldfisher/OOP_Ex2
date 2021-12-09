@@ -7,9 +7,9 @@ public class Pair implements Comparator<Pair> {
     public Pair() {
     }
 
-    public Pair(int key, double distance){
+    public Pair(int key, double distance) {
         this.key = key;
-        this.distance=distance;
+        this.distance = distance;
     }
 
     public int getKey() {
@@ -30,10 +30,10 @@ public class Pair implements Comparator<Pair> {
 
     @Override
     public int compare(Pair nd1, Pair nd2) {
-        if(nd1.distance< nd2.distance){
+        if (nd1.distance < nd2.distance) {
             return -1;
         }
-        if (nd1.distance> nd2.distance){
+        if (nd1.distance > nd2.distance) {
             return 1;
         }
 
