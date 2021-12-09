@@ -47,13 +47,8 @@ public class GUI_Graph extends JPanel {
 
     }
 
-    public void paintComponent(Graphics g) {
-        for (NodeData nd: graph_data.getKey_node().values()) {
-            MyGeoLocation loc = (MyGeoLocation) nd.getLocation();
-            g.setColor(Color.BLUE);
-            g.fillOval((int) ((loc.x()-min_x)/(max_x-min_x)*screen_W) , (int) ((loc.y()-min_y)/(max_y-min_y)*screen_H) ,
-                    2 * kRADIUS, 2 * kRADIUS);
-        }
+    public void paintComponent(Graphics g)
+    {
         for (EdgeData edge: graph_data.getKeys_edge().values()) {
             int src = edge.getSrc();
             int dest = edge.getDest();
@@ -68,6 +63,15 @@ public class GUI_Graph extends JPanel {
             g.drawString(String.format("%.2f", dist),
                     (int) ((dest_loc.x() + src_loc.x()) / 2),
                     (int) ((dest_loc.y() + src_loc.y()) / 2));
+        }
+        for (NodeData nd: graph_data.getKey_node().values()) {
+            MyGeoLocation loc = (MyGeoLocation) nd.getLocation();
+            g.setColor(Color.BLUE);
+            g.fillOval((int) ((loc.x()-min_x)/(max_x-min_x)*screen_W) , (int) ((loc.y()-min_y)/(max_y-min_y)*screen_H) ,
+                    2 * kRADIUS, 2 * kRADIUS);
+            g.setColor(Color.BLACK);
+            g.drawOval((int) ((loc.x()-min_x)/(max_x-min_x)*screen_W) , (int) ((loc.y()-min_y)/(max_y-min_y)*screen_H) ,
+                    2 * kRADIUS, 2 * kRADIUS);
         }
     }
 }
