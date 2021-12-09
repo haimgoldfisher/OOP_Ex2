@@ -77,6 +77,8 @@ public class GUI_Graph extends JPanel {
             g.fillOval(x , y,2 * kRADIUS, 2 * kRADIUS);
             g.setColor(Color.BLACK);
             g.drawOval(x , y,2 * kRADIUS, 2 * kRADIUS);
+            g.setColor(Color.RED);
+            g.setFont(new Font("Serif", Font.BOLD, 16));
             g.drawString(""+nd.getKey(),x+3,y+13);
         }
     }

@@ -2,9 +2,11 @@ import api.NodeData;
 
 import java.awt.*;
 import javax.swing.*;
+import javax.swing.event.AncestorListener;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
+
 
 public class GUI_Menu extends JFrame implements ActionListener {
     public MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
@@ -15,7 +17,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
     int innerW;
     int innerH;
 
-    public GUI_Menu() {
+    public GUI_Menu(String path) {
+        this.graph.load(path);
         init();
     }
 
@@ -29,6 +32,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
 //        this.setName("Ex2 - Data Structures and Algorithms On Graphs");
         this.setTitle("Ex2 - Data Structures and Algorithms On Graphs");
         label = new JLabel("Please select a function from the menu bar");
+        //label.setLocation((int)this.graph.center().getLocation().x(), (int)this.graph.center().getLocation().y());
         main_menu = new JMenu("Menu");
         load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
@@ -37,7 +41,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         gson_g2 = new JMenuItem("G2");
         gson_g3 = new JMenuItem("G3");
         saved = new JMenuItem("Saved G");
-        show_graph = new JMenuItem("Show Graph");
+        //show_graph = new JMenuItem("Show Graph");
         edit = new JMenu("Edit");
         insert_node = new JMenuItem("Insert Node");
         insert_edge = new JMenuItem("Insert Edge");
@@ -68,7 +72,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         main_menu.add(save);
         main_menu.add(load);
         main_menu.add(edit);
-        main_menu.add(show_graph);
+        //main_menu.add(show_graph);
         main_menu.add(run_alogs);
 
         menuBar.add(main_menu);
@@ -81,7 +85,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         gson_g3.addActionListener(this);
         saved.addActionListener(this);
         edit.addActionListener(this);
-        show_graph.addActionListener(this);
+        //show_graph.addActionListener(this);
         isConnected.addActionListener(this);
         shortestPath.addActionListener(this);
         shortestPathDist.addActionListener(this);
@@ -92,7 +96,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
         remove_edge.addActionListener(this);
         remove_node.addActionListener(this);
 
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         pack(); // Need this, otherwise insets() show as 0.
@@ -101,6 +104,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         innerW = scrW - getInsets().left - getInsets().right;
         innerH = scrH - getInsets().top - getInsets().bottom;
         setSize(scrW, scrH);
+        drawGraph();
         setVisible(true);
 
     }
@@ -117,7 +121,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "Insert Edge" -> fills_funcs("Insert Edge");
             case "Remove Node" -> fills_funcs("Remove Node");
             case "Remove Edge" -> fills_funcs("Remove Edge");
-            case "Show Graph" -> drawGraph();
             case "Is Connected" -> this.graph.isConnected();
             case "Shortest Path" -> fills_funcs("Shortest Path");
             case "Shortest Path Distance" -> fills_funcs("Shortest Path Distance");
@@ -154,6 +157,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
             this.name = name;
             label.setText(message);
             label.setVisible(true);
+            drawGraph();
             return true;
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -287,8 +291,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new GUI_Menu();
-//        new TextBox();
+        new GUI_Menu("data/G1.json");
     }
 }
 
