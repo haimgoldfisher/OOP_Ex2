@@ -54,6 +54,7 @@ public class GUI_Graph extends JPanel {
             int dest = edge.getDest();
             NodeData src_nd = graph_data.getKey_node().get(src);
             NodeData dest_nd = graph_data.getKey_node().get(dest);
+//            MyGeoLocation src_loc = (MyGeoLocation) src_nd.getLocation();
             MyGeoLocation src_loc = (MyGeoLocation) src_nd.getLocation();
             MyGeoLocation dest_loc = (MyGeoLocation) dest_nd.getLocation();
             g.setColor(Color.RED);
