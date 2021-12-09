@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/GUI_Graph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Graph.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagram.puml" beforeDir="false" afterPath="$PROJECT_DIR$/diagram.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,26 +37,18 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="Application.GUI_Menu">
-    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUI.GUI" />
-      <module name="OOP_Ex2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="GUI_Graph" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUI.GUI_Graph" />
-      <module name="OOP_Ex2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\goldi\IdeaProjects\OOP_Ex2" />
+    </key>
+  </component>
+  <component name="RunManager">
     <configuration name="GUI_Menu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI_Menu" />
       <module name="OOP_Ex2" />
@@ -70,6 +63,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TextBox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TextBox" />
+      <module name="OOP_Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="loginMenu" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="loginMenu" />
       <module name="OOP_Ex2" />
@@ -77,15 +77,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.GUI_Menu" />
-        <item itemvalue="Application.JavaComboBox" />
-        <item itemvalue="Application.loginMenu" />
-        <item itemvalue="Application.GUI_Graph" />
-        <item itemvalue="Application.GUI" />
-      </list>
-    </recent_temporary>
+    <configuration name="text" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="text" />
+      <module name="OOP_Ex2" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -113,6 +111,10 @@
       <workItem from="1638913020510" duration="12910000" />
       <workItem from="1638982637599" duration="4678000" />
       <workItem from="1639037688196" duration="270000" />
+      <workItem from="1639049231217" duration="4106000" />
+      <workItem from="1639061489958" duration="100000" />
+      <workItem from="1639062377283" duration="111000" />
+      <workItem from="1639062610288" duration="36000" />
     </task>
     <servers />
   </component>
@@ -129,5 +131,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

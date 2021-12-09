@@ -1,11 +1,9 @@
-import api.EdgeData;
 import api.NodeData;
 
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.util.LinkedList;
+import java.util.List;
 
 public class GUI_Menu extends JFrame implements ActionListener {
     public MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
@@ -104,13 +102,13 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "G3" -> load_graph("G3");
             case "Saved G" -> load_graph("Saved G");
             case "Save" -> this.graph.save("output.json");
-            case "Edit" -> System.out.println("Edit");
+            case "Edit" -> fills_funcs("Edit");
             case "Show Graph" -> drawGraph();
-            case "Is Connected" -> System.out.println("Is Connected");
-            case "Shortest Path" -> System.out.println("Shortest Path");
-            case "Shortest Path Distance" -> System.out.println("Shortest Path Distance");
-            case "Center" -> System.out.println("Center");
-            case "TSP" -> System.out.println("TSP");
+            case "Is Connected" -> this.graph.isConnected();
+            case "Shortest Path" -> fills_funcs("Shortest Path");
+            case "Shortest Path Distance" -> fills_funcs("Shortest Path Distance");
+            case "Center" -> this.graph.center();
+            case "TSP" -> fills_funcs("TSP");
             default -> throw new IllegalStateException("This option doesn't exist!");
         }
     }
@@ -133,7 +131,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public boolean load_graph(String name)
     {
-        // CLEAR SCREEN
+        this.setContentPane(new JPanel());
         String fullPath;
         if (name.startsWith("G"))
             fullPath = "data/" + name + ".json";
@@ -144,16 +142,104 @@ public class GUI_Menu extends JFrame implements ActionListener {
             this.graph.load(fullPath);
             this.name = name;
             label.setText(message);
+            label.setVisible(true);
             return true;
         }
         catch (NullPointerException e){
             e.printStackTrace();
             label.setText("Error: The Graph "+name+" couldn't be uploaded!");
+            label.setVisible(true);
             return false;
         }
     }
 
+    public boolean fills_funcs(String functionName)
+    {
+        label.setText(functionName);
+        TextBox.TextBoxInit(this.name);
+        String input = TextBox.algorithm_input;
+        String[] in = input.split(" ");
+        switch (functionName){
+            case "Edit":
+                //
+                return true;
+            case "Shortest Path":
+                if (in.length == 2) {
+                    int src = Integer.parseInt(in[0]);
+                    int dest = Integer.parseInt(in[1]);
+                    this.graph.shortestPath(src, dest);
+                    return true;
+                }
+                return false;
+            case "Shortest Path Distance":
+                if (in.length == 2) {
+                    int src = Integer.parseInt(in[0]);
+                    int dest = Integer.parseInt(in[1]);
+                    this.graph.shortestPathDist(src, dest);
+                    return true;
+                }
+                return false;
+            case "TSP":
+                try {
+                    List<NodeData> cities = null;
+                    for (String str : in) {
+                        int key = Integer.parseInt(str);
+                        cities.add(graph.getGraph().getNode(key));
+                    }
+                    this.graph.tsp(cities);
+                    return true;
+                }
+                catch (IllegalArgumentException e){
+                    e.printStackTrace();
+                    return false;
+                }
+            default:
+                throw new IllegalStateException("This option doesn't exist!");
+        }
+    }
+
+/* ***********************************************************
+        This is TextBox class for algorithm inputs
+ */
+
+    static class TextBox extends JFrame implements ActionListener {
+        static String algorithm_input;
+        static JTextField textField;
+        static JPanel panel;
+        static JButton button;
+        static JLabel label;
+
+        TextBox() {
+        }
+
+        public static void TextBoxInit(String functionName) {
+            panel = new JPanel();
+            label = new JLabel("Please enter your input to "+functionName+".");
+            button = new JButton("Send");
+            TextBox textBox = new TextBox();
+            button.addActionListener(textBox);
+            textField = new JTextField(16);
+            JPanel panel = new JPanel();
+            panel.add(textField);
+            panel.add(button);
+            panel.add(label);
+            panel.add(panel);
+            panel.setSize(300, 300);
+            panel.show();
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equals("Send")) {
+                // set the text of the label to the text of the field
+                algorithm_input = textField.getText();
+                textField.setText("");
+            }
+        }
+    }
+
     public static void main(String[] args) {
-       new GUI_Menu();
+        new GUI_Menu();
     }
 }
+

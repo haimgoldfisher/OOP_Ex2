@@ -1,0 +1,94 @@
+@startuml
+
+'https://plantuml.com/sequence-diagram
+
+interface GeoLocation
+{
+
+}
+
+class MyGeoLocation
+{
+
+}
+
+interface NodeData
+{
+
+}
+
+class Node
+{
+
+}
+
+interface EdgeData
+{
+
+}
+
+class Edge
+{
+
+}
+
+interface DirectedWeightedGraph
+{
+
+}
+
+class MyDirectedWeightedGraph
+{
+
+}
+
+class Pair
+{
+
+}
+
+interface DirectedWeightedGraphAlgorithms
+{
+
+
+}
+
+class MyDirectedWeightedGraphAlgorithms
+{
+
+
+}
+
+class GUI_Graph
+{
+
+
+}
+
+class GUI_Menu
+{
+
+}
+
+class Ex2
+{
+
+}
+
+MyGeoLocation --|> GeoLocation
+MyGeoLocation --|> Node
+Node --|> NodeData
+Node --|> Edge
+Node --|> MyDirectedWeightedGraph
+Edge --|> EdgeData
+Edge --|> MyDirectedWeightedGraph
+MyDirectedWeightedGraph --|> DirectedWeightedGraph
+MyDirectedWeightedGraph --|> MyDirectedWeightedGraphAlgorithms
+Pair --|> MyDirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraphAlgorithms --|> DirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraphAlgorithms --|> GUI_Menu
+GUI_Graph --|> GUI_Menu
+GUI_Menu --|> Ex2
+
+@enduml
+@enduml
