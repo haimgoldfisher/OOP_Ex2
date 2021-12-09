@@ -79,31 +79,39 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public double shortestPathDist(int src, int dest) {
         HashMap<Integer, Double> distances = new HashMap();
-        ArrayList<Integer> not_visited = new ArrayList<>();
+        HashSet<Integer> visited = new HashSet<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+        PriorityQueue<Pair> pq = new PriorityQueue<>(keys.size(),new Pair());
         for (int key : keys) {
             distances.put(key, Double.POSITIVE_INFINITY);
-            not_visited.add(key);
         }
         distances.put(src, (double) 0);
-        while (!not_visited.isEmpty()) {
-            int min_id = minDistance(not_visited, distances);
-            if(min_id == -1){
+        pq.add(new Pair(src,0));
+        while (visited.size()!= keys.size()) {
+            if(pq.isEmpty()){
                 break;
             }
-            Node curr_node = (Node) this.graph.getNode(min_id);
-            not_visited.remove((Object) min_id);
+            int curr_key = pq.remove().getKey();
+            if (curr_key==dest){
+                break;
+            }
+            if (visited.contains(curr_key)){
+                continue;
+            }
+            visited.add(curr_key);
+            Node curr_node = (Node) this.graph.getNode(curr_key);
             for (EdgeData edge : curr_node.edges_to_children) {
                 Edge curr_edge = (Edge) edge;
                 int curr_dest = curr_edge.getDest();
-                if (!not_visited.contains(curr_dest)) {//necessary?
+                if (visited.contains(curr_dest)) {//necessary?
                     continue;
                 }
                 double curr_weight = distances.get(curr_dest);
-                double new_weight = distances.get(min_id) + curr_edge.getWeight();
+                double new_weight = distances.get(curr_key) + curr_edge.getWeight();
                 if (new_weight < curr_weight) {
                     distances.put(curr_dest, new_weight);
                 }
+                pq.add(new Pair (curr_dest,distances.get(curr_dest)));
             }
         }
         double shortest = distances.get(dest);
@@ -117,34 +125,46 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
     @Override
     public List<NodeData> shortestPath(int src, int dest) {
         LinkedList<NodeData> path = new LinkedList<>();
+        if(src ==dest){
+            path.add(this.graph.getKey_node().get(src));
+            return path;
+        }
         HashMap<Integer, Integer> previous = new HashMap();
         HashMap<Integer, Double> distances = new HashMap();
-        ArrayList<Integer> not_visited = new ArrayList<>();
+        HashSet<Integer> visited = new HashSet<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+        PriorityQueue<Pair> pq = new PriorityQueue<>(keys.size(),new Pair());
         for (int key : keys) {
             distances.put(key, Double.POSITIVE_INFINITY);
-            not_visited.add(key);
         }
         distances.put(src, (double) 0);
-        while (!not_visited.isEmpty()) {
-            int curr_src = minDistance(not_visited, distances);
-            if(curr_src == -1){
+        pq.add(new Pair(src,0));
+        while (visited.size()!= keys.size()) {
+            if(pq.isEmpty()){
                 break;
             }
-            Node curr_node = (Node) this.graph.getNode(curr_src);
-            not_visited.remove((Object) curr_src);
+            int curr_key = pq.remove().getKey();
+            if (curr_key==dest){
+                break;
+            }
+            if (visited.contains(curr_key)){
+                continue;
+            }
+            visited.add(curr_key);
+            Node curr_node = (Node) this.graph.getNode(curr_key);
             for (EdgeData edge : curr_node.edges_to_children) {
                 Edge curr_edge = (Edge) edge;
                 int curr_dest = curr_edge.getDest();
-                if (!not_visited.contains(curr_dest)) {//necessary?
+                if (visited.contains(curr_dest)) {
                     continue;
                 }
                 double curr_weight = distances.get(curr_dest);
-                double new_weight = distances.get(curr_src) + curr_edge.getWeight();
+                double new_weight = distances.get(curr_key) + curr_edge.getWeight();
                 if (new_weight < curr_weight) {
                     distances.put(curr_dest, new_weight);
-                    previous.put(curr_dest, curr_src);
+                    previous.put(curr_dest, curr_key);
                 }
+                pq.add(new Pair (curr_dest,distances.get(curr_dest)));
             }
         }
         if(distances.get(dest)== Double.POSITIVE_INFINITY){
@@ -168,7 +188,6 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         }
         HashMap<Integer,Double> e = new HashMap<>();
         double rad = Double.POSITIVE_INFINITY;
-//        double diam = Double.MIN_VALUE;
         for (int src: id_distances.keySet()) {
             e.put(src, (double) 0);
         }
@@ -180,7 +199,6 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         }
         for (int key: e.keySet()) {
             rad = Math.min(rad,e.get(key));
-//            diam = Math.max(diam,e.get(key));
         }
         for (int key: e.keySet()) {
             if(e.get(key) == rad){
@@ -345,50 +363,87 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         }
     }
 
-    private HashMap<Integer, Double> DijkstraAlgorithm(int src) {
+//    private HashMap<Integer, Double> DijkstraAlgorithm(int src) {
+//        HashMap<Integer, Double> distances = new HashMap();
+//        ArrayList<Integer> not_visited = new ArrayList<>();
+//        HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+//        for (int key : keys) {
+//            distances.put(key, Double.POSITIVE_INFINITY);
+//            not_visited.add(key);
+//        }
+//        distances.put(src, (double) 0);
+//        while (!not_visited.isEmpty()) {
+//            int min_id = minDistance(not_visited, distances);
+//            if(min_id == -1){
+//                break;
+//            }
+//            Node curr_node = (Node) this.graph.getNode(min_id);
+//            not_visited.remove((Object) min_id);
+//            for (EdgeData edge : curr_node.edges_to_children) {
+//                Edge curr_edge = (Edge) edge;
+//                int curr_dest = curr_edge.getDest();
+//                if (!not_visited.contains(curr_dest)) {//necessary?
+//                    continue;
+//                }
+//                double curr_weight = distances.get(curr_dest);
+//                double new_weight = distances.get(min_id) + curr_edge.getWeight();
+//                if (new_weight < curr_weight) {
+//                    distances.put(curr_dest, new_weight);
+//                }
+//            }
+//        }
+//        return distances;
+//    }
+//
+//    private int minDistance(ArrayList<Integer> not_visited, HashMap<Integer, Double> distances) {
+//        int ans_id = -1;
+//        double min = Double.POSITIVE_INFINITY;
+//        for (int i = 0; i < not_visited.size(); i++) {
+//            int curr_id = not_visited.get(i);
+//            double curr_distance = distances.get(curr_id);
+//            if (curr_distance < min) {
+//                min = curr_distance;
+//                ans_id = curr_id;
+//            }
+//        }
+//        return ans_id;
+//    }
+
+    public HashMap<Integer, Double> DijkstraAlgorithm(int src) {
         HashMap<Integer, Double> distances = new HashMap();
-        ArrayList<Integer> not_visited = new ArrayList<>();
+        HashSet<Integer> visited = new HashSet<>();
         HashSet<Integer> keys = new HashSet<>(this.graph.getKey_node().keySet());
+        PriorityQueue<Pair> pq = new PriorityQueue<>(keys.size(),new Pair());
         for (int key : keys) {
             distances.put(key, Double.POSITIVE_INFINITY);
-            not_visited.add(key);
         }
         distances.put(src, (double) 0);
-        while (!not_visited.isEmpty()) {
-            int min_id = minDistance(not_visited, distances);
-            if(min_id == -1){
+        pq.add(new Pair(src,0));
+        while (visited.size()!= keys.size()) {
+            if(pq.isEmpty()){
                 break;
             }
-            Node curr_node = (Node) this.graph.getNode(min_id);
-            not_visited.remove((Object) min_id);
+            int curr_key = pq.remove().getKey();
+            if (visited.contains(curr_key)){
+                continue;
+            }
+            visited.add(curr_key);
+            Node curr_node = (Node) this.graph.getNode(curr_key);
             for (EdgeData edge : curr_node.edges_to_children) {
                 Edge curr_edge = (Edge) edge;
                 int curr_dest = curr_edge.getDest();
-                if (!not_visited.contains(curr_dest)) {//necessary?
+                if (visited.contains(curr_dest)) {//necessary?
                     continue;
                 }
                 double curr_weight = distances.get(curr_dest);
-                double new_weight = distances.get(min_id) + curr_edge.getWeight();
+                double new_weight = distances.get(curr_key) + curr_edge.getWeight();
                 if (new_weight < curr_weight) {
                     distances.put(curr_dest, new_weight);
                 }
+                pq.add(new Pair (curr_dest,distances.get(curr_dest)));
             }
         }
         return distances;
-    }
-
-    private int minDistance(ArrayList<Integer> not_visited, HashMap<Integer, Double> distances) {
-        int ans_id = -1;
-        double min = Double.POSITIVE_INFINITY;
-        for (int i = 0; i < not_visited.size(); i++) {
-            int curr_id = not_visited.get(i);
-            double curr_distance = distances.get(curr_id);
-            if (curr_distance < min) {
-                min = curr_distance;
-                ans_id = curr_id;
-            }
-        }
-        return ans_id;
     }
 
 }
