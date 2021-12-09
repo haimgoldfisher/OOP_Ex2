@@ -56,13 +56,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JavaComboBox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="JavaComboBox" />
-      <module name="OOP_Ex2" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TextBox" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="TextBox" />
       <module name="OOP_Ex2" />
@@ -77,9 +70,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="text" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="text" />
+    <configuration name="testing.center_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OOP_Ex2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="testing" />
+      <option name="METHOD_NAME" value="center_Test" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="testing.isConnected_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="OOP_Ex2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="testing" />
+      <option name="METHOD_NAME" value="isConnected_Test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -115,6 +121,8 @@
       <workItem from="1639061489958" duration="100000" />
       <workItem from="1639062377283" duration="111000" />
       <workItem from="1639062610288" duration="36000" />
+      <workItem from="1639067668485" duration="37000" />
+      <workItem from="1639070482744" duration="863000" />
     </task>
     <servers />
   </component>

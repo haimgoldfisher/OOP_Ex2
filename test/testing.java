@@ -12,7 +12,14 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 public class testing {
+    MyDirectedWeightedGraphAlgorithms G1 = new MyDirectedWeightedGraphAlgorithms();
+    MyDirectedWeightedGraphAlgorithms G2 = new MyDirectedWeightedGraphAlgorithms();
+    MyDirectedWeightedGraphAlgorithms G3 = new MyDirectedWeightedGraphAlgorithms();
+
 
     @Test
     public void load_Test()
@@ -37,6 +44,33 @@ public class testing {
 
     }
 
+    @Test
+    public void isConnected_Test()
+    {
+        G1.load("data/G1.json");
+        G2.load("data/G2.json");
+        G3.load("data/G3.json");
+        assertTrue(G1.isConnected());
+        assertTrue(G2.isConnected());
+        assertTrue(G3.isConnected());
+    }
+
+    @Test
+    public void center_Test()
+    {
+        G1.load("data/G1.json");
+        G2.load("data/G2.json");
+        G3.load("data/G3.json");
+        assertEquals(G1.center().getKey(), 8);
+        assertEquals(G2.center().getKey(), 0);
+        assertEquals(G3.center().getKey(), 40);
+    }
+
+    @Test
+    public void TPS_Test()
+    {
+
+    }
 
 
 }
