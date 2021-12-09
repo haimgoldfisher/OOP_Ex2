@@ -45,6 +45,10 @@ We will also complete the MAIN function EX2 so that we can run the program as on
 ---------
 ## 3. UML Diagram:
 
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/diagram.png?raw=true" />
+</p>
+
 ---------
 ## 4. Testing Class:
 ---------
