@@ -45,12 +45,17 @@ We will also complete the MAIN function EX2 so that we can run the program as on
 ---------
 ## 3. UML Diagram:
 
+Since each class contains a lot of parameters, methods and functions, we will only present the names of the classes and the hierarchy between them:
+
 <p align="center">
-<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/diagram.png?raw=true" />
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/diagram.png?raw=true" height=500 weight=1000/>
 </p>
 
 ---------
 ## 4. Testing Class:
+
+We have created a tests directory. The tests should be done in three ways. First of all we want to see that our functions work, both on valid inputs and on illegal inputs (exception throwing). This is critical because some of the algorithms and methods are performed through user input. Therefore we should expect the user to enter in the text box an incorrect input. Once we are sure that all the functions work and accept any input, we want to be sure that the output of all our algorithms is correct. This is a bit complicated because the test is manual. Given a particular graph with certain properties, we would like to make sure that the output of the algorithm matches the correct answer it is supposed to give. We will manually solve the algorithms and verify the correctness of the algorithms. We will also need to make sure that every situation exists, and also that when an incorrect input is obtained, the algorithm manages to give an answer accordingly. Having gone through all of this, we would like to test the efficiency of our algorithms. It is important to note at this point that this cannot be calculated by checking the running time on the computer, because it also depends on the computer's hardware abilities. We will need to calculate this with the tools we have from data structure and algorithms courses. This test is also done manually and not by a computer.
+
 ---------
 ## 5. Analysis - The Performance of The Algorithms:
 
