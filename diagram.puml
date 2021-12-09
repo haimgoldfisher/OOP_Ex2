@@ -33,10 +33,6 @@ class Node
 {
     - private int key
     - private GeoLocation location
-    - private double weight
-    - private String info
-    - private int tag
-    - public boolean discovered = false
     - public HashSet<Integer> parents_ids
     - public HashSet<Integer> children_ids
     - public HashSet<EdgeData> edges_to_children
@@ -58,8 +54,6 @@ class Edge
     - private int src_key
     - private int dest_key
     - private double weight
-    - private String info
-    - private int tag
 }
 
 interface DirectedWeightedGraph
@@ -80,9 +74,23 @@ interface DirectedWeightedGraph
 
 class MyDirectedWeightedGraph
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
-
+     - private HashMap<Integer, NodeData> key_node;
+     - private HashMap<ArrayList<Integer>, EdgeData> keys_edge;
+     - private int mc;
+     + public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
+     + public EdgeData getEdge(int src, int dest)
+     + public void addNode(NodeData n) {
+     + public void connect(int src, int dest, double w) {
+     + public Iterator<NodeData> nodeIter() {
+     + public Iterator<EdgeData> edgeIter() {
+     + public Iterator<EdgeData> edgeIter(int node_id) {
+     + public NodeData removeNode(int key) {
+     + public EdgeData removeEdge(int src, int dest) {
+     + private int DFS(int start){
+     + private void DFSVisit(int u, HashMap<Integer,Integer> key_color,
+      HashMap<Integer,Integer> key_previous,AtomicInteger time,
+       HashMap<Integer,Integer> key_start,  HashMap<Integer,Integer> key_stop)
+     + public int myDFS(int start)
 }
 
 class Pair
@@ -96,20 +104,20 @@ class Pair
     + public void setKey(int key)
     + public void setDistance(double distance)
     + public int compare(Pair nd1, Pair nd2)
-
 }
 
 interface DirectedWeightedGraphAlgorithms
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
-
-}
-
-interface DirectedWeightedGraphAlgorithms
-{
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
+    + public void init(DirectedWeightedGraph g);
+    + public DirectedWeightedGraph getGraph();
+    + public DirectedWeightedGraph copy();
+    + public boolean isConnected();
+    + public double shortestPathDist(int src, int dest);
+    + public List<NodeData> shortestPath(int src, int dest);
+    + public NodeData center();
+    + List<NodeData> tsp(List<NodeData> cities);
+    + public boolean save(String file);
+    + public boolean load(String file);
 
 }
 
@@ -122,21 +130,23 @@ class MyDirectedWeightedGraphAlgorithms
 
 class GUI_Graph
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
+    + public GUI_Graph(MyDirectedWeightedGraph graph,int h,int w)
+    + private void Init()
+    + public void paintComponent(Graphics g)
 
 }
 
 class GUI_Menu
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
+    + private void init()
+    + public void actionPerformed(ActionEvent e)
 }
 
 class Ex2
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
+    + public static DirectedWeightedGraph getGrapg(String json_file)
+    + public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file)
+    + public static void runGUI(String json_file)
 
 }
 
