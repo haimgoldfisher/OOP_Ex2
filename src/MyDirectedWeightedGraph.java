@@ -110,14 +110,18 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         mc++;
         Node curr_node = (Node) key_node.get(key);
         for (int parent_id : curr_node.parents_ids) {
-            int[] edge_keys = {parent_id, key};
+            ArrayList<Integer> edge_keys = new ArrayList<>();
+            edge_keys.add(parent_id);
+            edge_keys.add(key);
             keys_edge.remove(edge_keys);
             Node parent_node = (Node) key_node.get(key);
             parent_node.children_ids.remove(key);
         }
         curr_node.parents_ids.clear();
         for (int child_id : curr_node.children_ids) {
-            int[] edge_keys = {key, child_id};
+            ArrayList<Integer> edge_keys = new ArrayList<>();
+            edge_keys.add(key);
+            edge_keys.add(child_id);
             keys_edge.remove(edge_keys);
             Node child_node = (Node) key_node.get(key);
             child_node.parents_ids.remove(key);
