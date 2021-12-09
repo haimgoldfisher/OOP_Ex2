@@ -67,6 +67,7 @@ class GUI_Graph
 
 class GUI_Menu
 {
+*TextBox (Class)
 
 }
 
@@ -75,21 +76,22 @@ class Ex2
 
 }
 
-MyGeoLocation --|> GeoLocation
+MyGeoLocation ..> GeoLocation
 MyGeoLocation --|> Node
-Node --|> NodeData
+Node ..> NodeData
 Node --|> Edge
 Node --|> MyDirectedWeightedGraph
-Edge --|> EdgeData
+Edge ..> EdgeData
 Edge --|> MyDirectedWeightedGraph
-MyDirectedWeightedGraph --|> DirectedWeightedGraph
+MyDirectedWeightedGraph ..> DirectedWeightedGraph
 MyDirectedWeightedGraph --|> MyDirectedWeightedGraphAlgorithms
 MyDirectedWeightedGraph --|> GUI_Graph
 Pair --|> MyDirectedWeightedGraphAlgorithms
-MyDirectedWeightedGraphAlgorithms --|> DirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraphAlgorithms ..> DirectedWeightedGraphAlgorithms
 MyDirectedWeightedGraphAlgorithms --|> GUI_Menu
 GUI_Graph --|> GUI_Menu
 GUI_Menu --|> Ex2
+
 
 @enduml
 @enduml
