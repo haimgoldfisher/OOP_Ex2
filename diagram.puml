@@ -78,8 +78,6 @@ interface DirectedWeightedGraph
     + public int getMC();
 }
 
-}
-
 class MyDirectedWeightedGraph
 {
     - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
@@ -142,6 +140,7 @@ class Ex2
 
 }
 
+MyGeoLocation --|> GeoLocation
 MyGeoLocation --|> Node
 Node --|> NodeData
 Node --|> Edge
