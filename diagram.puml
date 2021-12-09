@@ -4,149 +4,74 @@
 
 interface GeoLocation
 {
-    + public int x()
-    + public int y()
-    + public int z()
-    + public double distance()
+
 }
 
 class MyGeoLocation
 {
-    - private double  x;
-    - private double  y;
-    - private double  z;
+
 }
 
 interface NodeData
 {
-	+ public GeoLocation getLocation()
-	+ public void setLocation(GeoLocation p)
-	+ public double getWeight()
-	+ public void setWeight(double w)
-	+ public String getInfo()
-	+ public void setInfo(String s)
-	+ public int getTag()
-	+ public void setTag(int t)
+
 }
 
 class Node
 {
-    - private int key
-    - private GeoLocation location
-    - public HashSet<Integer> parents_ids
-    - public HashSet<Integer> children_ids
-    - public HashSet<EdgeData> edges_to_children
+
 }
 
 interface EdgeData
 {
-    + public int getSrc()
-    + public int getDest()
-    + public double getWeight()
-    + public String getInfo()
-    + public void setInfo(String s)
-    + public int getTag()
-    + public void setTag(int t)
+
 }
 
 class Edge
 {
-    - private int src_key
-    - private int dest_key
-    - private double weight
+
 }
 
 interface DirectedWeightedGraph
 {
-   	+ public NodeData getNode(int key);
-   	+ public EdgeData getEdge(int src, int dest);
-   	+ public void addNode(NodeData n);
-   	+ public void connect(int src, int dest, double w);
-   	+ public Iterator<NodeData> nodeIter();
-   	+ public Iterator<EdgeData> edgeIter();
-   	+ public Iterator<EdgeData> edgeIter(int node_id);
-   	+ public NodeData removeNode(int key);
-   	+ public EdgeData removeEdge(int src, int dest);
-   	+ public int nodeSize();
-    + public int edgeSize();
-    + public int getMC();
+
 }
 
 class MyDirectedWeightedGraph
 {
-     - private HashMap<Integer, NodeData> key_node;
-     - private HashMap<ArrayList<Integer>, EdgeData> keys_edge;
-     - private int mc;
-     + public MyDirectedWeightedGraph(DirectedWeightedGraph graph) // copy constructor
-     + public EdgeData getEdge(int src, int dest)
-     + public void addNode(NodeData n) {
-     + public void connect(int src, int dest, double w) {
-     + public Iterator<NodeData> nodeIter() {
-     + public Iterator<EdgeData> edgeIter() {
-     + public Iterator<EdgeData> edgeIter(int node_id) {
-     + public NodeData removeNode(int key) {
-     + public EdgeData removeEdge(int src, int dest) {
-     + private int DFS(int start){
-     + private void DFSVisit(int u, HashMap<Integer,Integer> key_color,
-      HashMap<Integer,Integer> key_previous,AtomicInteger time,
-       HashMap<Integer,Integer> key_start,  HashMap<Integer,Integer> key_stop)
-     + public int myDFS(int start)
+
 }
 
 class Pair
 {
-    - private int key;
-    - private double distance
-    + public Pair()
-    + public Pair(int key, double distance)
-    + public int getKey()
-    + public double getDistance()
-    + public void setKey(int key)
-    + public void setDistance(double distance)
-    + public int compare(Pair nd1, Pair nd2)
+
 }
 
 interface DirectedWeightedGraphAlgorithms
 {
-    + public void init(DirectedWeightedGraph g);
-    + public DirectedWeightedGraph getGraph();
-    + public DirectedWeightedGraph copy();
-    + public boolean isConnected();
-    + public double shortestPathDist(int src, int dest);
-    + public List<NodeData> shortestPath(int src, int dest);
-    + public NodeData center();
-    + List<NodeData> tsp(List<NodeData> cities);
-    + public boolean save(String file);
-    + public boolean load(String file);
+
 
 }
 
 class MyDirectedWeightedGraphAlgorithms
 {
-    - exporter(building: str, calls: str, output: str) -> dict, pd.DataFrame,pd.DataFrame
-    + elevator_allocation(elev_list: list, call: int) -> int
+
 
 }
 
 class GUI_Graph
 {
-    + public GUI_Graph(MyDirectedWeightedGraph graph,int h,int w)
-    + private void Init()
-    + public void paintComponent(Graphics g)
+
 
 }
 
 class GUI_Menu
 {
-    + private void init()
-    + public void actionPerformed(ActionEvent e)
+
 }
 
 class Ex2
 {
-    + public static DirectedWeightedGraph getGrapg(String json_file)
-    + public static DirectedWeightedGraphAlgorithms getGrapgAlgo(String json_file)
-    + public static void runGUI(String json_file)
 
 }
 
