@@ -1,3 +1,4 @@
+import api.GeoLocation;
 import api.NodeData;
 
 import java.awt.*;
@@ -21,8 +22,9 @@ public class GUI_Menu extends JFrame implements ActionListener {
     private void init() {
 //        GUI_Menu gui_menu = new GUI_Menu();
         JMenuBar menuBar = new JMenuBar();
-        JMenu main_menu, load ,run_alogs;
-        JMenuItem save, gson_g1, gson_g2, gson_g3, saved, show_graph, edit;
+        JMenu main_menu, load ,run_alogs, edit;
+        JMenuItem save, gson_g1, gson_g2, gson_g3, saved, show_graph;
+        JMenuItem insert_node, insert_edge, remove_node, remove_edge;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
 //        JFrame frame = new JFrame("Ex2 - Data Structures and Algorithms On Graphs");
 //        this.setName("Ex2 - Data Structures and Algorithms On Graphs");
@@ -37,7 +39,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
         gson_g3 = new JMenuItem("G3");
         saved = new JMenuItem("Saved G");
         show_graph = new JMenuItem("Show Graph");
-        edit = new JMenuItem("Edit");
+        edit = new JMenu("Edit");
+        insert_node = new JMenuItem("Insert Node");
+        insert_edge = new JMenuItem("Insert Edge");
+        remove_node = new JMenuItem("Remove Node");
+        remove_edge = new JMenuItem("Remove Edge");
         isConnected = new JMenuItem("Is Connected");
         shortestPath = new JMenuItem("Shortest Path");
         shortestPathDist = new JMenuItem("Shortest Path Distance");
@@ -55,12 +61,16 @@ public class GUI_Menu extends JFrame implements ActionListener {
         run_alogs.add(center);
         run_alogs.add(tsp);
 
+        edit.add(insert_node);
+        edit.add(insert_edge);
+        edit.add(remove_node);
+        edit.add(remove_edge);
+
         main_menu.add(save);
         main_menu.add(load);
         main_menu.add(edit);
         main_menu.add(show_graph);
         main_menu.add(run_alogs);
-
 
         menuBar.add(main_menu);
         this.setJMenuBar(menuBar);
@@ -102,7 +112,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "G3" -> load_graph("G3");
             case "Saved G" -> load_graph("Saved G");
             case "Save" -> this.graph.save("output.json");
-            case "Edit" -> fills_funcs("Edit");
+            case "Insert Node" -> fills_funcs("Insert Node");
+            case "Insert Edge" -> fills_funcs("Insert Edge");
+            case "Remove Node" -> fills_funcs("Remove Node");
+            case "Remove Edge" -> fills_funcs("Remove Edge");
             case "Show Graph" -> drawGraph();
             case "Is Connected" -> this.graph.isConnected();
             case "Shortest Path" -> fills_funcs("Shortest Path");
@@ -126,7 +139,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
             label.setText("Error: couldn't draw "+ this.name);
             return false;
         }
-
     }
 
     public boolean load_graph(String name)
@@ -160,25 +172,78 @@ public class GUI_Menu extends JFrame implements ActionListener {
         String input = TextBox.algorithm_input;
         String[] in = input.split(" ");
         switch (functionName){
-            case "Edit":
-                //
-                return true;
+            case "Insert Node":
+                try {
+                    int key_node = Integer.parseInt(in[0]); // if we have a node with this key???
+                    double x = Double.parseDouble(in[1]);
+                    double y = Double.parseDouble(in[2]);
+                    MyGeoLocation location = new MyGeoLocation(x, y, 0);
+                    Node newNode = new Node(key_node, location);
+                    if (this.graph.getGraph().getNode(key_node) == null)
+                        this.graph.getGraph().addNode(newNode); // new node
+                    else // change exist
+                        this.graph.getGraph().getNode(key_node).setLocation(location);
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e){
+                e.printStackTrace();
+                return false;
+            }
+            case "Insert Edge":
+                try {
+                    int src_new = Integer.parseInt(in[0]);
+                    int dest_new = Integer.parseInt(in[1]);
+                    double weight_new = Double.parseDouble(in[2]);
+                    this.graph.getGraph().connect(src_new, dest_new, weight_new);
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e){
+                    e.printStackTrace();
+                    return false;
+                }
+            case "Remove Node":
+                try {
+                    int node_to_del = Integer.parseInt(in[0]);
+                    this.graph.getGraph().removeNode(node_to_del);
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e){
+                    e.printStackTrace();
+                    return false;
+                }
+            case "Remove Edge":
+                try {
+                    int src_del = Integer.parseInt(in[0]);
+                    int dest_del = Integer.parseInt(in[1]);
+                    this.graph.getGraph().removeEdge(src_del, dest_del);
+                    return true;
+                }
+                catch (IllegalArgumentException | NullPointerException e){
+                    e.printStackTrace();
+                    return false;
+                }
             case "Shortest Path":
-                if (in.length == 2) {
+                try {
                     int src = Integer.parseInt(in[0]);
                     int dest = Integer.parseInt(in[1]);
                     this.graph.shortestPath(src, dest);
                     return true;
                 }
+                catch (IllegalArgumentException | NullPointerException e){
+                e.printStackTrace();
                 return false;
+            }
             case "Shortest Path Distance":
-                if (in.length == 2) {
+                try {
                     int src = Integer.parseInt(in[0]);
                     int dest = Integer.parseInt(in[1]);
                     this.graph.shortestPathDist(src, dest);
                     return true;
                 }
-                return false;
+                catch (IllegalArgumentException | NullPointerException e) {
+                    e.printStackTrace();
+                    return false;
+                }
             case "TSP":
                 try {
                     List<NodeData> cities = null;
