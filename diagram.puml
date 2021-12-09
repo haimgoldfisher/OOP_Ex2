@@ -84,6 +84,7 @@ Edge --|> EdgeData
 Edge --|> MyDirectedWeightedGraph
 MyDirectedWeightedGraph --|> DirectedWeightedGraph
 MyDirectedWeightedGraph --|> MyDirectedWeightedGraphAlgorithms
+MyDirectedWeightedGraph --|> GUI_Graph
 Pair --|> MyDirectedWeightedGraphAlgorithms
 MyDirectedWeightedGraphAlgorithms --|> DirectedWeightedGraphAlgorithms
 MyDirectedWeightedGraphAlgorithms --|> GUI_Menu
