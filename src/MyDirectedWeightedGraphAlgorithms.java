@@ -438,5 +438,33 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
         return new Pair(src, max);
     }
 
-
+    public void initRandomGraph(int zeroes) {
+        double numOfNodes = Math.pow(10, zeroes);
+        MyDirectedWeightedGraph randGraph = new MyDirectedWeightedGraph();
+        for (int i = 0; i <= numOfNodes-1; i++){
+            double x,y;
+            x = 35+Math.random();
+            y = 32+Math.random();
+            MyGeoLocation location = new MyGeoLocation(x, y ,0);
+            Node newNode = new Node(i, location);
+            randGraph.addNode(newNode);
+        }
+        Iterator<NodeData> nodeIT = randGraph.nodeIter();
+        while (nodeIT.hasNext()) {
+            NodeData currNode = nodeIT.next();
+            int scale;
+            if (zeroes > 1)
+                scale = (int) (Math.log10(zeroes)/2);
+            else
+                scale = 1;
+            for (int i = 1; i <= scale; i++){
+                int dest = (int)(Math.random()*numOfNodes);
+                double weight = 1+Math.random();
+                while (currNode.getKey() == dest)
+                    dest = (int)(Math.random()*numOfNodes);
+                randGraph.connect(currNode.getKey(), dest, weight);
+            }
+        }
+        this.graph = randGraph;
+    }
 }

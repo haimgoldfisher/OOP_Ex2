@@ -44,6 +44,13 @@ public class testing {
 
     }
 
+    @Test void create_new_rand_Graph_Test()
+    {
+        MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
+        algo.initRandomGraph(1);
+        algo.save("output");
+    }
+
     @Test
     public void isConnected_Test()
     {
