@@ -18,7 +18,14 @@ public class GUI_Menu extends JFrame implements ActionListener {
     int innerH;
 
     public GUI_Menu(String path) {
-        this.graph.load(path);
+        if (!path.isEmpty())
+            this.graph.load(path);
+        else {
+            MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph();
+            MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
+            algo.init(newGraph);
+            this.graph = algo;
+        }
         init();
     }
 
@@ -111,6 +118,14 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand() + " selected");
+        JLabel answer = new JLabel(e.getActionCommand() + " selected. please wait");
+        JPanel answer_panel = new JPanel();
+        answer.setFont(new Font("Italian", Font.BOLD, 20));
+        //answer_panel.setLocation();
+        //this.setContentPane(answer_panel);
+        answer.setSize(400,400);
+        this.setLocationRelativeTo(null);
+        answer_panel.add(answer);
         switch (e.getActionCommand()) {
             case "G1" -> load_graph("G1");
             case "G2" -> load_graph("G2");
@@ -126,8 +141,9 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "Shortest Path Distance" -> fills_funcs("Shortest Path Distance");
             case "Center" -> this.graph.center();
             case "TSP" -> fills_funcs("TSP");
-            default -> throw new IllegalStateException("This option doesn't exist!");
         }
+        answer.setText("Done");
+        answer_panel.add(answer);
     }
 
     private boolean drawGraph() {
@@ -189,7 +205,26 @@ public class GUI_Menu extends JFrame implements ActionListener {
             this.graph = graph;
             algorithm_name = functionName;
             panel = new JPanel();
-            label = new JLabel("Please enter your input to " + functionName + ".");
+            label = new JLabel("Please enter your input to " + functionName + ". \n");
+            switch (functionName){
+                case "Insert Node" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Enter the node name, X value and<br/> Y value, split them by ','" +
+                        "<br/>If you like to edit node's <br/>location, enter it name.</html>");
+                case "Remove Node" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Enter the name of the<br/> node which you like to remove.</html>");
+                case "Insert Edge" -> label.setText("<html>"+label.getText() + "<br/>Select two node keys" +
+                        " of the<br/> edge first for source, second for<br/> destination, then add the wanted weight" +
+                        " <br/>split them by ','</html>");
+                case "Remove Edge" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Select two node keys of the<br/> edge first for source, second for" +
+                        "destination,<br/> split them by ','</html>");
+                case "Shortest Path" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Select two node keys,<br/> split them by ','</html>");
+                case "Shortest Path Distance" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Select two node keys, <br/>split them by ','</html>");
+                case "TSP" -> label.setText("<html>"+label.getText() + "<br/>" +
+                        "Select the wanted nodes,<br/> split them by ','</html>");
+            }
             button = new JButton("Send");
             button.addActionListener(this);
             textField = new JTextField(16);
@@ -211,7 +246,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                 textField.setText("");
                 String input = this.algorithm_input;
                 System.out.println(input);
-                String[] in = input.split(" ");
+                String[] in = input.split(",");
                 switch (algorithm_name) {
                     case "Insert Node":
                         try {
@@ -291,7 +326,12 @@ public class GUI_Menu extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new GUI_Menu("data/G1.json");
+        if(args.length > 0){
+            MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
+            new GUI_Menu(args[0]);
+        }
+        else
+            new GUI_Menu("");
     }
 }
 
