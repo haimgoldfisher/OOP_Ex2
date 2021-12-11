@@ -111,12 +111,13 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
         Node curr_node = (Node) key_node.get(key);
         for (int parent_id : curr_node.parents_ids) {
 //            ArrayList<Integer> edge_keys = new ArrayList<>();
-            ArrayList<Integer> edge_keys =new ArrayList<>();
+            ArrayList<Integer> edge_keys = new ArrayList<>();
             edge_keys.add(parent_id);
             edge_keys.add(key);
-            keys_edge.remove(edge_keys);
-            Node parent_node = (Node) key_node.get(key);
+            EdgeData removed_edge = keys_edge.remove(edge_keys);
+            Node parent_node = (Node) key_node.get(parent_id);
             parent_node.children_ids.remove(key);
+            parent_node.edges_to_children.remove(removed_edge);
         }
         curr_node.parents_ids.clear();
         for (int child_id : curr_node.children_ids) {
@@ -124,7 +125,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
             edge_keys.add(key);
             edge_keys.add(child_id);
             keys_edge.remove(edge_keys);
-            Node child_node = (Node) key_node.get(key);
+            Node child_node = (Node) key_node.get(child_id);
             child_node.parents_ids.remove(key);
         }
         curr_node.children_ids.clear();

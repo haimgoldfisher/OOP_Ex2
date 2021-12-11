@@ -22,7 +22,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.setLayout(new BorderLayout());
         this.label.setHorizontalAlignment(JLabel.CENTER);
 
-        this.add(label,BorderLayout.NORTH);
+        this.add(label, BorderLayout.NORTH);
         this.add(panel);
         this.menu_bar = new JMenuBar();
         JMenu main_menu, load, run_alogs, edit;
@@ -93,23 +93,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
         remove_node.addActionListener(this);
 
 
-
-
-
-
-
-
-
-
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
-
-
-
-
-
 
 
     @Override
@@ -157,37 +144,41 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public void fills_funcs(String functionName) {
 //        gg.label.setText(functionName);
-        TextBox tb = new TextBox(functionName, this.graphAlgo,this.panel);
+        TextBox tb = new TextBox(functionName, this.graphAlgo, this.panel);
     }
 
-    public void answerBox(String func_name){
+    public void answerBox(String func_name) {
 
         JLabel messege = new JLabel("Please wait");
 //            messege.setFont();
         messege.setHorizontalAlignment(JLabel.CENTER);
         JFrame frame = new JFrame();
-        frame.setSize(400,200);
+        frame.setSize(400, 200);
         frame.setLocationRelativeTo(null);
         frame.add(messege);
         frame.setVisible(true);
-        if(this.graphAlgo.getGraph() == null){
+        if (this.graphAlgo.getGraph() == null) {
             messege.setText("Please load a graph first");
             return;
         }
 
         switch (func_name) {
             case "Is Connected":
-                boolean is_connected =  this.graphAlgo.isConnected();
-                if(is_connected) {
+                boolean is_connected = this.graphAlgo.isConnected();
+                if (is_connected) {
                     messege.setText("True! this graph is connected");
-                }
-                else {
+                } else {
                     messege.setText("False! this graph is NOT connected");
                 }
                 break;
             case "Center":
                 NodeData cen = this.graphAlgo.center();
-                messege.setText("The key of the Center Node is: "+cen.getKey());
+                if (cen == null) {
+                    messege.setText("There is no center because this graph is not connected");
+                } else {
+                    messege.setText("The key of the Center Node is: " + cen.getKey());
+                }
+
                 break;
         }
     }
@@ -205,29 +196,29 @@ public class GUI_Menu extends JFrame implements ActionListener {
         public static JLabel label;
         public static GUI_Graph main_panel;
 
-        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graphAlgo,GUI_Graph main_panel) {
+        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graphAlgo, GUI_Graph main_panel) {
             this.main_panel = main_panel;
             this.graphAlgo = graphAlgo;
             algorithm_name = functionName;
             panel = new JPanel();
             label = new JLabel("Please enter your input to " + functionName + ". \n");
-            switch (functionName){
-                case "Insert Node" -> label.setText("<html>"+label.getText() + "<br/>" +
+            switch (functionName) {
+                case "Insert Node" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Enter the node name, X value and<br/> Y value, split them by ','" +
                         "<br/>If you like to edit node's <br/>location, enter it name.</html>");
-                case "Remove Node" -> label.setText("<html>"+label.getText() + "<br/>" +
+                case "Remove Node" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Enter the name of the<br/> node which you like to remove.</html>");
-                case "Insert Edge" -> label.setText("<html>"+label.getText() + "<br/>Select two node keys" +
+                case "Insert Edge" -> label.setText("<html>" + label.getText() + "<br/>Select two node keys" +
                         " of the<br/> edge first for source, second for<br/> destination, then add the wanted weight" +
                         " <br/>split them by ','</html>");
-                case "Remove Edge" -> label.setText("<html>"+label.getText() + "<br/>" +
+                case "Remove Edge" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Select two node keys of the<br/> edge first for source, second for" +
                         "destination,<br/> split them by ','</html>");
-                case "Shortest Path" -> label.setText("<html>"+label.getText() + "<br/>" +
+                case "Shortest Path" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Select two node keys,<br/> split them by ','</html>");
-                case "Shortest Path Distance" -> label.setText("<html>"+label.getText() + "<br/>" +
+                case "Shortest Path Distance" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Select two node keys, <br/>split them by ','</html>");
-                case "TSP" -> label.setText("<html>"+label.getText() + "<br/>" +
+                case "TSP" -> label.setText("<html>" + label.getText() + "<br/>" +
                         "Select the wanted nodes,<br/> split them by ','</html>");
             }
             button = new JButton("Send");
@@ -258,11 +249,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
 //            messege.setFont();
                 messege.setHorizontalAlignment(JLabel.CENTER);
                 JFrame frame = new JFrame();
-                frame.setSize(400,200);
+                frame.setSize(400, 200);
                 frame.setLocationRelativeTo(null);
                 frame.add(messege);
                 frame.setVisible(true);
-                if(this.graphAlgo.getGraph() == null){
+                if (this.graphAlgo.getGraph() == null) {
                     messege.setText("Please load a graph first");
                     return;
                 }
@@ -270,7 +261,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                 switch (algorithm_name) {
                     case "Insert Node":
                         try {
-                            if(in.length==3) {
+                            if (in.length == 3) {
                                 int key_node = Integer.parseInt(in[0]); // if we have a node with this key???
                                 double x = Double.parseDouble(in[1]);
                                 double y = Double.parseDouble(in[2]);
@@ -284,8 +275,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                     this.graphAlgo.getGraph().getNode(key_node).setLocation(location);
                                     messege.setText("OOPS! a Node with this key is already exists you should pick another key");
                                 }
-                            }
-                            else {
+                            } else {
                                 messege.setText("that's wrong input");
                             }
                         } catch (IllegalArgumentException | NullPointerException ex) {
@@ -295,15 +285,14 @@ public class GUI_Menu extends JFrame implements ActionListener {
                         break;
                     case "Insert Edge":
                         try {
-                            if(in.length == 3) {
+                            if (in.length == 3) {
                                 int src_new = Integer.parseInt(in[0]);
                                 int dest_new = Integer.parseInt(in[1]);
                                 double weight_new = Double.parseDouble(in[2]);
                                 this.graphAlgo.getGraph().connect(src_new, dest_new, weight_new);
 //                                main_panel.updateUI();
                                 messege.setText("the Edge has been added successfully");
-                            }
-                            else{
+                            } else {
                                 messege.setText("that's wrong input");
                             }
                         } catch (IllegalArgumentException | NullPointerException ex) {
@@ -323,8 +312,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 } else {
                                     messege.setText("there is no Node with this key");
                                 }
-                            }
-                            else {
+                            } else {
                                 messege.setText("that's wrong input");
                             }
                         } catch (IllegalArgumentException | NullPointerException ex) {
@@ -334,7 +322,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                         break;
                     case "Remove Edge":
                         try {
-                            if(in.length==2) {
+                            if (in.length == 2) {
                                 int src_del = Integer.parseInt(in[0]);
                                 int dest_del = Integer.parseInt(in[1]);
                                 if (this.graphAlgo.getGraph().getEdge(src_del, dest_del) != null) {
@@ -344,8 +332,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 } else {
                                     messege.setText("this Edge dose not exist");
                                 }
-                            }
-                            else{
+                            } else {
                                 messege.setText("that's wrong input");
                             }
                         } catch (IllegalArgumentException | NullPointerException ex) {
@@ -360,14 +347,13 @@ public class GUI_Menu extends JFrame implements ActionListener {
                             List<NodeData> ans = this.graphAlgo.shortestPath(src, dest);
                             String ans_str = "";
                             for (int i = 0; i < ans.size(); i++) {
-                                if (i==ans.size()-1){
-                                    ans_str+=ans.get(i).getKey();
-                                }
-                                else {
-                                    ans_str+= ans.get(i).getKey()+"->";
+                                if (i == ans.size() - 1) {
+                                    ans_str += ans.get(i).getKey();
+                                } else {
+                                    ans_str += ans.get(i).getKey() + "->";
                                 }
                             }
-                            messege.setText("the Shortest Path from "+src+" to "+dest+" is: "+ans_str);
+                            messege.setText("the Shortest Path from " + src + " to " + dest + " is: " + ans_str);
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
@@ -378,7 +364,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
                             int src = Integer.parseInt(in[0]);
                             int dest = Integer.parseInt(in[1]);
                             double ans = this.graphAlgo.shortestPathDist(src, dest);
-                            messege.setText("the Shortest Path Distance from "+src+" to "+dest+" is: "+ans);
+                            messege.setText("the Shortest Path Distance from " + src + " to " + dest + " is: " + ans);
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
@@ -391,17 +377,17 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 int key = Integer.parseInt(str);
                                 cities.add(graphAlgo.getGraph().getNode(key));
                             }
-                            List<NodeData> ans = this.graphAlgo.tsp(cities);;
+                            List<NodeData> ans = this.graphAlgo.tsp(cities);
+                            ;
                             String ans_str = "";
                             for (int i = 0; i < ans.size(); i++) {
-                                if (i==ans.size()-1){
-                                    ans_str+=ans.get(i).getKey();
-                                }
-                                else {
-                                    ans_str+= ans.get(i).getKey()+"->";
+                                if (i == ans.size() - 1) {
+                                    ans_str += ans.get(i).getKey();
+                                } else {
+                                    ans_str += ans.get(i).getKey() + "->";
                                 }
                             }
-                            messege.setText("the TSP answer is: "+ans_str);
+                            messege.setText("the TSP answer is: " + ans_str);
                         } catch (IllegalArgumentException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
@@ -413,9 +399,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
     }
 
 
-
-
-    public static void main(String args[]){
+    public static void main(String args[]) {
         new GUI_Menu();
     }
 }
