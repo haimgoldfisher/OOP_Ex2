@@ -31,7 +31,7 @@ Each **graph (MyDirectedWeightedGraph)** has Mode Count int param and two hash s
 
 * `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
 whether a given graph is a connected or not.
-* `Shortest Path Disttance` - 
+* `Shortest Path Distance` - 
 * `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph.
 * `Center` - Algorithm for finding the most central vertex in a graph (can be more than one)
 * `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices.
@@ -69,21 +69,49 @@ We have created a tests directory. The tests should be done in three ways. First
 | `save(String file)`                   | O()          |
 | `load(String file)`                   | O()          |
 
-> **1,000**
+> **1,000:**
 
+| **Algorithm**                         |    **Time**   |
+|---------------------------------------|---------------|
+| `isConnected()`                       |  ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  ms          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  ms         |
 
+> **10,000:**
 
-> **10,000**
+| **Algorithm**                         |    **Time**   |
+|---------------------------------------|---------------|
+| `isConnected()`                       |  ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  ms          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  ms         |
 
+> **100,000:**
 
+| **Algorithm**                         |    **Time**   |
+|---------------------------------------|---------------|
+| `isConnected()`                       |  ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  ms          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  ms         |
 
-> **100,000**
+> **1,000,000:**
 
-
-
-> **1,000,000**
-
-
+| **Algorithm**                         |    **Time**   |
+|---------------------------------------|---------------|
+| `isConnected()`                       |  ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  ms          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  ms         |
 
 ---------
 ## 6. How to Download, Run and Use The Graphical Interface:
