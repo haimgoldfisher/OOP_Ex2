@@ -44,7 +44,8 @@ public class testing {
 
     }
 
-    @Test void create_new_rand_Graph_Test()
+    @Test
+    public void create_new_rand_Graph_Test()
     {
         MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
         algo.initRandomGraph(1);
