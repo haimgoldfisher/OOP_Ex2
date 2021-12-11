@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/output.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyDirectedWeightedGraph.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyDirectedWeightedGraph.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/testing.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/diagram.puml" beforeDir="false" afterPath="$PROJECT_DIR$/diagram.puml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +47,7 @@
       <recent name="C:\Users\goldi\IdeaProjects\OOP_Ex2" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.GUI_Menu">
+  <component name="RunManager">
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="OOP_Ex2" />
@@ -92,15 +86,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.GUI_Menu" />
-        <item itemvalue="JUnit.testing.create_new_rand_Graph_Test" />
-        <item itemvalue="Application.MyDirectedWeightedGraphAlgorithms" />
-        <item itemvalue="Application.Window" />
-        <item itemvalue="Application.GUI" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -138,6 +123,7 @@
       <workItem from="1639132591115" duration="767000" />
       <workItem from="1639134186965" duration="1895000" />
       <workItem from="1639242853906" duration="2247000" />
+      <workItem from="1639245219380" duration="85000" />
     </task>
     <servers />
   </component>
@@ -154,5 +140,6 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>
