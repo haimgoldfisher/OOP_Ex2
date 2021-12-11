@@ -1,45 +1,35 @@
 import api.NodeData;
 
-import java.awt.*;
 import javax.swing.*;
-import javax.swing.event.AncestorListener;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-
 public class GUI_Menu extends JFrame implements ActionListener {
-    public MyDirectedWeightedGraphAlgorithms graph = new MyDirectedWeightedGraphAlgorithms();
-    static JLabel label;
-    String name;
-    int scrW;
-    int scrH;
-    int innerW;
-    int innerH;
+    public MyDirectedWeightedGraphAlgorithms graphAlgo = new MyDirectedWeightedGraphAlgorithms();
+    JLabel label;
+    GUI_Graph panel;
+    JMenuBar menu_bar;
 
-    public GUI_Menu(String path) {
-        if (!path.isEmpty())
-            this.graph.load(path);
-        else {
-            MyDirectedWeightedGraph newGraph = new MyDirectedWeightedGraph();
-            MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
-            algo.init(newGraph);
-            this.graph = algo;
-        }
-        init();
-    }
+    public GUI_Menu() {
+        panel = new GUI_Graph();
+        label = new JLabel("Hello!");
 
-    private void init() {
-        JMenuBar menuBar = new JMenuBar();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new BorderLayout());
+        this.label.setHorizontalAlignment(JLabel.CENTER);
+
+        this.add(label,BorderLayout.NORTH);
+        this.add(panel);
+        this.menu_bar = new JMenuBar();
         JMenu main_menu, load, run_alogs, edit;
         JMenuItem save, gson_g1, gson_g2, gson_g3, saved, show_graph;
         JMenuItem insert_node, insert_edge, remove_node, remove_edge;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
-//        JFrame frame = new JFrame("Ex2 - Data Structures and Algorithms On Graphs");
-//        this.setName("Ex2 - Data Structures and Algorithms On Graphs");
-        this.setTitle("Ex2 - Data Structures and Algorithms On Graphs");
-        label = new JLabel("Please select a function from the menu bar");
-        //label.setLocation((int)this.graph.center().getLocation().x(), (int)this.graph.center().getLocation().y());
+
         main_menu = new JMenu("Menu");
         load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
@@ -82,9 +72,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
         //main_menu.add(show_graph);
         main_menu.add(run_alogs);
 
-        menuBar.add(main_menu);
-        this.setJMenuBar(menuBar);
-        this.add(label);
+        this.menu_bar.add(main_menu);
+        this.setJMenuBar(this.menu_bar);
 
         save.addActionListener(this);
         gson_g1.addActionListener(this);
@@ -103,65 +92,50 @@ public class GUI_Menu extends JFrame implements ActionListener {
         remove_edge.addActionListener(this);
         remove_node.addActionListener(this);
 
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        pack(); // Need this, otherwise insets() show as 0.
-        scrW = (int) screenSize.getWidth();
-        scrH = (int) screenSize.getHeight();
-        innerW = scrW - getInsets().left - getInsets().right;
-        innerH = scrH - getInsets().top - getInsets().bottom;
-        setSize(scrW, scrH);
-        drawGraph();
-        setVisible(true);
 
+
+
+
+
+
+
+
+
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
+
+
+
+
+
+
+    @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println(e.getActionCommand() + " selected");
-        JLabel answer = new JLabel(e.getActionCommand() + " selected. please wait");
-        JPanel answer_panel = new JPanel();
-        answer.setFont(new Font("Italian", Font.BOLD, 20));
-        //answer_panel.setLocation();
-        //this.setContentPane(answer_panel);
-        answer.setSize(400,400);
-        this.setLocationRelativeTo(null);
-        answer_panel.add(answer);
+        this.label.setText(e.getActionCommand() + " selected. please wait");
         switch (e.getActionCommand()) {
             case "G1" -> load_graph("G1");
             case "G2" -> load_graph("G2");
             case "G3" -> load_graph("G3");
             case "Saved G" -> load_graph("Saved G");
-            case "Save" -> this.graph.save("output.json");
+            case "Save" -> this.graphAlgo.save("output.json");
             case "Insert Node" -> fills_funcs("Insert Node");
             case "Insert Edge" -> fills_funcs("Insert Edge");
             case "Remove Node" -> fills_funcs("Remove Node");
             case "Remove Edge" -> fills_funcs("Remove Edge");
-            case "Is Connected" -> this.graph.isConnected();
+            case "Is Connected" -> answerBox("Is Connected");
             case "Shortest Path" -> fills_funcs("Shortest Path");
             case "Shortest Path Distance" -> fills_funcs("Shortest Path Distance");
-            case "Center" -> this.graph.center();
+            case "Center" -> answerBox("Center");
             case "TSP" -> fills_funcs("TSP");
-        }
-        answer.setText("Done");
-        answer_panel.add(answer);
-    }
-
-    private boolean drawGraph() {
-        label.setText("Drawing " + this.name + " it might take a while");
-        try {
-            this.setContentPane(new GUI_Graph((MyDirectedWeightedGraph) this.graph.getGraph(), innerH, innerW));
-            label.setText("Succeeded drawing " + this.name);
-            return true;
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-            label.setText("Error: couldn't draw " + this.name);
-            return false;
         }
 
     }
 
     public boolean load_graph(String name) {
-        this.setContentPane(new JPanel());
         String fullPath;
         if (name.startsWith("G"))
             fullPath = "data/" + name + ".json";
@@ -169,40 +143,71 @@ public class GUI_Menu extends JFrame implements ActionListener {
             fullPath = "output.json";
         String message = "The Graph " + name + " has uploaded!";
         try {
-            this.graph.load(fullPath);
-            this.name = name;
+            this.graphAlgo.load(fullPath);
+            this.panel.graph_data = graphAlgo.getGraph();
+            this.panel.updateUI();
             label.setText(message);
-            label.setVisible(true);
-            drawGraph();
             return true;
         } catch (NullPointerException e) {
             e.printStackTrace();
             label.setText("Error: The Graph " + name + " couldn't be uploaded!");
-            label.setVisible(true);
             return false;
         }
     }
 
     public void fills_funcs(String functionName) {
-        label.setText(functionName);
-        TextBox tb = new TextBox(functionName, this.graph);
+//        gg.label.setText(functionName);
+        TextBox tb = new TextBox(functionName, this.graphAlgo,this.panel);
     }
 
-/* ***********************************************************
-        This is TextBox class for algorithm inputs
- */
+    public void answerBox(String func_name){
+
+        JLabel messege = new JLabel("Please wait");
+//            messege.setFont();
+        messege.setHorizontalAlignment(JLabel.CENTER);
+        JFrame frame = new JFrame();
+        frame.setSize(400,200);
+        frame.setLocationRelativeTo(null);
+        frame.add(messege);
+        frame.setVisible(true);
+        if(this.graphAlgo.getGraph() == null){
+            messege.setText("Please load a graph first");
+            return;
+        }
+
+        switch (func_name) {
+            case "Is Connected":
+                boolean is_connected =  this.graphAlgo.isConnected();
+                if(is_connected) {
+                    messege.setText("True! this graph is connected");
+                }
+                else {
+                    messege.setText("False! this graph is NOT connected");
+                }
+                break;
+            case "Center":
+                NodeData cen = this.graphAlgo.center();
+                messege.setText("The key of the Center Node is: "+cen.getKey());
+                break;
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     static class TextBox extends JFrame implements ActionListener {
-        public MyDirectedWeightedGraphAlgorithms graph;
+        public MyDirectedWeightedGraphAlgorithms graphAlgo;
         public static String algorithm_name;
         public static String algorithm_input;
         public static JTextField textField;
         public static JPanel panel;
         public static JButton button;
         public static JLabel label;
+        public static GUI_Graph main_panel;
 
-        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graph) {
-            this.graph = graph;
+        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graphAlgo,GUI_Graph main_panel) {
+            this.main_panel = main_panel;
+            this.graphAlgo = graphAlgo;
             algorithm_name = functionName;
             panel = new JPanel();
             label = new JLabel("Please enter your input to " + functionName + ". \n");
@@ -247,77 +252,159 @@ public class GUI_Menu extends JFrame implements ActionListener {
                 String input = this.algorithm_input;
                 System.out.println(input);
                 String[] in = input.split(",");
+                System.out.println(Arrays.toString(in));
+
+                JLabel messege = new JLabel("Please wait");
+//            messege.setFont();
+                messege.setHorizontalAlignment(JLabel.CENTER);
+                JFrame frame = new JFrame();
+                frame.setSize(400,200);
+                frame.setLocationRelativeTo(null);
+                frame.add(messege);
+                frame.setVisible(true);
+                if(this.graphAlgo.getGraph() == null){
+                    messege.setText("Please load a graph first");
+                    return;
+                }
+
                 switch (algorithm_name) {
                     case "Insert Node":
                         try {
-                            int key_node = Integer.parseInt(in[0]); // if we have a node with this key???
-                            double x = Double.parseDouble(in[1]);
-                            double y = Double.parseDouble(in[2]);
-                            MyGeoLocation location = new MyGeoLocation(x, y, 0);
-                            Node newNode = new Node(key_node, location);
-                            if (this.graph.getGraph().getNode(key_node) == null)
-                                this.graph.getGraph().addNode(newNode); // new node
-                            else // change exist
-                                this.graph.getGraph().getNode(key_node).setLocation(location);
+                            if(in.length==3) {
+                                int key_node = Integer.parseInt(in[0]); // if we have a node with this key???
+                                double x = Double.parseDouble(in[1]);
+                                double y = Double.parseDouble(in[2]);
+                                MyGeoLocation location = new MyGeoLocation(x, y, 0);
+                                Node newNode = new Node(key_node, location);
+                                if (this.graphAlgo.getGraph().getNode(key_node) == null) {
+                                    this.graphAlgo.getGraph().addNode(newNode); // new node
+//                                    main_panel.updateUI();
+                                    messege.setText("the Node has been added successfully");
+                                } else {// change exist
+                                    this.graphAlgo.getGraph().getNode(key_node).setLocation(location);
+                                    messege.setText("OOPS! a Node with this key is already exists you should pick another key");
+                                }
+                            }
+                            else {
+                                messege.setText("that's wrong input");
+                            }
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "Insert Edge":
                         try {
-                            int src_new = Integer.parseInt(in[0]);
-                            int dest_new = Integer.parseInt(in[1]);
-                            double weight_new = Double.parseDouble(in[2]);
-                            this.graph.getGraph().connect(src_new, dest_new, weight_new);
+                            if(in.length == 3) {
+                                int src_new = Integer.parseInt(in[0]);
+                                int dest_new = Integer.parseInt(in[1]);
+                                double weight_new = Double.parseDouble(in[2]);
+                                this.graphAlgo.getGraph().connect(src_new, dest_new, weight_new);
+//                                main_panel.updateUI();
+                                messege.setText("the Edge has been added successfully");
+                            }
+                            else{
+                                messege.setText("that's wrong input");
+                            }
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "Remove Node":
                         try {
-                            int node_to_del = Integer.parseInt(in[0]);
-                            this.graph.getGraph().removeNode(node_to_del);
+                            if (in.length == 1) {
+                                int node_to_del = Integer.parseInt(in[0]);
+                                if (this.graphAlgo.getGraph().getNode(node_to_del) != null) {
+                                    this.graphAlgo.getGraph().removeNode(node_to_del);
+//                                    main_panel.removeAll();
+//                                    main_panel.updateUI();
+                                    messege.setText("the Node has been removed successfully");
+                                } else {
+                                    messege.setText("there is no Node with this key");
+                                }
+                            }
+                            else {
+                                messege.setText("that's wrong input");
+                            }
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "Remove Edge":
                         try {
-                            int src_del = Integer.parseInt(in[0]);
-                            int dest_del = Integer.parseInt(in[1]);
-                            this.graph.getGraph().removeEdge(src_del, dest_del);
+                            if(in.length==2) {
+                                int src_del = Integer.parseInt(in[0]);
+                                int dest_del = Integer.parseInt(in[1]);
+                                if (this.graphAlgo.getGraph().getEdge(src_del, dest_del) != null) {
+                                    this.graphAlgo.getGraph().removeEdge(src_del, dest_del);
+//                                    main_panel.updateUI();
+                                    messege.setText("the Edge has been removed successfully");
+                                } else {
+                                    messege.setText("this Edge dose not exist");
+                                }
+                            }
+                            else{
+                                messege.setText("that's wrong input");
+                            }
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "Shortest Path":
                         try {
                             int src = Integer.parseInt(in[0]);
                             int dest = Integer.parseInt(in[1]);
-                            this.graph.shortestPath(src, dest);
+                            List<NodeData> ans = this.graphAlgo.shortestPath(src, dest);
+                            String ans_str = "";
+                            for (int i = 0; i < ans.size(); i++) {
+                                if (i==ans.size()-1){
+                                    ans_str+=ans.get(i).getKey();
+                                }
+                                else {
+                                    ans_str+= ans.get(i).getKey()+"->";
+                                }
+                            }
+                            messege.setText("the Shortest Path from "+src+" to "+dest+" is: "+ans_str);
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "Shortest Path Distance":
                         try {
                             int src = Integer.parseInt(in[0]);
                             int dest = Integer.parseInt(in[1]);
-                            System.out.println(this.graph.shortestPathDist(src, dest));
+                            double ans = this.graphAlgo.shortestPathDist(src, dest);
+                            messege.setText("the Shortest Path Distance from "+src+" to "+dest+" is: "+ans);
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                     case "TSP":
                         try {
-                            List<NodeData> cities = null;
+                            List<NodeData> cities = new ArrayList<>();
                             for (String str : in) {
                                 int key = Integer.parseInt(str);
-                                cities.add(graph.getGraph().getNode(key));
+                                cities.add(graphAlgo.getGraph().getNode(key));
                             }
-                            this.graph.tsp(cities);
+                            List<NodeData> ans = this.graphAlgo.tsp(cities);;
+                            String ans_str = "";
+                            for (int i = 0; i < ans.size(); i++) {
+                                if (i==ans.size()-1){
+                                    ans_str+=ans.get(i).getKey();
+                                }
+                                else {
+                                    ans_str+= ans.get(i).getKey()+"->";
+                                }
+                            }
+                            messege.setText("the TSP answer is: "+ans_str);
                         } catch (IllegalArgumentException ex) {
                             ex.printStackTrace();
+                            messege.setText("ERROR, something went wrong (IllegalArgument)");
                         }
                         break;
                 }
@@ -325,13 +412,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
         }
     }
 
-    public static void main(String[] args) {
-        if(args.length > 0){
-            MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
-            new GUI_Menu(args[0]);
-        }
-        else
-            new GUI_Menu("");
+
+
+
+    public static void main(String args[]){
+        new GUI_Menu();
     }
 }
 
