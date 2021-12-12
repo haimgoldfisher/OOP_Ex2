@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,7 +28,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.add(panel);
         this.menu_bar = new JMenuBar();
         JMenu main_menu, run_alogs, edit, init_rand;
-        JMenuItem save, gson_g1, gson_g2, gson_g3, saved,load;
+        JMenuItem save, gson_g1, gson_g2, gson_g3, saved, load;
         JMenuItem insert_node, insert_edge, remove_node, remove_edge;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
         JMenuItem graph10, graph100, graph1000, graph10000, graph100000, graph1000000;
@@ -119,12 +120,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        if (!arg.isEmpty() && (arg.equals("G1")||arg.equals("G2")||arg.equals("G3")||arg.equals("output")))
+        if (!arg.isEmpty()){
             this.load_graph(arg);
-        else if (!arg.isEmpty()) {
-            System.out.println("Illegal Argument, must be G1,G2,G3 or output.");
-            label.setText("Illegal Argument, must be G1.json,G2.json,G3.json or output.json. " +
-                    "Please load your wanted graph from the menu.");
+            if (this.graphAlgo.getGraph() == null)
+                label.setText("Could not find " + arg + ".json, try to load it from the menu.");
         }
     }
 
