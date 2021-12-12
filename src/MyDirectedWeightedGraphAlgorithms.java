@@ -221,7 +221,19 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             return null;
         }
         List<NodeData> shortest_path = all_paths.get(min_index);
-        return shortest_path;
+        List<NodeData> ans  = new ArrayList<>();
+        for (int i = 0; i < shortest_path.size()-1; i++) {
+            List<NodeData> curr_path = shortestPath(shortest_path.get(i).getKey(),shortest_path.get(i+1).getKey());
+            if(i == 0){
+                ans.addAll(curr_path);
+            }
+            else {
+                curr_path.remove(0);
+                ans.addAll(curr_path);
+            }
+
+        }
+        return ans;
     }
 
     private double calcCost(List<NodeData> curr_path, HashMap<Integer, HashMap<Integer, Double>> id_distances) {
