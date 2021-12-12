@@ -456,7 +456,7 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
             NodeData currNode = nodeIT.next();
             int scale;
             if (zeroes > 1)
-                scale = 20;
+                scale = 10;
             else
                 scale = 1;
             for (int i = 1; i <= scale; i++) {
