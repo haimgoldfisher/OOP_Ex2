@@ -31,7 +31,7 @@ Each **graph (MyDirectedWeightedGraph)** has Mode Count int param and two hash s
 
 * `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
 whether a given graph is a connected or not.
-* `Shortest Path Distance` - 
+* `Shortest Path Distance` - Algorithm for finding the distance of shortest path between any 2 vertices in a graph.
 * `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph.
 * `Center` - Algorithm for finding the most central vertex in a graph (can be more than one)
 * `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices.
@@ -39,8 +39,7 @@ whether a given graph is a connected or not.
 ---------
 ## 2. The Thoughts Behind The Classes:
 
-It is important to note that since most of the designings of the task are given to us, most of the planning is in the auxiliary functions for the implementation of the algorithms and less about the classes (except for the implementation of the GUI). Since we were initially given five interfaces that we implemented, we will build a class that matches each interface. Each class will implement all the necessary methods and functions. Next, additional methods and additional functions will be built within each class in order to help us solve the task. The work on the GUI interface is divided into several different classes. A class that represents the main menu, one that represents the drawing of the graph,
-We will also complete the MAIN function EX2 so that we can run the program as one complete unit.
+It is important to note that since most of the designings of the task are given to us, most of the planning is in the auxiliary functions for the implementation of the algorithms and less about the classes (except for the implementation of the GUI). Since we were initially given five interfaces that we implemented, we will build a class that matches each interface. Each class will implement all the necessary methods and functions. Next, additional methods and additional functions will be built within each class in order to help us solve the task. The work on the GUI interface is divided into several different classes. A class that represents the main menu and contains a second inner class that represents a text box that the user needs to fill. It is consumed because in some functions, there is a requirement to fill some input to enable it (edit, algorithms like TSP). The third represents the drawing of the graph. It includes vertices with their key number. Edges are marked along with an arrow to indicate where they are aimed. Also their weight is indicated. We will also complete the MAIN function EX2 so that we can run the program as one complete unit. Finally, after performing a meaningful and comprehensive test, we will know that all our functions work. At this point we will turn the project into a jar file.
 
 ---------
 ## 3. UML Diagram:
@@ -58,17 +57,23 @@ We have created a tests directory. The tests should be done in three ways. First
 
 ---------
 ## 5. Analysis - The Performance of The Algorithms:
-**n** = # of nodes of the graph. **m** = # of the edges of the graph.
+**n** = # of V nodes of the graph. **m** = # of the E edges of the graph.
 
 | **Algorithm**                         |    **Complexity**   |
 |---------------------------------------|---------------------|
-| `isConnected()`                       | O(V+E)              |
-| `shortestPathDist(int src, int dest)` | O(ElogV)            |
-| `shortestPath(int src, int dest)`     | O(ElogV)            |
-| `center()`                            | O(V(ElogV))         |
+| `isConnected()`                       | O(n+m)              |
+| `shortestPathDist(int src, int dest)` | O(mlogn)            |
+| `shortestPath(int src, int dest)`     | O(mlogn)            |
+| `center()`                            | O(n(mlogn))         |
 | `tsp(List<NodeData> cities)`          | O(n!)               |
 | `save(String file)`                   | O(m+n)              |
 | `load(String file)`                   | O(m+n)              |
+
+**Before we start checking running times, it is important to note a few important things:**
+
+- Because we use a random graph-building function, the results may not be accurate enough. This happens because in the edge creation phase, if the function matches a edge to the same vertex, it tries again until it finds another vertex (src & dest cannot be the same here).
+- Each time we create a random graph and then run the function on it. That is, the initialization time of the graph in addition to the function must be taken into account.
+- Our computers are not that powerful. This causes our functions to run quite poorly. Therefore, we have added the complications in advance. It is known that the efficiency of a function is measured by its complexity and not by its runtime, because it is directly affected by the CPU's strength.
 
 > **1,000:**
 
@@ -125,7 +130,7 @@ Run the above command in cmd:
 ```
 java -jar Ex2.jar 
 ```
-If you want to boot the program already with a loaded graph, use one of the following commands:
+If you want to initialize the program already with a loaded graph, use one of the following commands:
 ```
 java -jar Ex2.jar G1.json
 java -jar Ex2.jar G2.json
