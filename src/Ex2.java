@@ -13,11 +13,7 @@ public class Ex2 {
     public static DirectedWeightedGraph getGrapg(String json_file) {
         DirectedWeightedGraphAlgorithms ga = new MyDirectedWeightedGraphAlgorithms();
         ga.load(json_file);
-        DirectedWeightedGraph ans = ga.getGraph();
-        // ****** Add your code here ******
-        //
-        // ********************************
-        return ans;
+        return ga.getGraph();
     }
     /**
      * This static function will be used to test your implementation
@@ -28,9 +24,6 @@ public class Ex2 {
         DirectedWeightedGraphAlgorithms ans = new MyDirectedWeightedGraphAlgorithms();
         ans.load(json_file);
         ans.init(ans.getGraph());
-        // ****** Add your code here ******
-        //
-        // ********************************
         return ans;
     }
     /**
@@ -39,9 +32,16 @@ public class Ex2 {
      *
      */
     public static void runGUI(String json_file) {
-        DirectedWeightedGraphAlgorithms alg = getGrapgAlgo(json_file);
-        // ****** Add your code here ******
-        //
-        // ********************************
+        if (json_file.endsWith(".json"))
+            json_file = json_file.substring(0, json_file.length()-5);
+        new GUI_Menu(json_file);
+    }
+
+    public static void main(String[] args) throws IllegalArgumentException {
+        if (args.length > 0) {
+            MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
+            runGUI(args[0]); // with JSON
+        } else
+            runGUI(""); // without JSON
     }
 }

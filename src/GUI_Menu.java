@@ -16,9 +16,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
     JMenuBar menu_bar;
 
     public GUI_Menu(String arg) {
+        label = new JLabel("Hello! Please load your wanted graph from the menu.");
         panel = new GUI_Graph();
-        label = new JLabel("Hello!");
-
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.label.setHorizontalAlignment(JLabel.CENTER);
@@ -117,8 +116,13 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        if (!arg.isEmpty())
+        if (!arg.isEmpty() && (arg.equals("G1")||arg.equals("G2")||arg.equals("G3")||arg.equals("output")))
             this.load_graph(arg);
+        else if (!arg.isEmpty()) {
+            System.out.println("Illegal Argument, must be G1,G2,G3 or output.");
+            label.setText("Illegal Argument, must be G1.json,G2.json,G3.json or output.json. " +
+                    "Please load your wanted graph from the menu.");
+        }
     }
 
 
@@ -148,11 +152,9 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "100,000 Nodes Graph" -> initRand(5);
             case "1,000,000 Nodes Graph" -> initRand(6);
         }
-
     }
 
-    private void initRand(int i)
-    {
+    private void initRand(int i) {
         MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
         algo.initRandomGraph(i);
         algo.center();
@@ -309,7 +311,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
                     messege.setText("Please load a graph first");
                     return;
                 }
-
                 switch (algorithm_name) {
                     case "Insert Node":
                         try {
@@ -448,15 +449,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
                 }
             }
         }
-    }
-
-
-    public static void main(String[] args) {
-        if (args.length > 0) {
-            MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
-            new GUI_Menu(args[0]);
-        } else
-            new GUI_Menu("");
     }
 }
 

@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/Algo_test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/Graph_Node_Edge_test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/Ex2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/Ex2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testing.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/MyDirectedWeightedGraphAlgorithms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/MyDirectedWeightedGraphAlgorithms.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/OOP_Ex2/Graph_Node_Edge_test.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/OOP_Ex2/Graph_Node_Edge_test.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Ex2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Ex2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/Graph_Node_Edge_test.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/Graph_Node_Edge_test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +45,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -52,9 +55,9 @@
       <recent name="C:\Users\goldi\IdeaProjects\OOP_Ex2" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.Graph_Node_Edge_test.myLoc_Test">
-    <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="GUI" />
+  <component name="RunManager" selected="Application.Ex2">
+    <configuration name="Ex2" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Ex2" />
       <module name="OOP_Ex2" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -67,9 +70,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Window" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Window" />
+    <configuration name="Graph_Node_Edge_test.edge_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OOP_Ex2" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Graph_Node_Edge_test" />
+      <option name="METHOD_NAME" value="edge_Test" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -84,11 +90,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="testing.create_new_rand_Graph_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Graph_Node_Edge_test.node_Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="OOP_Ex2" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="testing" />
-      <option name="METHOD_NAME" value="create_new_rand_Graph_Test" />
+      <option name="MAIN_CLASS_NAME" value="Graph_Node_Edge_test" />
+      <option name="METHOD_NAME" value="node_Test" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -96,10 +102,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.Graph_Node_Edge_test.myLoc_Test" />
+        <item itemvalue="Application.Ex2" />
+        <item itemvalue="JUnit.Graph_Node_Edge_test.edge_Test" />
+        <item itemvalue="JUnit.Graph_Node_Edge_test.node_Test" />
         <item itemvalue="Application.GUI_Menu" />
-        <item itemvalue="JUnit.testing.create_new_rand_Graph_Test" />
-        <item itemvalue="Application.GUI" />
+        <item itemvalue="JUnit.Graph_Node_Edge_test.myLoc_Test" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +150,7 @@
       <workItem from="1639264585401" duration="1026000" />
       <workItem from="1639265860332" duration="2435000" />
       <workItem from="1639305223618" duration="59000" />
-      <workItem from="1639305306729" duration="1885000" />
+      <workItem from="1639305306729" duration="9400000" />
     </task>
     <servers />
   </component>
