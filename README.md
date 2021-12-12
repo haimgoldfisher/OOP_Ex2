@@ -30,10 +30,10 @@ Each **graph (MyDirectedWeightedGraph)** has Mode Count int param and two hash s
 <ins>**The algorithms**</ins> we would like to implement at maximum efficiency:
 
 * `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
-whether a given graph is a connected or not.
+whether a given graph is strongly connected or not (strongly connected - there is a valid path from each node to each other node).
 * `Shortest Path Distance` - Algorithm for finding the distance of shortest path between any 2 vertices in a graph.
 * `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph.
-* `Center` - Algorithm for finding the most central vertex in a graph (can be more than one)
+* `Center` - Algorithm for finding the most central vertex in a graph (can be more than one), but we can give one. Note that an unconnected graph does not contain a center.
 * `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices.
 
 ---------
@@ -64,6 +64,7 @@ We have created a tests directory. The tests should be done in three ways. First
 - Each time we create a random graph and then run the function on it. That is, the initialization time of the graph in addition to the function must be taken into account.
 - Our computers are not that powerful. This causes our functions to run quite poorly. Therefore, we have added the complications in advance. It is known that the efficiency of a function is measured by its complexity and not by its runtime, because it is directly affected by the CPU's strength.
 - Since some of the algorithms depend on which or how many vertices we chose, for the shortest path algorithms, we chose the first and last vertex in terms of order. In the Traveling Saleman Problem algorithm, we selected 4 cities to divide the number of vertices by 4. Of course it is not possible to know how complex this possibility is, on the other hand, there is no end to this matter.
+- We were required that the average rank of each vertex will be 20. Therefore, the more vertices there are, the less likely the graph is to be connected. As a result, some running times are when the graph is not connected. This greatly reduces the runtime of the functions that require connectivity so that the algorithm can find a proper (non-empty) solution.
 
 | **Algorithm**                         |  **Complexity**  |  **1,000 Graph RT**  | **10,000 Graph RT**   |  **100,000 Graph RT**    |  **1,000,000 Graph RT**    |
 |---------------------------------------|------------------|----------------------|-----------------------|--------------------------|----------------------------|
@@ -102,6 +103,7 @@ This project was done by using JDK 15.0.2.
 ## 7. Info & Resources:
 
 - Directed Graphs : https://en.wikipedia.org/wiki/Directed_graph
+- Connectivity: https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
 - More information about HashSets : https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html
 - DFS Algorithm : https://en.wikipedia.org/wiki/Depth-first_search
 - Dijkstra's Algorithm : https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
