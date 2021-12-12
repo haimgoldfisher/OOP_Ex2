@@ -58,16 +58,17 @@ We have created a tests directory. The tests should be done in three ways. First
 
 ---------
 ## 5. Analysis - The Performance of The Algorithms:
+**n** = # of nodes of the graph. **m** = # of the edges of the graph.
 
 | **Algorithm**                         |    **Complexity**   |
 |---------------------------------------|---------------------|
-| `isConnected()`                       | O())          |
-| `shortestPathDist(int src, int dest)` | O()      |
-| `shortestPath(int src, int dest)`     | O()      |
-| `center()`                            | O()          |
-| `tsp(List<NodeData> cities)`          | O()          |
-| `save(String file)`                   | O(|E|+|V|)          |
-| `load(String file)`                   | O(|E|+|V|)          |
+| `isConnected()`                       | O())                |
+| `shortestPathDist(int src, int dest)` | O()                 |
+| `shortestPath(int src, int dest)`     | O()                 |
+| `center()`                            | O()                 |
+| `tsp(List<NodeData> cities)`          | O()                 |
+| `save(String file)`                   | O(m+n)              |
+| `load(String file)`                   | O(m+n)              |
 
 > **1,000:**
 
