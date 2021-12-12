@@ -490,31 +490,31 @@ public class GUI_Menu extends JFrame implements ActionListener {
                         }
                         break;
                 }
-                frame.addWindowListener(new WindowAdapter()
-                {
-                    @Override
-                    public void windowActivated(WindowEvent e)
-                    {
-//                        main_panel.updateUI();
-//                        main_panel.invalidate();
-//                        main_panel.validate();
-//                        main_panel.repaint();
-//                        SwingUtilities.updateComponentTreeUI(main_panel);
-//                        main_panel.revalidate();
-//                        main_panel.repaint();
-                        System.out.println("Open Window");
-                    }
-
-                    @Override
-                    public void windowClosing(WindowEvent e)
-                    {
-                        System.out.println("Closed Message Window");
-                        //main_panel.repaint();
-                        e.getWindow().setMinimumSize(e.getWindow().getMaximumSize());
-                        e.getWindow().dispose();
-                    }
-
-                });
+//                frame.addWindowListener(new WindowAdapter()
+//                {
+//                    @Override
+//                    public void windowActivated(WindowEvent e)
+//                    {
+////                        main_panel.updateUI();
+////                        main_panel.invalidate();
+////                        main_panel.validate();
+////                        main_panel.repaint();
+////                        SwingUtilities.updateComponentTreeUI(main_panel);
+////                        main_panel.revalidate();
+////                        main_panel.repaint();
+//                        System.out.println("Open Window");
+//                    }
+//
+//                    @Override
+//                    public void windowClosing(WindowEvent e)
+//                    {
+//                        System.out.println("Closed Message Window");
+//                        //main_panel.repaint();
+//                        e.getWindow().setMinimumSize(e.getWindow().getMaximumSize());
+//                        e.getWindow().dispose();
+//                    }
+//
+//                });
             }
         }
     }
