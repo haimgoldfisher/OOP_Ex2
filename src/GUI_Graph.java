@@ -25,11 +25,15 @@ public class GUI_Graph extends JPanel {
     @Override
     public void paint(Graphics g) {
         if (this.graph_data == null) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setPaint(Color.blue);
-            g2d.setStroke((new BasicStroke(5)));
-            g2d.drawLine(0, 0, 500, 500);
+//            Graphics2D g2d = (Graphics2D) g;
+//            g2d.setPaint(Color.blue);
+//            g2d.setStroke((new BasicStroke(5)));
+//            g2d.drawLine(0, 0, 500, 500);
         } else {
+            double min_x = Double.MAX_VALUE;
+            double max_x = Double.MIN_VALUE;
+            double min_y = Double.MAX_VALUE;
+            double max_y = Double.MIN_VALUE;
             MyDirectedWeightedGraph my_graph_data = (MyDirectedWeightedGraph) graph_data;
             for (NodeData nd : my_graph_data.getKey_node().values()) {
                 MyGeoLocation loc = (MyGeoLocation) nd.getLocation();
