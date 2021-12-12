@@ -3,14 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="f20cdc5a-cfb0-4e5c-bd8c-f613ed3b07ac" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu$TextBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/GUI_Menu.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/OOP_Ex2/MyDirectedWeightedGraphAlgorithms.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/OOP_Ex2/MyDirectedWeightedGraphAlgorithms.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/OOP_Ex2/testing.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/OOP_Ex2/testing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/output.json" beforeDir="false" afterPath="$PROJECT_DIR$/output.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI_Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI_Menu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MyDirectedWeightedGraphAlgorithms.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/testing.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +49,7 @@
       <recent name="C:\Users\goldi\IdeaProjects\OOP_Ex2" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.testing.create_new_rand_Graph_Test">
+  <component name="RunManager" selected="Application.GUI_Menu">
     <configuration name="GUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="GUI" />
       <module name="OOP_Ex2" />
@@ -96,8 +90,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.testing.create_new_rand_Graph_Test" />
         <item itemvalue="Application.GUI_Menu" />
+        <item itemvalue="JUnit.testing.create_new_rand_Graph_Test" />
         <item itemvalue="Application.GUI" />
       </list>
     </recent_temporary>
@@ -141,6 +135,8 @@
       <workItem from="1639245219380" duration="85000" />
       <workItem from="1639264585401" duration="1026000" />
       <workItem from="1639265860332" duration="2435000" />
+      <workItem from="1639305223618" duration="59000" />
+      <workItem from="1639305306729" duration="1176000" />
     </task>
     <servers />
   </component>

@@ -1,3 +1,4 @@
+import api.DirectedWeightedGraph;
 import api.NodeData;
 
 import javax.swing.*;
@@ -14,7 +15,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
     GUI_Graph panel;
     JMenuBar menu_bar;
 
-    public GUI_Menu() {
+    public GUI_Menu(String arg) {
         panel = new GUI_Graph();
         label = new JLabel("Hello!");
 
@@ -25,21 +26,23 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.add(label, BorderLayout.NORTH);
         this.add(panel);
         this.menu_bar = new JMenuBar();
-        JMenu main_menu, load, run_alogs, edit;
-        JMenuItem save, gson_g1, gson_g2, gson_g3, saved, show_graph;
+        JMenu main_menu, load, run_alogs, edit, init_rand;
+        JMenuItem save, gson_g1, gson_g2, gson_g3, saved;
         JMenuItem insert_node, insert_edge, remove_node, remove_edge;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
+        JMenuItem graph10, graph100, graph1000, graph10000, graph100000, graph1000000;
 
         main_menu = new JMenu("Menu");
         load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
+        edit = new JMenu("Edit");
+        init_rand = new JMenu("Init Random Graph");
         save = new JMenuItem("Save");
         gson_g1 = new JMenuItem("G1");
         gson_g2 = new JMenuItem("G2");
         gson_g3 = new JMenuItem("G3");
         saved = new JMenuItem("Saved G");
         //show_graph = new JMenuItem("Show Graph");
-        edit = new JMenu("Edit");
         insert_node = new JMenuItem("Insert Node");
         insert_edge = new JMenuItem("Insert Edge");
         remove_node = new JMenuItem("Remove Node");
@@ -49,6 +52,12 @@ public class GUI_Menu extends JFrame implements ActionListener {
         shortestPathDist = new JMenuItem("Shortest Path Distance");
         center = new JMenuItem("Center");
         tsp = new JMenuItem("TSP");
+        graph10 = new JMenuItem("10 Nodes Graph");
+        graph100 = new JMenuItem("100 Nodes Graph");
+        graph1000 = new JMenuItem("1,000 Nodes Graph");
+        graph10000 = new JMenuItem("10,000 Nodes Graph");
+        graph100000 = new JMenuItem("100,000 Nodes Graph");
+        graph1000000 = new JMenuItem("1,000,000 Nodes Graph");
 
         load.add(gson_g1);
         load.add(gson_g2);
@@ -66,10 +75,17 @@ public class GUI_Menu extends JFrame implements ActionListener {
         edit.add(remove_node);
         edit.add(remove_edge);
 
+        init_rand.add(graph10);
+        init_rand.add(graph100);
+        init_rand.add(graph1000);
+        init_rand.add(graph10000);
+        init_rand.add(graph100000);
+        init_rand.add(graph1000000);
+
         main_menu.add(save);
         main_menu.add(load);
+        main_menu.add(init_rand);
         main_menu.add(edit);
-        //main_menu.add(show_graph);
         main_menu.add(run_alogs);
 
         this.menu_bar.add(main_menu);
@@ -91,11 +107,18 @@ public class GUI_Menu extends JFrame implements ActionListener {
         insert_node.addActionListener(this);
         remove_edge.addActionListener(this);
         remove_node.addActionListener(this);
-
+        graph10.addActionListener(this);
+        graph100.addActionListener(this);
+        graph1000.addActionListener(this);
+        graph10000.addActionListener(this);
+        graph100000.addActionListener(this);
+        graph1000000.addActionListener(this);
 
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+        if (!arg.isEmpty())
+            this.load_graph(arg);
     }
 
 
@@ -118,8 +141,37 @@ public class GUI_Menu extends JFrame implements ActionListener {
             case "Shortest Path Distance" -> fills_funcs("Shortest Path Distance");
             case "Center" -> answerBox("Center");
             case "TSP" -> fills_funcs("TSP");
+            case "10 Nodes Graph" -> initRand(1);
+            case "100 Nodes Graph" -> initRand(2);
+            case "1,000 Nodes Graph" -> initRand(3);
+            case "10,000 Nodes Graph" -> initRand(4);
+            case "100,000 Nodes Graph" -> initRand(5);
+            case "1,000,000 Nodes Graph" -> initRand(6);
         }
 
+    }
+
+    private void initRand(int i)
+    {
+        MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
+        algo.initRandomGraph(i);
+        algo.center();
+        this.graphAlgo = algo;
+        load_rand_graph(this.graphAlgo.getGraph());
+    }
+
+    public boolean load_rand_graph(DirectedWeightedGraph graph) {
+        String message = "The Graph has uploaded!";
+        try {
+            this.panel.graph_data = graphAlgo.getGraph();
+            this.panel.updateUI();
+            label.setText(message);
+            return true;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            label.setText("Error: The Graph couldn't be uploaded!");
+            return false;
+        }
     }
 
     public boolean load_graph(String name) {
@@ -399,8 +451,12 @@ public class GUI_Menu extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String args[]) {
-        new GUI_Menu();
+    public static void main(String[] args) {
+        if (args.length > 0) {
+            MyDirectedWeightedGraphAlgorithms graphAlgorithms = new MyDirectedWeightedGraphAlgorithms();
+            new GUI_Menu(args[0]);
+        } else
+            new GUI_Menu("");
     }
 }
 
