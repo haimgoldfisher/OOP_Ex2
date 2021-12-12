@@ -96,7 +96,7 @@ java -jar Ex2.jar G1.json
 java -jar Ex2.jar G2.json
 java -jar Ex2.jar G3.json
 ```
-This project was done by using JDK 17.0.1.
+This project was done by using JDK 15.0.2.
 
 ---------
 ## 7. Info & Resources:
