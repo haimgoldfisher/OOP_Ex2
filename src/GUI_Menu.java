@@ -398,15 +398,20 @@ public class GUI_Menu extends JFrame implements ActionListener {
                             int src = Integer.parseInt(in[0]);
                             int dest = Integer.parseInt(in[1]);
                             List<NodeData> ans = this.graphAlgo.shortestPath(src, dest);
-                            String ans_str = "";
-                            for (int i = 0; i < ans.size(); i++) {
-                                if (i == ans.size() - 1) {
-                                    ans_str += ans.get(i).getKey();
-                                } else {
-                                    ans_str += ans.get(i).getKey() + "->";
+                            if (ans != null) {
+                                String ans_str = "";
+                                for (int i = 0; i < ans.size(); i++) {
+                                    if (i == ans.size() - 1) {
+                                        ans_str += ans.get(i).getKey();
+                                    } else {
+                                        ans_str += ans.get(i).getKey() + "->";
+                                    }
                                 }
+                                messege.setText("the Shortest Path from " + src + " to " + dest + " is: " + ans_str);
+                            } else {
+                                messege.setText("There is no path from " + src + " to " + dest);
                             }
-                            messege.setText("the Shortest Path from " + src + " to " + dest + " is: " + ans_str);
+
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
@@ -417,7 +422,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
                             int src = Integer.parseInt(in[0]);
                             int dest = Integer.parseInt(in[1]);
                             double ans = this.graphAlgo.shortestPathDist(src, dest);
-                            messege.setText("the Shortest Path Distance from " + src + " to " + dest + " is: " + ans);
+                            if (ans != -1) {
+                                messege.setText("the Shortest Path Distance from " + src + " to " + dest + " is: " + ans);
+                            } else {
+                                messege.setText("There is no path from " + src + " to " + dest);
+                            }
                         } catch (IllegalArgumentException | NullPointerException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
@@ -431,16 +440,19 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 cities.add(graphAlgo.getGraph().getNode(key));
                             }
                             List<NodeData> ans = this.graphAlgo.tsp(cities);
-                            ;
-                            String ans_str = "";
-                            for (int i = 0; i < ans.size(); i++) {
-                                if (i == ans.size() - 1) {
-                                    ans_str += ans.get(i).getKey();
-                                } else {
-                                    ans_str += ans.get(i).getKey() + "->";
+                            if (ans != null) {
+                                String ans_str = "";
+                                for (int i = 0; i < ans.size(); i++) {
+                                    if (i == ans.size() - 1) {
+                                        ans_str += ans.get(i).getKey();
+                                    } else {
+                                        ans_str += ans.get(i).getKey() + "->";
+                                    }
                                 }
+                                messege.setText("the TSP answer is: " + ans_str);
+                            } else {
+                                messege.setText("there is no path to one between 2 Nodes or more");
                             }
-                            messege.setText("the TSP answer is: " + ans_str);
                         } catch (IllegalArgumentException ex) {
                             ex.printStackTrace();
                             messege.setText("ERROR, something went wrong (IllegalArgument)");
