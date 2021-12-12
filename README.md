@@ -62,11 +62,11 @@ We have created a tests directory. The tests should be done in three ways. First
 
 | **Algorithm**                         |    **Complexity**   |
 |---------------------------------------|---------------------|
-| `isConnected()`                       | O())                |
-| `shortestPathDist(int src, int dest)` | O()                 |
-| `shortestPath(int src, int dest)`     | O()                 |
-| `center()`                            | O()                 |
-| `tsp(List<NodeData> cities)`          | O()                 |
+| `isConnected()`                       | O(V+E)              |
+| `shortestPathDist(int src, int dest)` | O(ElogV)            |
+| `shortestPath(int src, int dest)`     | O(ElogV)            |
+| `center()`                            | O(V(ElogV))         |
+| `tsp(List<NodeData> cities)`          | O(n!)               |
 | `save(String file)`                   | O(m+n)              |
 | `load(String file)`                   | O(m+n)              |
 
