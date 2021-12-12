@@ -120,7 +120,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-        if (!arg.isEmpty()){
+        if (!arg.isEmpty()) {
             this.load_graph(arg);
             if (this.graphAlgo.getGraph() == null)
                 label.setText("Could not find " + arg + ".json, try to load it from the menu.");
@@ -169,7 +169,7 @@ public class GUI_Menu extends JFrame implements ActionListener {
         String message = "The Graph has uploaded!";
         try {
             this.panel.graph_data = graphAlgo.getGraph();
-            this.panel.updateUI();
+            SwingUtilities.updateComponentTreeUI(this);
             label.setText(message);
             return true;
         } catch (NullPointerException e) {
@@ -181,16 +181,16 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public boolean load_graph(String name) {
         String fullPath;
-        if (name.equals("G1")||name.equals("G2")||name.equals("G3"))
+        if (name.equals("G1") || name.equals("G2") || name.equals("G3"))
             fullPath = "data/" + name + ".json";
         else
-            fullPath = name+".json";
+            fullPath = name + ".json";
         String message = "The Graph " + name + " has uploaded!";
         try {
             this.graphAlgo.load(fullPath);
             this.panel.graph_data = graphAlgo.getGraph();
-            this.panel.updateUI();
             label.setText(message);
+            SwingUtilities.updateComponentTreeUI(this);
             return true;
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -203,33 +203,33 @@ public class GUI_Menu extends JFrame implements ActionListener {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("."));
         int response = fileChooser.showOpenDialog(this);
-        if(response == JFileChooser.APPROVE_OPTION){
+        if (response == JFileChooser.APPROVE_OPTION) {
             String path = fileChooser.getSelectedFile().getAbsolutePath();
-            if(path.endsWith(".json")){
+            if (path.endsWith(".json")) {
                 try {
                     this.graphAlgo.load(path);
                     this.panel.graph_data = graphAlgo.getGraph();
                     this.panel.updateUI();
                     String message = "The Graph has been uploaded!";
                     label.setText(message);
+                    SwingUtilities.updateComponentTreeUI(this);
                     return true;
                 } catch (NullPointerException e) {
                     e.printStackTrace();
                     label.setText("Error: The Graph couldn't be uploaded!");
                     return false;
                 }
-            }
-            else {
+            } else {
                 label.setText("Error: The Graph couldn't be uploaded!");
                 return false;
             }
         }
-       return false;
+        return false;
     }
 
     public void fills_funcs(String functionName) {
 //        gg.label.setText(functionName);
-        TextBox tb = new TextBox(functionName, this.graphAlgo, this.panel);
+        TextBox tb = new TextBox(functionName, this.graphAlgo, this);
     }
 
     public void answerBox(String func_name) {
@@ -246,7 +246,6 @@ public class GUI_Menu extends JFrame implements ActionListener {
             messege.setText("Please load a graph first");
             return;
         }
-
         switch (func_name) {
             case "Is Connected":
                 boolean is_connected = this.graphAlgo.isConnected();
@@ -279,9 +278,9 @@ public class GUI_Menu extends JFrame implements ActionListener {
         public static JPanel panel;
         public static JButton button;
         public static JLabel label;
-        public static GUI_Graph main_panel;
+        public static GUI_Menu main_panel;
 
-        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graphAlgo, GUI_Graph main_panel) {
+        public TextBox(String functionName, MyDirectedWeightedGraphAlgorithms graphAlgo, GUI_Menu main_panel) {
             this.main_panel = main_panel;
             this.graphAlgo = graphAlgo;
             algorithm_name = functionName;
@@ -353,8 +352,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 Node newNode = new Node(key_node, location);
                                 if (this.graphAlgo.getGraph().getNode(key_node) == null) {
                                     this.graphAlgo.getGraph().addNode(newNode); // new node
-//                                    main_panel.updateUI();
                                     messege.setText("the Node has been added successfully");
+                                    SwingUtilities.updateComponentTreeUI(main_panel);
                                 } else {// change exist
                                     this.graphAlgo.getGraph().getNode(key_node).setLocation(location);
                                     messege.setText("OOPS! a Node with this key is already exists you should pick another key");
@@ -374,8 +373,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 int dest_new = Integer.parseInt(in[1]);
                                 double weight_new = Double.parseDouble(in[2]);
                                 this.graphAlgo.getGraph().connect(src_new, dest_new, weight_new);
-//                                main_panel.updateUI();
                                 messege.setText("the Edge has been added successfully");
+                                SwingUtilities.updateComponentTreeUI(main_panel);
                             } else {
                                 messege.setText("that's wrong input");
                             }
@@ -390,9 +389,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 int node_to_del = Integer.parseInt(in[0]);
                                 if (this.graphAlgo.getGraph().getNode(node_to_del) != null) {
                                     this.graphAlgo.getGraph().removeNode(node_to_del);
-//                                    main_panel.removeAll();
-//                                    main_panel.updateUI();
                                     messege.setText("the Node has been removed successfully");
+                                    SwingUtilities.updateComponentTreeUI(main_panel);
                                 } else {
                                     messege.setText("there is no Node with this key");
                                 }
@@ -411,8 +409,8 @@ public class GUI_Menu extends JFrame implements ActionListener {
                                 int dest_del = Integer.parseInt(in[1]);
                                 if (this.graphAlgo.getGraph().getEdge(src_del, dest_del) != null) {
                                     this.graphAlgo.getGraph().removeEdge(src_del, dest_del);
-//                                    main_panel.updateUI();
                                     messege.setText("the Edge has been removed successfully");
+                                    SwingUtilities.updateComponentTreeUI(main_panel);
                                 } else {
                                     messege.setText("this Edge dose not exist");
                                 }
