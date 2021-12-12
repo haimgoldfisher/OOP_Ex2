@@ -89,17 +89,17 @@ public class Algo_test {
     public void create_new_rand_Graph_Test() // for inner using - RunTime calc
     {
         MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
-        algo.initRandomGraph(4);
+        algo.initRandomGraph(5);
 //        algo.isConnected();
 //        algo.shortestPath(0,999999);
 //        algo.shortestPathDist(0,999999);
-//        algo.center();
-        LinkedList<NodeData> cities = new LinkedList<NodeData>();
-        cities.add(algo.getGraph().getNode(0));
-        cities.add(algo.getGraph().getNode(2500));
-        cities.add(algo.getGraph().getNode(5000));
-        cities.add(algo.getGraph().getNode(7500));
-        algo.tsp(cities);
+        algo.center();
+//        LinkedList<NodeData> cities = new LinkedList<NodeData>();
+//        cities.add(algo.getGraph().getNode(0));
+//        cities.add(algo.getGraph().getNode(2500));
+//        cities.add(algo.getGraph().getNode(5000));
+//        cities.add(algo.getGraph().getNode(7500));
+//        algo.tsp(cities);
 //        algo.save("output");
     }
 }

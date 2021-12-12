@@ -181,10 +181,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
 
     public boolean load_graph(String name) {
         String fullPath;
-        if (name.startsWith("G"))
+        if (name.equals("G1")||name.equals("G2")||name.equals("G3"))
             fullPath = "data/" + name + ".json";
         else
-            fullPath = "output.json";
+            fullPath = name+".json";
         String message = "The Graph " + name + " has uploaded!";
         try {
             this.graphAlgo.load(fullPath);
