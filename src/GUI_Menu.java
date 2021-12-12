@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,22 +26,23 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.add(label, BorderLayout.NORTH);
         this.add(panel);
         this.menu_bar = new JMenuBar();
-        JMenu main_menu, load, run_alogs, edit, init_rand;
-        JMenuItem save, gson_g1, gson_g2, gson_g3, saved;
+        JMenu main_menu, run_alogs, edit, init_rand;
+        JMenuItem save, gson_g1, gson_g2, gson_g3, saved,load;
         JMenuItem insert_node, insert_edge, remove_node, remove_edge;
         JMenuItem isConnected, shortestPathDist, shortestPath, center, tsp;
         JMenuItem graph10, graph100, graph1000, graph10000, graph100000, graph1000000;
 
         main_menu = new JMenu("Menu");
-        load = new JMenu("Load");
+//        load = new JMenu("Load");
         run_alogs = new JMenu("Run Algorithms");
         edit = new JMenu("Edit");
         init_rand = new JMenu("Init Random Graph");
         save = new JMenuItem("Save");
-        gson_g1 = new JMenuItem("G1");
-        gson_g2 = new JMenuItem("G2");
-        gson_g3 = new JMenuItem("G3");
-        saved = new JMenuItem("Saved G");
+        load = new JMenuItem("Load");
+//        gson_g1 = new JMenuItem("G1");
+//        gson_g2 = new JMenuItem("G2");
+//        gson_g3 = new JMenuItem("G3");
+//        saved = new JMenuItem("Saved G");
         //show_graph = new JMenuItem("Show Graph");
         insert_node = new JMenuItem("Insert Node");
         insert_edge = new JMenuItem("Insert Edge");
@@ -58,10 +60,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
         graph100000 = new JMenuItem("100,000 Nodes Graph");
         graph1000000 = new JMenuItem("1,000,000 Nodes Graph");
 
-        load.add(gson_g1);
-        load.add(gson_g2);
-        load.add(gson_g3);
-        load.add(saved);
+//        load.add(gson_g1);
+//        load.add(gson_g2);
+//        load.add(gson_g3);
+//        load.add(saved);
 
         run_alogs.add(isConnected);
         run_alogs.add(shortestPath);
@@ -91,10 +93,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
         this.setJMenuBar(this.menu_bar);
 
         save.addActionListener(this);
-        gson_g1.addActionListener(this);
-        gson_g2.addActionListener(this);
-        gson_g3.addActionListener(this);
-        saved.addActionListener(this);
+        load.addActionListener(this);
+//        gson_g1.addActionListener(this);
+//        gson_g2.addActionListener(this);
+//        gson_g3.addActionListener(this);
+//        saved.addActionListener(this);
         edit.addActionListener(this);
         //show_graph.addActionListener(this);
         isConnected.addActionListener(this);
@@ -131,10 +134,11 @@ public class GUI_Menu extends JFrame implements ActionListener {
         System.out.println(e.getActionCommand() + " selected");
         this.label.setText(e.getActionCommand() + " selected. please wait");
         switch (e.getActionCommand()) {
-            case "G1" -> load_graph("G1");
-            case "G2" -> load_graph("G2");
-            case "G3" -> load_graph("G3");
-            case "Saved G" -> load_graph("Saved G");
+//            case "G1" -> load_graph("G1");
+//            case "G2" -> load_graph("G2");
+//            case "G3" -> load_graph("G3");
+//            case "Saved G" -> load_graph("Saved G");
+            case "Load" -> load_graph2();
             case "Save" -> this.graphAlgo.save("output.json");
             case "Insert Node" -> fills_funcs("Insert Node");
             case "Insert Edge" -> fills_funcs("Insert Edge");
@@ -194,6 +198,34 @@ public class GUI_Menu extends JFrame implements ActionListener {
             label.setText("Error: The Graph " + name + " couldn't be uploaded!");
             return false;
         }
+    }
+
+    public boolean load_graph2() {
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("."));
+        int response = fileChooser.showOpenDialog(this);
+        if(response == JFileChooser.APPROVE_OPTION){
+            String path = fileChooser.getSelectedFile().getAbsolutePath();
+            if(path.endsWith(".json")){
+                try {
+                    this.graphAlgo.load(path);
+                    this.panel.graph_data = graphAlgo.getGraph();
+                    this.panel.updateUI();
+                    String message = "The Graph has been uploaded!";
+                    label.setText(message);
+                    return true;
+                } catch (NullPointerException e) {
+                    e.printStackTrace();
+                    label.setText("Error: The Graph couldn't be uploaded!");
+                    return false;
+                }
+            }
+            else {
+                label.setText("Error: The Graph couldn't be uploaded!");
+                return false;
+            }
+        }
+       return false;
     }
 
     public void fills_funcs(String functionName) {
