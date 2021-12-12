@@ -17,6 +17,8 @@ public class GUI_Graph extends JPanel {
 
     GUI_Graph() {
         this.setPreferredSize(new Dimension(screen_W, screen_H));
+        screen_H -= kRADIUS*2;
+        screen_W -= kRADIUS*2;
 //        this.setBackground(Color.red);
 //        this.setBounds(0,0,250,250);
 
