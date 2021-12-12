@@ -10,10 +10,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class testing {
     MyDirectedWeightedGraphAlgorithms G1 = new MyDirectedWeightedGraphAlgorithms();
@@ -48,8 +48,10 @@ public class testing {
     public void create_new_rand_Graph_Test()
     {
         MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
-        algo.initRandomGraph(1);
-        algo.save("output");
+        algo.initRandomGraph(4);
+        //algo.isConnected();
+        algo.center();
+        //algo.save("output");
     }
 
     @Test
@@ -61,6 +63,11 @@ public class testing {
         assertTrue(G1.isConnected());
         assertTrue(G2.isConnected());
         assertTrue(G3.isConnected());
+        G1.getGraph().removeNode(0);
+        G1.getGraph().removeNode(10);
+        assertFalse(G1.isConnected());
+        G1.getGraph().connect(16, 9, 1.5);
+        assertTrue(G1.isConnected());
     }
 
     @Test
@@ -72,6 +79,11 @@ public class testing {
         assertEquals(G1.center().getKey(), 8);
         assertEquals(G2.center().getKey(), 0);
         assertEquals(G3.center().getKey(), 40);
+        G2.getGraph().removeNode(1);
+        G2.getGraph().removeNode(8);
+        assertNull(G2.center());
+        G2.getGraph().connect(26, 27, 0.7);
+        assertNotNull(G2.center());
     }
 
     @Test
