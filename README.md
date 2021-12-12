@@ -66,50 +66,50 @@ We have created a tests directory. The tests should be done in three ways. First
 | `shortestPath(int src, int dest)`     | O()      |
 | `center()`                            | O()          |
 | `tsp(List<NodeData> cities)`          | O()          |
-| `save(String file)`                   | O()          |
-| `load(String file)`                   | O()          |
+| `save(String file)`                   | O(|E|+|V|)          |
+| `load(String file)`                   | O(|E|+|V|)          |
 
 > **1,000:**
 
-| **Algorithm**                         |    **Time**   |
-|---------------------------------------|---------------|
-| `isConnected()`                       |  ms          |
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  221 ms          |
 | `shortestPathDist(int src, int dest)` |  ms      |
 | `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  ms          |
+| `center()`                            |  3 sec 950 ms          |
 | `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  ms         |
+| `save(String file)`                   |  254 ms         |
 
 > **10,000:**
 
-| **Algorithm**                         |    **Time**   |
-|---------------------------------------|---------------|
-| `isConnected()`                       |  ms          |
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  988 ms          |
 | `shortestPathDist(int src, int dest)` |  ms      |
 | `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  ms          |
+| `center()`                            |  TimeOut          |
 | `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  ms         |
+| `save(String file)`                   |  1 sec 51 ms         |
 
 > **100,000:**
 
-| **Algorithm**                         |    **Time**   |
-|---------------------------------------|---------------|
-| `isConnected()`                       |  ms          |
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  9 sec 319 ms          |
 | `shortestPathDist(int src, int dest)` |  ms      |
 | `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  ms          |
+| `center()`                            |  TimeOut          |
 | `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  ms         |
+| `save(String file)`                   |  6 sec 600 ms         |
 
 > **1,000,000:**
 
-| **Algorithm**                         |    **Time**   |
-|---------------------------------------|---------------|
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
 | `isConnected()`                       |  ms          |
 | `shortestPathDist(int src, int dest)` |  ms      |
 | `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  ms          |
+| `center()`                            |  TimeOut          |
 | `tsp(List<NodeData> cities)`          |  ms          |
 | `save(String file)`                   |  ms         |
 
@@ -118,15 +118,17 @@ We have created a tests directory. The tests should be done in three ways. First
 
 Download the whole project and export it by the above actions:
 ```
-Code (Green Button) -> Download ZIP -> Extract to Folder -> 'cmd' in the project folder's path line
+Click Code (Green Button) -> Click Download ZIP -> Choose Extract to Folder in Zip -> Write 'cmd' in the project folder's path line
 ```
 Run the above command in cmd:
 ```
 java -jar Ex2.jar 
 ```
-If you want to boot the program already with a loaded graph, use the following command:
+If you want to boot the program already with a loaded graph, use one of the following commands:
 ```
-java -jar Ex2.jar (G1.json/G2.json/G3.json)
+java -jar Ex2.jar G1.json
+java -jar Ex2.jar G2.json
+java -jar Ex2.jar G3.json
 ```
 ---------
 ## 7. Info & Resources:
