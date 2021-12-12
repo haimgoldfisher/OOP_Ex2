@@ -419,12 +419,14 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 if (visited.contains(curr_dest)) {//necessary?
                     continue;
                 }
-                double curr_weight = distances.get(curr_dest);
-                double new_weight = distances.get(curr_key) + curr_edge.getWeight();
-                if (new_weight < curr_weight) {
-                    distances.put(curr_dest, new_weight);
+                if (distances.get(curr_dest)!=null){
+                    double curr_weight = distances.get(curr_dest);
+                    double new_weight = distances.get(curr_key) + curr_edge.getWeight();
+                    if (new_weight < curr_weight) {
+                        distances.put(curr_dest, new_weight);
+                    }
+                    pq.add(new Pair(curr_dest, distances.get(curr_dest)));
                 }
-                pq.add(new Pair(curr_dest, distances.get(curr_dest)));
             }
         }
         double max = Double.NEGATIVE_INFINITY;

@@ -5,6 +5,7 @@ import api.NodeData;
 import java.awt.*;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Consumer;
 
 public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
     private HashMap<Integer, NodeData> key_node;
@@ -87,26 +88,26 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
     }
 
     @Override
-    public Iterator<NodeData> nodeIter() {
+    public Iterator<NodeData> nodeIter() throws NullPointerException{
         Collection<NodeData> nodes = key_node.values();
         return nodes.iterator();
     }
 
     @Override
-    public Iterator<EdgeData> edgeIter() {
+    public Iterator<EdgeData> edgeIter() throws NullPointerException{
         Collection<EdgeData> edges = keys_edge.values();
         return edges.iterator();
     }
 
     @Override
-    public Iterator<EdgeData> edgeIter(int node_id) {
+    public Iterator<EdgeData> edgeIter(int node_id) throws NullPointerException{
         Node nd = (Node) key_node.get(node_id);
         HashSet<EdgeData> edges = nd.edges_to_children;
         return edges.iterator();
     }
 
     @Override
-    public NodeData removeNode(int key) {
+    public NodeData removeNode(int key) throws NullPointerException {
         mc++;
         Node curr_node = (Node) key_node.get(key);
         for (int parent_id : curr_node.parents_ids) {
@@ -207,7 +208,7 @@ public class MyDirectedWeightedGraph implements DirectedWeightedGraph {
             int curr_id = s.pop();
             Node curr_node = (Node) this.key_node.get(curr_id);
             for (int child : curr_node.children_ids) {
-                if (!key_visited.get(child)) {
+                if (key_visited.get(child)!=null && !key_visited.get(child)) {
                     s.push(child);
                     key_visited.put(child, true);
                     counter++;
