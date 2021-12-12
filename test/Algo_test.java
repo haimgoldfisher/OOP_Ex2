@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class testing {
+public class Algo_test {
     MyDirectedWeightedGraphAlgorithms G1 = new MyDirectedWeightedGraphAlgorithms();
     MyDirectedWeightedGraphAlgorithms G2 = new MyDirectedWeightedGraphAlgorithms();
     MyDirectedWeightedGraphAlgorithms G3 = new MyDirectedWeightedGraphAlgorithms();
