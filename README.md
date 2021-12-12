@@ -31,7 +31,7 @@ Each **graph (MyDirectedWeightedGraph)** has Mode Count int param and two hash s
 
 * `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
 whether a given graph is a connected or not.
-* `Shortest Path Disttance` - 
+* `Shortest Path Distance` - 
 * `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph.
 * `Center` - Algorithm for finding the most central vertex in a graph (can be more than one)
 * `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices.
@@ -58,47 +58,78 @@ We have created a tests directory. The tests should be done in three ways. First
 
 ---------
 ## 5. Analysis - The Performance of The Algorithms:
+**n** = # of nodes of the graph. **m** = # of the edges of the graph.
 
 | **Algorithm**                         |    **Complexity**   |
 |---------------------------------------|---------------------|
-| `isConnected()`                       | O())          |
-| `shortestPathDist(int src, int dest)` | O()      |
-| `shortestPath(int src, int dest)`     | O()      |
-| `center()`                            | O()          |
-| `tsp(List<NodeData> cities)`          | O()          |
-| `save(String file)`                   | O()          |
-| `load(String file)`                   | O()          |
+| `isConnected()`                       | O(V+E)              |
+| `shortestPathDist(int src, int dest)` | O(ElogV)            |
+| `shortestPath(int src, int dest)`     | O(ElogV)            |
+| `center()`                            | O(V(ElogV))         |
+| `tsp(List<NodeData> cities)`          | O(n!)               |
+| `save(String file)`                   | O(m+n)              |
+| `load(String file)`                   | O(m+n)              |
 
-> **1,000**
+> **1,000:**
 
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  221 ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  3 sec 950 ms          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  254 ms         |
 
+> **10,000:**
 
-> **10,000**
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  988 ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  TimeOut          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  1 sec 51 ms         |
 
+> **100,000:**
 
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  9 sec 319 ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  TimeOut          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  6 sec 600 ms         |
 
-> **100,000**
+> **1,000,000:**
 
-
-
-> **1,000,000**
-
-
+| **Algorithm**                         |    **Time (+ init())**   |
+|---------------------------------------|--------------------------|
+| `isConnected()`                       |  ms          |
+| `shortestPathDist(int src, int dest)` |  ms      |
+| `shortestPath(int src, int dest)`     |  ms      |
+| `center()`                            |  TimeOut          |
+| `tsp(List<NodeData> cities)`          |  ms          |
+| `save(String file)`                   |  ms         |
 
 ---------
 ## 6. How to Download, Run and Use The Graphical Interface:
 
 Download the whole project and export it by the above actions:
 ```
-Code (Green Button) -> Download ZIP -> Extract to Folder -> 'cmd' in the project folder's path line
+Click Code (Green Button) -> Click Download ZIP -> Choose Extract to Folder in Zip -> Write 'cmd' in the project folder's path line
 ```
 Run the above command in cmd:
 ```
 java -jar Ex2.jar 
 ```
-If you want to boot the program already with a loaded graph, use the following command:
+If you want to boot the program already with a loaded graph, use one of the following commands:
 ```
-java -jar Ex2.jar (G1.json/G2.json/G3.json)
+java -jar Ex2.jar G1.json
+java -jar Ex2.jar G2.json
+java -jar Ex2.jar G3.json
 ```
 ---------
 ## 7. Info & Resources:
