@@ -70,7 +70,7 @@ We have created a tests directory. The tests should be done in three ways. First
 | `isConnected()`                       | O(n+m)           |  116 ms              |  605 ms               |  1 sec 424 ms            |  16 sec 384 ms             |
 | `shortestPathDist(int src, int dest)` | O(mlogn)         |  38 ms               |  253 ms               |  1 sec 929 ms            |  19 sec 542 ms             |
 | `shortestPath(int src, int dest)`     | O(mlogn)         |  31 ms               |  231 ms               |  1 sec 454 ms            |  16 sec 451 ms             |
-| `center()`                            | O(n(mlogn))      |  1 sec 970 ms        |  4 min 32 sec         |                          |  TimeoutException          |
+| `center()`                            | O(n(mlogn))      |  1 sec 970 ms        |  4 min 32 sec         |  1 src 837 ms            |  TimeoutException          |
 | `tsp(List<NodeData> cities)`          | O(n!)            |  2 sec 36 ms         |  OutOfMemoryError     |  OutOfMemoryError        |  OutOfMemoryError          |
 | `save(String file)`                   | O(m+n)           |  216 ms              |  618 ms               |  3 sec 425 ms            |  OutOfMemoryError          |
 | `load(String file)`                   | O(m+n)           |  16 ms               |  138 ms               |  1 sec 223 ms            |  13 sec 450 ms             |
