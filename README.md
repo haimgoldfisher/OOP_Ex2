@@ -108,6 +108,7 @@ This project was done by using JDK 15.0.2.
 - DFS Algorithm : https://en.wikipedia.org/wiki/Depth-first_search
 - Priority Queue : https://en.wikipedia.org/wiki/Priority_queue
 - Dijkstra's Algorithm : https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+- TSP : https://en.wikipedia.org/wiki/Travelling_salesman_problem
 - Gson : https://github.com/google/gson
 - Java Swing Tutorial : https://www.javatpoint.com/java-swing
 
