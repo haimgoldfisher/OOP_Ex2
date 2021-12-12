@@ -12,6 +12,7 @@ import java.io.Reader;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 import static org.junit.Assert.*;
 
@@ -42,16 +43,6 @@ public class Algo_test {
     public void graph_Test()
     {
 
-    }
-
-    @Test
-    public void create_new_rand_Graph_Test()
-    {
-        MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
-        algo.initRandomGraph(4);
-        //algo.isConnected();
-        algo.center();
-        //algo.save("output");
     }
 
     @Test
@@ -92,5 +83,16 @@ public class Algo_test {
 
     }
 
-
+    @Test
+    public void create_new_rand_Graph_Test() // for inner using - RunTime calc
+    {
+        MyDirectedWeightedGraphAlgorithms algo = new MyDirectedWeightedGraphAlgorithms();
+        algo.initRandomGraph(3);
+        //algo.isConnected();
+        //algo.shortestPath();
+        //algo.shortestPathDist();
+        //algo.center();
+        //algo.tsp();
+        //algo.save("output");
+    }
 }
