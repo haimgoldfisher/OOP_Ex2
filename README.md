@@ -57,67 +57,27 @@ We have created a tests directory. The tests should be done in three ways. First
 
 ---------
 ## 5. Analysis - The Performance of The Algorithms:
-**n** = # of V nodes of the graph. **m** = # of the E edges of the graph.
-
-| **Algorithm**                         |    **Complexity**   |
-|---------------------------------------|---------------------|
-| `isConnected()`                       | O(n+m)              |
-| `shortestPathDist(int src, int dest)` | O(mlogn)            |
-| `shortestPath(int src, int dest)`     | O(mlogn)            |
-| `center()`                            | O(n(mlogn))         |
-| `tsp(List<NodeData> cities)`          | O(n!)               |
-| `save(String file)`                   | O(m+n)              |
-| `load(String file)`                   | O(m+n)              |
 
 **Before we start checking running times, it is important to note a few important things:**
 
 - Because we use a random graph-building function, the results may not be accurate enough. This happens because in the edge creation phase, if the function matches a edge to the same vertex, it tries again until it finds another vertex (src & dest cannot be the same here).
 - Each time we create a random graph and then run the function on it. That is, the initialization time of the graph in addition to the function must be taken into account.
 - Our computers are not that powerful. This causes our functions to run quite poorly. Therefore, we have added the complications in advance. It is known that the efficiency of a function is measured by its complexity and not by its runtime, because it is directly affected by the CPU's strength.
+- Since some of the algorithms depend on which or how many vertices we chose, for the shortest path algorithms, we chose the first and last vertex in terms of order. In the Traveling Saleman Problem algorithm, we selected 4 cities to divide the number of vertices by 4. Of course it is not possible to know how complex this possibility is, on the other hand, there is no end to this matter.
 
-> **1,000:**
+| **Algorithm**                         |  **Complexity**  |  **1,000 Graph RT**  | **10,000 Graph RT**   |  **100,000 Graph RT**    |  **1,000,000 Graph RT**    |
+|---------------------------------------|------------------|----------------------|-----------------------|--------------------------|----------------------------|
+| `isConnected()`                       | O(n+m)           |  116 ms              |  605 ms               |  1 sec 424 ms            |  16 sec 384 ms             |
+| `shortestPathDist(int s,d)`           | O(mlogn)         |  38 ms               |  253 ms               |  1 sec 929 ms            |  19 sec 542 ms             |
+| `shortestPath(int s,d)`               | O(mlogn)         |  31 ms               |  231 ms               |  1 sec 454 ms            |  16 sec 451 ms             |
+| `center()`                            | O(n(mlogn))      |  1 sec 970 ms        |  4 min 32 sec         |                          |  TimeoutException          |
+| `tsp(List<NodeData> c)`               | O(n!)            |  2 sec 36 ms         |  OutOfMemoryError     |  OutOfMemoryError        |  OutOfMemoryError          |
+| `save(String file)`                   | O(m+n)           |  216 ms              |  618 ms               |  3 sec 425 ms            |  OutOfMemoryError          |
+| `load(String file)`                   | O(m+n)           |  16 ms               |  138 ms               |  1 sec 223 ms            |  13 sec 450 ms             |
 
-| **Algorithm**                         |    **Time (+ init())**   |
-|---------------------------------------|--------------------------|
-| `isConnected()`                       |  221 ms          |
-| `shortestPathDist(int src, int dest)` |  ms      |
-| `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  3 sec 950 ms          |
-| `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  254 ms         |
-
-> **10,000:**
-
-| **Algorithm**                         |    **Time (+ init())**   |
-|---------------------------------------|--------------------------|
-| `isConnected()`                       |  988 ms          |
-| `shortestPathDist(int src, int dest)` |  ms      |
-| `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  TimeOut          |
-| `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  1 sec 51 ms         |
-
-> **100,000:**
-
-| **Algorithm**                         |    **Time (+ init())**   |
-|---------------------------------------|--------------------------|
-| `isConnected()`                       |  9 sec 319 ms          |
-| `shortestPathDist(int src, int dest)` |  ms      |
-| `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  TimeOut          |
-| `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  6 sec 600 ms         |
-
-> **1,000,000:**
-
-| **Algorithm**                         |    **Time (+ init())**   |
-|---------------------------------------|--------------------------|
-| `isConnected()`                       |  ms          |
-| `shortestPathDist(int src, int dest)` |  ms      |
-| `shortestPath(int src, int dest)`     |  ms      |
-| `center()`                            |  TimeOut          |
-| `tsp(List<NodeData> cities)`          |  ms          |
-| `save(String file)`                   |  ms         |
+* RT - Running Time
+* n  - # of V nodes of the graph
+* m  - # of the E edges of the graph
 
 ---------
 ## 6. How to Download, Run and Use The Graphical Interface:
@@ -136,6 +96,8 @@ java -jar Ex2.jar G1.json
 java -jar Ex2.jar G2.json
 java -jar Ex2.jar G3.json
 ```
+This project was done by using JDK 17.0.1.
+
 ---------
 ## 7. Info & Resources:
 
