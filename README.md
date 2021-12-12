@@ -103,9 +103,10 @@ This project was done by using JDK 15.0.2.
 ## 7. Info & Resources:
 
 - Directed Graphs : https://en.wikipedia.org/wiki/Directed_graph
-- Connectivity: https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
+- Connectivity : https://en.wikipedia.org/wiki/Connectivity_(graph_theory)
 - More information about HashSets : https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html
 - DFS Algorithm : https://en.wikipedia.org/wiki/Depth-first_search
+- Priority Queue : https://en.wikipedia.org/wiki/Priority_queue
 - Dijkstra's Algorithm : https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
 - Gson : https://github.com/google/gson
 - Java Swing Tutorial : https://www.javatpoint.com/java-swing
