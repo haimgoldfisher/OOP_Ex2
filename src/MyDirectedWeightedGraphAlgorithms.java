@@ -471,7 +471,9 @@ public class MyDirectedWeightedGraphAlgorithms implements DirectedWeightedGraphA
                 scale = 10;
             else
                 scale = 1;
-            for (int i = 1; i <= scale; i++) {
+            int i = 1;
+            randGraph.connect(currNode.getKey(), (int)((currNode.getKey()+1)%numOfNodes), 1 + Math.random());
+            for (i = 2; i <= scale; i++) {
                 int dest = (int) (Math.random() * numOfNodes);
                 double weight = 1 + Math.random();
                 while (currNode.getKey() == dest)

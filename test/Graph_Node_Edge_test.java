@@ -56,10 +56,4 @@ public class Graph_Node_Edge_test {
         assertEquals(e1.getWeight(), e4.getWeight(), 0.0);
         assertNotEquals(e2.getWeight(), e3.getWeight());
     }
-
-    @Test
-    public void myDirectedWeightedGraph_Test()
-    {
-
-    }
 }
