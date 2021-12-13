@@ -248,6 +248,10 @@ public class GUI_Menu extends JFrame implements ActionListener {
             messege.setText("Please load a graph first");
             return;
         }
+        if (this.graphAlgo.getGraph().nodeSize() == 0) {
+            messege.setText("This graph is empty");
+            return;
+        }
         switch (func_name) {
             case "Is Connected":
                 boolean is_connected = this.graphAlgo.isConnected();
