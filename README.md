@@ -149,6 +149,7 @@ Here's an example of how to fill a new edge creation box. Pay attention to the c
 <img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/edge.png?raw=true" height=250 weight=500/>
 </p> 
 
+---------
 
 This project was done by using JDK 15.0.2.
 
