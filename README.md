@@ -27,14 +27,14 @@ Each **graph (MyDirectedWeightedGraph)** has Mode Count int param and two hash s
   * `dest_key (int)`: The key of the vertex to which the edge reaches
   * `weight (double)`: Edge's weight. Also called Edge's length.
 
-<ins>**The algorithms**</ins> we would like to implement at maximum efficiency:
+* <ins>**The algorithms**</ins> we would like to implement at maximum efficiency:
 
-* `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
-whether a given graph is strongly connected or not (strongly connected - there is a valid path from each node to each other node).
-* `Shortest Path Distance` - Algorithm for finding the distance of shortest path between any 2 vertices in a graph.
-* `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph.
-* `Center` - Algorithm for finding the most central vertex in a graph (can be more than one), but we can give one. Note that an unconnected graph does not contain a center.
-* `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices.
+  * `Is Connected` - The purpose of this algorithm is very simple to understand. We would like to implement an efficient algorithm in oreder to understand
+  whether a given graph is strongly connected or not (strongly connected - there is a valid path from each node to each other node). The output if boolean - True or False.
+  * `Shortest Path Distance` - Algorithm for finding the distance of shortest path between any 2 vertices in a graph. The output is the weight (double) of the shortest path.
+  * `Shortest Path` - Algorithm for finding the shortest path between any 2 vertices in a graph. The output is a list of nodes which represent the order of the shortest path.
+  * `Center` - Algorithm for finding the most central vertex in a graph (can be more than one), but we can give one. Note that an unconnected graph does not contain a center.   The output is the key (int) of that node.
+  * `Travelling Salesman Problem (TSP)` - An algorithm for finding the shortest path that passes through all the given vertices. The output is a list of nodes which represent the path of the saleman (by order).
 
 ---------
 ## 2. The Thoughts Behind The Classes:
