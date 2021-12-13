@@ -47,7 +47,7 @@ It is important to note that since most of the designings of the task are given 
 Since each class contains a lot of parameters, methods and functions, we will only present the names of the classes and the hierarchy between them:
 
 <p align="center">
-<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/diagram.png?raw=true" height=500 weight=1000/>
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/diagram.png?raw=true" height=500 weight=1000/>
 </p>
 
 ---------
@@ -68,10 +68,10 @@ We have created a tests directory. The tests should be done in three ways. First
 
 | **Algorithm**                         |  **Complexity**  |  **1,000 Graph RT**  | **10,000 Graph RT**   |  **100,000 Graph RT**    |  **1,000,000 Graph RT**    |
 |---------------------------------------|------------------|----------------------|-----------------------|--------------------------|----------------------------|
-| `isConnected()`                       | O(n+m)           |  116 ms              |  605 ms               |  1 sec 424 ms            |  16 sec 384 ms             |
-| `shortestPathDist(int src, int dest)` | O(mlogn)         |  38 ms               |  253 ms               |  1 sec 929 ms            |  19 sec 542 ms             |
-| `shortestPath(int src, int dest)`     | O(mlogn)         |  31 ms               |  231 ms               |  1 sec 454 ms            |  16 sec 451 ms             |
-| `center()`                            | O(n(mlogn))      |  1 sec 970 ms        |  4 min 32 sec         |  1 src 837 ms            |  TimeoutException          |
+| `isConnected()`                       | O(n+m)           |  116 ms              |  667 ms               |  4 sec 642 ms            |  TimeoutException          |
+| `shortestPathDist(int src, int dest)` | O(mlogn)         |  38 ms               |  491 ms               |  1 sec 610 ms            |  22 sec 542 ms             |
+| `shortestPath(int src, int dest)`     | O(mlogn)         |  31 ms               |  789 ms               |  1 sec 821 ms            |  14 sec 669 ms             |
+| `center()`                            | O(n(mlogn))      |  1 sec 970 ms        |  9 min 11 sec         |  TimeoutException        |  TimeoutException          |
 | `tsp(List<NodeData> cities)`          | O(n!)            |  2 sec 36 ms         |  OutOfMemoryError     |  OutOfMemoryError        |  OutOfMemoryError          |
 | `save(String file)`                   | O(m+n)           |  216 ms              |  618 ms               |  3 sec 425 ms            |  OutOfMemoryError          |
 | `load(String file)`                   | O(m+n)           |  16 ms               |  138 ms               |  1 sec 223 ms            |  13 sec 450 ms             |
@@ -97,6 +97,59 @@ java -jar Ex2.jar G1.json
 java -jar Ex2.jar G2.json
 java -jar Ex2.jar G3.json
 ```
+Instructions for the GUI :
+
+1. <ins>The Menu:</ins>
+
+Every option has it guide. If you want to save your current graph, click on 'Save', then you can load it. The name of the saved graph is output.json.
+
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/MENU.png?raw=true" height=250 weight=500/>
+</p> 
+
+2. <ins>Load A Graph:</ins> 
+
+Just click on output.json or enter data folder and choose one of G1.json, G2.json and G3.json.
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/load.png?raw=true" height=250 weight=500/>
+</p> 
+
+3. <ins>Init A Random Graph:</ins> 
+
+You are given the option to create a random graph. You can choose with how many vertices it will start from the above options. Note that **all graphs are initialized to be already strongly connected**. In addition, graphs that are too large are not recommended for loading, as it is difficult to see them and run algorithms on them.
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/rand.png?raw=true" height=250 weight=500/>
+</p> 
+
+4. <ins>The Graph:</ins>
+
+Here is an example of what the graph looks like and what each object in the graph represents. The graph is automatically displayed when loaded or created. Also, you will see the changes in it when you edit it
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/graph.png?raw=true" height=250 weight=500/>
+</p>
+
+5. <ins>Edit Your Graph: </ins>
+
+You are given the option to add or delete vertices and edges. Pay attention to the instructions and follow them.
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/EDIT.png?raw=true" height=250 weight=500/>
+</p> 
+
+6. <ins>Algorithms:</ins>
+
+After loading a graph, you can run those algorithms on it. Read the instructions in each text box and fill the wanted input correctly.
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/algo.png?raw=true" height=250 weight=500/>
+</p> 
+
+7. <ins>A Text Box Example:</ins> 
+
+Here's an example of how to fill a new edge creation box. Pay attention to the context, otherwise the function will not work.
+<p align="center">
+<img align="center" src="https://github.com/or-yitshak/OOP_Ex2/blob/main/pics/edge.png?raw=true" height=250 weight=500/>
+</p> 
+
+
 This project was done by using JDK 15.0.2.
 
 ---------
